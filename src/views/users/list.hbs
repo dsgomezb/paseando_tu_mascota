@@ -1,0 +1,29 @@
+<div class="container p-4">
+    <div class="row">         
+        <div class="col-md-3">
+            <a href="/users/create" class="btn btn-primary">{{lang.users.create}}</a>
+        </div>
+        <table id="users_table" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>{{lang.users.document}}</th>
+                    <th>{{lang.users.name}}</th>
+                    <th>{{lang.users.email}}</th>
+                    <th>{{lang.users.phone}}</th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#each users}}
+                <tr>
+                    <td>{{document}}</td>
+                    <td>{{names}}</td>
+                    <td>{{email}}</td>
+                    <td>{{phone}}</td>
+                </tr>
+                {{/each}}
+            </tbody>    
+        </table>
+    </div>
+</div>
+</div>
+</div>

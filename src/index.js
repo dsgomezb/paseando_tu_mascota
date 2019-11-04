@@ -7,6 +7,7 @@ const session = require('express-session');
 const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
 const passport = require('passport');
+const lang = require('./lib/lang/es');
 
 //Inicializaciones
 const app = express();
@@ -43,6 +44,7 @@ app.use((req, res, next) => {
     app.locals.exito = req.flash('exito');
     app.locals.message = req.flash('message');
     app.locals.user = req.user;
+    app.locals.lang = lang;
     next();
 });
 
@@ -50,6 +52,7 @@ app.use((req, res, next) => {
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
 app.use('/links', require('./routes/links'));
+app.use('/users', require('./routes/users'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));

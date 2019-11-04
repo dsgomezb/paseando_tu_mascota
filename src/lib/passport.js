@@ -3,13 +3,11 @@ const LocalStrategy = require('passport-local').Strategy;
 const pool = require('../database');
 const helpers = require('../lib/helpers');
 
-
 passport.use('local.signin', new LocalStrategy({
     usernameField: 'username',
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, username, password, done) => {
-    console.log(req.body);
     const rows = await pool.query('SELECT * FROM users WHERE username = ?', [username]);
     if(rows.length > 0){
         const user = rows[0];
@@ -29,15 +27,21 @@ passport.use('local.signup', new LocalStrategy({
     passwordField: 'password',
     passReqToCallback: true
 }, async (req, username, password, done) => {
-    const { fullname } = req.body;
+    const { names, document, email, phone } = req.body;
+    let created_at = new Date();
     const newUser = {
         username,
         password,
-        fullname
+        names,
+        document,
+        email,
+        phone,
+        created_at
     };
     newUser.password = await helpers.encryptPassword(password);
     const result = await pool.query('INSERT INTO users SET ?', [newUser]);
     newUser.id = result.insertId;
+    req.flash('exito', 'Usuario creado correctamente');
     return done(null, newUser);
 }));
 

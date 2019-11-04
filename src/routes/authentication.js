@@ -8,11 +8,11 @@ router.get('/signup', isNotLoggedIn, (req, res) => {
     res.render('auth/signup');
 });
 
-router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
+/*router.post('/signup', isNotLoggedIn, passport.authenticate('local.signup', {
     successRedirect: '/profile',
     failureRedirect: '/signup',
     failureFlash: true
-}));
+}));*/
 
 router.get('/signin', isNotLoggedIn, (req, res) => {
     res.render('auth/signin');

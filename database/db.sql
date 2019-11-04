@@ -4,17 +4,17 @@ USE establecimiento_online;
 
 -- USER TABLE
 CREATE TABLE users(
-    id INT(30) NOT NULL,
-    username VARCHAR(30) NOT NULL,
-    password VARCHAR(60) NOT NULL,
-    fullname VARCHAR(100) NOT NULL
+    id INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(80) NOT NULL,
+    names VARCHAR(250) NOT NULL,
+    document VARCHAR(30) NOT NULL,
+    email VARCHAR(250) NOT NULL,
+    phone VARCHAR(250) NOT NULL,
+    created_at timestamp,
+    updated_at timestamp
 );
 
-ALTER TABLE users 
-ADD PRIMARY KEY (id);
-
-ALTER TABLE users
-MODIFY id INT(30) NOT NULL AUTO_INCREMENT;
 
 DESCRIBE users;
 
