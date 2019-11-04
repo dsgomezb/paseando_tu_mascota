@@ -33,6 +33,8 @@ module.exports = {
         email: 'Email',
         phone: 'Teléfono',
         username: 'Usuario',
-        password: 'Contraseña'
+        password: 'Contraseña',
+        new: 'Nuevo',
+        N: 'N°'
     }
 };
