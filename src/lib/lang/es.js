@@ -1,5 +1,11 @@
 module.exports = {
     required: '*',
+    detail: {
+        action: 'Acción',
+        view: 'Ver',
+        edit: 'Editar',
+        delete: 'Eliminar'
+    },
     login: {
         login: 'Ingreso',
         register: 'Registro',

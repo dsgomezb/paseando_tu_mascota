@@ -14,6 +14,7 @@
                     <th>{{lang.users.name}}</th>
                     <th>{{lang.users.email}}</th>
                     <th>{{lang.users.phone}}</th>
+                    <th class="text-center">{{lang.detail.action}}</th>
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +25,11 @@
                     <td>{{names}}</td>
                     <td>{{email}}</td>
                     <td>{{phone}}</td>
+                    <td class="text-center">
+                        <a href="#"><i class="fa fa-eye fa-lg" title="{{../lang.detail.view}}"></i></a>
+                        <a href="#"><i class="fa fa-edit fa-lg" title="{{../lang.detail.edit}}"></i></a>                       
+                        <a href="#"><i class="fa fa-trash fa-lg" title="{{../lang.detail.delete}}"></i></a>
+                    </td>
                 </tr>
                 {{/each}}
             </tbody>    
