@@ -15,7 +15,8 @@ module.exports = {
         save: 'Guardar',
         edit: 'Editar',
         delete: 'Eliminar',
-        save_links: 'Guarda tus enlaces'
+        save_links: 'Guarda tus enlaces',
+        close: 'Cerrar'
     },
     links: {
         not_links_create :'No hay links creados aun',
@@ -41,6 +42,7 @@ module.exports = {
         username: 'Usuario',
         password: 'Contraseña',
         new: 'Nuevo',
-        N: 'N°'
+        N: 'N°',
+        detail: 'Detalle del usuario'
     }
 };

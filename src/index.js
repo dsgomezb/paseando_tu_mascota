@@ -56,6 +56,7 @@ app.use('/users', require('./routes/users'));
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'lib')));
 
 //Starting the server
 app.listen(app.get('port'), () => {

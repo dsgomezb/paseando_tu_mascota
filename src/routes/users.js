@@ -4,13 +4,11 @@ const passport = require('passport');
 const { isLoggedIn } = require('../lib/auth');
 const { isNotLoggedIn } = require('../lib/auth');
 const pool = require('../database');
-const datatable = require('datatables.net');
-const jquery = require('jquery');
-const NodeTable = require("nodetable");
 
 //Ruta para listar todos los usuarios del sistema
 router.get('/', isLoggedIn, async (req, res) => {
-    const users = await pool.query('SELECT * FROM users');
+    const id_user = req.user.id;
+    const users = await pool.query('SELECT * FROM users WHERE id != ?', [id_user]);
     res.render('users/list', {users});
 });
 
@@ -25,5 +23,20 @@ router.post('/signup', passport.authenticate('local.signup', {
     failureRedirect: '/create',
     failureFlash: true,
 }));
+
+//Ruta para obtener los datos al detalle del usuario
+router.get('/detail/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    const users = await pool.query('SELECT * FROM users WHERE id = ?', [id]);
+    const data = users[0];
+    res.json(data);
+});
+
+//Ruta para eliminar un usuario
+router.get('/delete/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    await pool.query('DELETE FROM users WHERE ID = ?',[id]);
+    res.send('true');
+});
 
 module.exports = router;
