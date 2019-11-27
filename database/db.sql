@@ -11,10 +11,18 @@ CREATE TABLE users(
     document VARCHAR(30) NOT NULL,
     email VARCHAR(250) NOT NULL,
     phone VARCHAR(250) NOT NULL,
+    status smallint(30) NOT NULL,
     created_at timestamp,
-    updated_at timestamp
+    updated_at timestamp,
+    deleted_at timestamp
 );
 
+CREATE TABLE parameters(
+    id SMALLINT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    description VARCHAR(250)
+);
+
+ALTER TABLE users ADD FOREIGN KEY(status) REFERENCES parameters(id);
 
 DESCRIBE users;
 

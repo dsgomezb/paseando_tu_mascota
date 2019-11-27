@@ -2,8 +2,7 @@
 <div class="container p-4">
     <div class="row">    
         <div class="col-md-3">
-            <a href="/users/create" class="btn btn-success">{{lang.users.new}}</a>
-            {{user.id}}
+            <a href="/users/create" class="btn btn-success">{{lang.users.new}}</a>          
         </div>
         <div class="col-md-9">
         </div>     
@@ -18,6 +17,7 @@
                         <th>{{lang.users.name}}</th>
                         <th>{{lang.users.email}}</th>
                         <th>{{lang.users.phone}}</th>
+                        <th>{{lang.detail.status}}</th>
                         <th class="text-center">{{lang.detail.action}}</th>
                     </tr>
                 </thead>
@@ -29,10 +29,21 @@
                         <td>{{names}}</td>
                         <td>{{email}}</td>
                         <td>{{phone}}</td>
+                        <td>  
+                            {{#if_eq status "1" }}      
+                                <span class="badge badge-success">{{../lang.detail.act}}</span>
+                            {{else}}
+                                <span class="badge badge-danger">{{../lang.detail.inact}}</span>
+                            {{/if_eq }} 
+                        </td>
                         <td class="text-center">
-                            <a href="#" class="detail" data-id="{{id}}"><i class="fa fa-eye fa-lg" title="{{../lang.detail.view}}"></i></a>
-                            <a href="/users/edit/{{id}}"><i class="fa fa-edit fa-lg" title="{{../lang.detail.edit}}"></i></a>                       
-                            <a href="#" class="delete" data-id="{{id}}"><i class="fa fa-trash fa-lg" title="{{../lang.detail.delete}}"></i></a>
+                            {{#if_eq status "1" }}   
+                                <a href="#" class="detail btn btn-primary btn-sm" data-id="{{id}}"><i class="fa fa-align-justify fa-lg" title="{{../lang.detail.detail}}"></i></a>
+                                <a href="/users/edit/{{id}}" class="btn btn-secondary btn-sm"><i class="fa fa-edit fa-lg" title="{{../lang.detail.edit}}"></i></a>
+                                <a href="#" class="inactive btn btn-danger btn-sm" data-id="{{id}}"><i class="fa fa-ban fa-lg" title="{{../lang.detail.inactive}}"></i></a>
+                            {{else}}
+                                <a href="#" class="active btn btn-success btn-sm" data-id="{{id}}"><i class="fa fa-check fa-lg" title="{{../lang.detail.active}}"></i></a>
+                            {{/if_eq }}    
                         </td>
                     </tr>
                     {{/each}}

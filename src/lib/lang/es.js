@@ -3,8 +3,14 @@ module.exports = {
     detail: {
         action: 'Acción',
         view: 'Ver',
+        detail: 'Detalle',
         edit: 'Editar',
-        delete: 'Eliminar'
+        delete: 'Eliminar',
+        status: 'Estado',
+        active: 'Activar',
+        act: 'Activo',
+        inactive: 'Inactivar',
+        inact: 'Inactivo'
     },
     login: {
         login: 'Ingreso',
@@ -13,6 +19,7 @@ module.exports = {
     },
     button: {
         save: 'Guardar',
+        update: 'Actualizar',
         edit: 'Editar',
         delete: 'Eliminar',
         save_links: 'Guarda tus enlaces',
@@ -35,6 +42,7 @@ module.exports = {
     users: {
         create: 'Crear',
         create_user: 'Crear nuevo usuario',
+        update_user: 'Actualizar usuario',
         name: 'Nombres y Apellidos',
         document: 'Documento',
         email: 'Email',
@@ -43,6 +51,6 @@ module.exports = {
         password: 'Contraseña',
         new: 'Nuevo',
         N: 'N°',
-        detail: 'Detalle del usuario'
+        detail: 'Detalle del usuario',
     }
 };

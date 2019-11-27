@@ -49,24 +49,25 @@ $(document).ready(function(){
         return false;
     });
 
-    //Se hace la peticion ajax para eliminar un usuario
-    $("#users_table").on("click", ".delete", function(){
+    //Se hace la peticion ajax para inactivar un usuario
+    $("#users_table").on("click", ".inactive", function(){
         //Se muestra ventana alert donde se pregunta al usuario si desea confirmar la eliminación
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: lang.inactive,
+            text: lang.inactive_sure,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: lang.accept,
+            cancelButtonText: lang.cancel
         }).then((result)=>{
             //Si el usuario acepta, se hace la peticion para eliminarse
             if(result.value){
                 var id =  $(this).data('id');
                 $.ajax({
                     type: "GET",
-                    url: "/users/delete/"+id,
+                    url: "/users/inactive/"+id,
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(data){
@@ -74,11 +75,11 @@ $(document).ready(function(){
                             //Si se recibe respuesta del servidor de que se borro el usuario, 
                             //se muestra nuevo mensaje de confirmacion que le informa la eliminacion y posteriormente se recarga la pagina
                             Swal.fire({
-                                title: 'eliminado',
-                                text: "You won't be able to revert this!",
-                                icon: 'info',
+                                title: lang.exit,
+                                text: lang.exit_inactive,
+                                icon: 'success',
                                 confirmButtonColor: '#3085d6',
-                                confirmButtonText: 'aceptar',
+                                confirmButtonText: lang.accept,
                                 allowOutsideClick: false
                             }).then((result)=>{
                                 if(result.value){
@@ -91,15 +92,204 @@ $(document).ready(function(){
                     error: function(err){
                     var msg = 'Status: ' + err.status + ': ' + err.responseText;
                     console.log(msg);
-                    Swal.fire(
-                        'Error!',
-                        'Your file has been deleted.',
-                        'error'
-                        )
                     }
                 });
             }
         });
         return false;
+    });
+
+
+    //Se hace la peticion ajax para activar un usuario
+    $("#users_table").on("click", ".active", function(){
+        //Se muestra ventana alert donde se pregunta al usuario si desea confirmar la eliminación
+        Swal.fire({
+            title: lang.active,
+            text: lang.active_sure,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: lang.accept,
+            cancelButtonText: lang.cancel
+        }).then((result)=>{
+            //Si el usuario acepta, se hace la peticion para eliminarse
+            if(result.value){
+                var id =  $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    url: "/users/active/"+id,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(data){
+                        if(data.success != false){
+                            //Si se recibe respuesta del servidor de que se borro el usuario, 
+                            //se muestra nuevo mensaje de confirmacion que le informa la eliminacion y posteriormente se recarga la pagina
+                            Swal.fire({
+                                title: lang.exit,
+                                text: lang.exit_active,
+                                icon: 'success',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,
+                                allowOutsideClick: false
+                            }).then((result)=>{
+                                if(result.value){
+                                    //Se recarga la pagina al dar clic en aceptar
+                                    document.location.reload();
+                                }
+                            });
+                        }   
+                    },
+                    error: function(err){
+                    var msg = 'Status: ' + err.status + ': ' + err.responseText;
+                    console.log(msg);
+                    }
+                });
+            }
+        });
+        return false;
+    });
+
+    //Se hace la peticion ajax para guardar el usuario
+    $('#form_save').on('submit', (e) => {
+        e.preventDefault();
+        //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
+        var formData = new Object();
+        formData.document = $("#document").val();
+        formData.names = $("#names").val();
+        formData.email = $("#email").val();
+        formData.phone = $("#phone").val();
+        formData.username = $("#username").val();
+        formData.password = $("#password").val();
+
+        //Petición ajax paa envío de la info del form
+        $.ajax({
+            type: 'POST',
+            url: '/users/register',
+            data: formData,
+            cache: false,
+            success: function(data){
+                if(data == 'username'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.user.username_invalid,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == 'document'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.user.document_invalid,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == 'email'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.user.email_invalid,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == true){
+                    Swal.fire({
+                        title: lang.exit,
+                        text: lang.user.exit_register,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    }).then((result)=>{
+                        if(result.value){
+                            //Se recarga la pagina al dar clic en aceptar
+                            window.location.href = "/users"
+                        }
+                    });
+                }
+            },
+            error: function(err) {
+            var msg = 'Status: ' + err.status;
+            console.log(msg);
+            }
+        });
+        return false;
+        
+    });
+
+    //Se hace la peticion ajax para actualizar el usuario
+    $('#form_update').on('submit', (e) => {
+        e.preventDefault();
+        //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
+        var formData = new Object();
+        formData.document = $("#document").val();
+        formData.names = $("#names").val();
+        formData.email = $("#email").val();
+        formData.phone = $("#phone").val();
+        formData.username = $("#username").val();
+        formData.password = $("#password").val();
+        formData.user_id = $("#user_id").val();
+
+        //Petición ajax paa envío de la info del form
+        $.ajax({
+            type: 'POST',
+            url: '/users/update',
+            data: formData,
+            cache: false,
+            success: function(data){
+                if(data == 'username'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.user.username_invalid,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == 'document'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.user.document_invalid,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == 'email'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.user.email_invalid,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == true){
+                    Swal.fire({
+                        title: lang.exit,
+                        text: lang.user.exit_updated,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    }).then((result)=>{
+                        if(result.value){
+                            //Se recarga la pagina al dar clic en aceptar
+                            window.location.href = "/users"
+                        }
+                    });
+                }
+            },
+            error: function(err) {
+            var msg = 'Status: ' + err.status;
+            console.log(msg);
+            }
+        });
+        return false;
+        
     });
 });
