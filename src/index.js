@@ -8,6 +8,7 @@ const MySQLStore = require('express-mysql-session');
 const { database } = require('./keys');
 const passport = require('passport');
 const lang = require('./lib/lang/es');
+var favicon = require('serve-favicon');
 
 //Inicializaciones
 const app = express();
@@ -24,6 +25,7 @@ app.engine('.hbs', exphbs({
     helpers: require('./lib/handlebars')
 }));
 app.set('view engine', '.hbs');
+app.use(favicon(path.join(__dirname, 'public/img/images_logo', 'favicon.png')))
 
 //Middlewars
 app.use(session({
