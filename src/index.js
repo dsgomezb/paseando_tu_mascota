@@ -53,8 +53,10 @@ app.use((req, res, next) => {
 //Rutas
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
+app.use('/establecimientos', require('./routes/establecimientos'));
 app.use('/links', require('./routes/links'));
 app.use('/users', require('./routes/users'));
+
 
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
@@ -62,5 +64,5 @@ app.use(express.static(path.join(__dirname, 'lib')));
 
 //Starting the server
 app.listen(app.get('port'), () => {
-    console.log('server port'+app.get('port'));
+    console.log('server port: '+app.get('port'));
 });

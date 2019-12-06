@@ -13,6 +13,7 @@ $(document).ready(function(){
     "bLengthChange": false,
     "bFilter": true,
     "bInfo": false,
+    "scrollX": true,
     "order": [[ 1, 'asc' ]]
     });
 
@@ -38,6 +39,8 @@ $(document).ready(function(){
                     $("#user_document").text(data.document);
                     $("#user_email").text(data.email);
                     $("#user_phone").text(data.phone);
+                    $("#user_username").text(data.username);
+                    $("#user_profile").text(data.name_profile);
                     $("#detalle").modal();
                 }
             },
@@ -161,7 +164,18 @@ $(document).ready(function(){
         formData.phone = $("#phone").val();
         formData.username = $("#username").val();
         formData.password = $("#password").val();
-
+        formData.id_profile = $("#profile").val();
+        if(formData.id_profile == 0){
+            Swal.fire({
+                title: lang.error,
+                text: lang.user.profile_required,
+                icon: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: lang.accept,                    
+            });
+            return false;
+        }
         //Petición ajax paa envío de la info del form
         $.ajax({
             type: 'POST',

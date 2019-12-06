@@ -9,7 +9,7 @@ passport.use('local.signin', new LocalStrategy({
     passReqToCallback: true
 }, async (req, username, password, done) => {
     let status_active = 1;
-    const rows = await pool.query('SELECT * FROM users WHERE username = ? and status = ?', [username, status_active]);
+    const rows = await pool.query('SELECT * FROM users WHERE username = ? and status_user = ?', [username, status_active]);
     if(rows.length > 0){
         const user = rows[0];
         const validPassword = await helpers.matchPassword(password, user.password);
@@ -29,7 +29,7 @@ passport.use('local.signup', new LocalStrategy({
     passReqToCallback: true
 }, async (req, username, password, done) => {
     const { names, document, email, phone } = req.body;
-    let status = 1;
+    let status_user = 1;
     let created_at = new Date();
     const newUser = {
         username,
@@ -38,7 +38,7 @@ passport.use('local.signup', new LocalStrategy({
         document,
         email,
         phone,
-        status,
+        status_user,
         created_at
     };
     const usernam = newUser.username;
@@ -50,15 +50,15 @@ passport.use('local.signup', new LocalStrategy({
         req.flash('exito', 'Usuario creado correctamente');
         return done(null, newUser);
     }else{
-        return done(null, false, req.flash('message','nooooooo'));
+        return done(null, false, req.flash('message','No se puede crear el usuario'));
     }
 }));
 
 passport.serializeUser((user, done) => {
-    done(null, user.id);
+    done(null, user.id_user);
 });
 
 passport.deserializeUser(async (id, done) => {
-    const rows = await pool.query('SELECT * FROM users WHERE id = ?', [id]);
+    const rows = await pool.query('SELECT * FROM users WHERE id_user = ?', [id]);
     done(null, rows[0]);
 });

@@ -12,6 +12,10 @@ module.exports = {
         inactive: 'Inactivar',
         inact: 'Inactivo'
     },
+    general: {
+        depto: 'Departamento',
+        muni: 'Municipio'
+    },
     login: {
         login: 'Ingreso',
         register: 'Registro',
@@ -52,5 +56,24 @@ module.exports = {
         new: 'Nuevo',
         N: 'N°',
         detail: 'Detalle del usuario',
+        profile_select: 'Seleccione el perfil',
+        profile: 'Perfil',
+        management_users: 'Gestión de Usuarios'
+    },
+    establecimientos: {
+        create: 'Crear',
+        create_establecimiento: 'Crear nuevo establecimiento',
+        update_user: 'Actualizar establecimiento',
+        new: 'Nuevo',
+        N: 'N°',
+        detail: 'Detalle del establecimiento',
+        code: 'Código',
+        address: 'Dirección',
+        city: 'Ciudad',
+        phone: 'Teléfono',
+        admin: 'Administrador',
+        management_establecimientos: 'Gestión de Establecimientos',
+        establecimiento_admin: 'Administrador del Establecimiento',
+        establecimiento_name: 'Nombre del establecimiento'
     }
 };
