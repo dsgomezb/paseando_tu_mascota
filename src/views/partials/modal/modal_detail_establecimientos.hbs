@@ -1,0 +1,69 @@
+<!-- Modal detalle establecimiento-->
+<div class="modal inmodal" id="detalle" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Encabezado del modal -->
+            <div class="modal-header text-center bg-light">
+                <h4 class="modal-title ">{{lang.establecimiento.detail}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- /Encabezado del modal -->
+            <!-- Cuerpo del modal -->
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.establecimientos.name}}</b>
+                            </label>
+                            <label id="name_establecimiento"></label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.establecimientos.address}}</b>
+                            </label>
+                            <label id="direccion_establecimiento"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.establecimientos.phone}}</b>
+                            </label>
+                            <label id="telefono_establecimiento"></label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.establecimientos.establecimiento_admin}}</b>
+                            </label>
+                            <label id="establecimiento_admin"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.general.muni}}</b>
+                            </label>
+                            <label id="establecimiento_muni"></label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.general.depto}}</b>
+                            </label>
+                            <label id="establecimiento_depto"></label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Cuerpo del modal -->
+            <!-- Pie del modal -->
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lang.button.close}}</button>
+            </div>
+            <!-- /Pie del modal -->
+        </div>
+    </div>
+</div>
+<!-- /Modal detalle establecimiento-->

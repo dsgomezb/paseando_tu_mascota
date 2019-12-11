@@ -68,6 +68,7 @@ module.exports = {
         N: 'N°',
         detail: 'Detalle del establecimiento',
         code: 'Código',
+        name: 'Nombre',
         address: 'Dirección',
         city: 'Ciudad',
         phone: 'Teléfono',

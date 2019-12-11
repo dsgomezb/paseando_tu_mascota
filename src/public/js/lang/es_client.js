@@ -16,5 +16,14 @@ var lang = {
         exit_register: 'Usuario registrado exitosamente',
         exit_updated: 'Usuario actualizado exitosamente',
         profile_required: 'Debe seleccionar un perfil válido'
+    },
+    establecimiento:{
+        user_required: 'Debe seleccionar un administrador de establecimiento',
+        municipio_required: 'El municipio es requerido',
+        exit_register: 'Establecimiento registrado exitosamente',
+        name_establecimiento: 'Este nombre de establecimiento ya se encuentra registrado',
+        direccion_establecimiento: 'Esta direccion ya se encuentra registrada',
+        exit_register: 'Establecimiento registrado exitosamente',
+        exit_updated: 'Establecimiento actualizado exitosamente',
     }
 }
