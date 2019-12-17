@@ -1,0 +1,75 @@
+<div class="container p-4">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h2 class="text-success">{{lang.establecimientos.update_establecimiento}}</h2>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 mx-auto">
+            <div class="card">
+                <div class="card-body">
+                    <form id="form_update">
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <b><label for="">{{lang.establecimientos.establecimiento_name}}{{lang.required}}</label></b>
+                                <input value="{{establecimiento.name_establecimiento}}" type="text" name="establecimiento_name" id="establecimiento_name" class="form-control" maxlength="255" placeholder="{{lang.establecimientos.establecimiento_name}}" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <b><label for="">{{lang.establecimientos.establecimiento_admin}}{{lang.required}}</label></b>
+                                <select class="form-control" name="user" id="user" style="cursor: pointer;">
+                                    <option value="{{establecimiento.id_user}}">{{establecimiento.document}} - {{establecimiento.names}}</option>
+                                    {{#each users}}
+                                        {{#if_eq status_user "1" }}
+                                            {{#if_eq id_profile "2"}}
+                                                <option value="{{id_user}}">{{document}} - {{names}}</option>
+                                            {{/if_eq}}    
+                                        {{/if_eq }} 
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <b><label for="">{{lang.general.depto}}{{lang.required}}</label></b>
+                                <select class="form-control" name="depto" id="depto" style="cursor: pointer;">
+                                    <option value="{{establecimiento.id_depto}}">{{establecimiento.name_depto}}</option>
+                                    {{#each deptos}}
+                                        <option value="{{id_depto}}">{{name_depto}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <b><label for="">{{lang.general.muni}}{{lang.required}}</label></b>
+                                <select class="form-control" name="municipio" id="municipio" style="cursor: pointer;">
+                                    <option value="{{establecimiento.id_muni}}">{{establecimiento.nombre_muni}}</option>
+                                    {{#each muni}}
+                                        <option value="{{id_muni}}">{{nombre_muni}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="form-group col-md-6">
+                                <b><label for="">{{lang.establecimientos.phone}}{{lang.required}}</label></b>
+                                <input value="{{establecimiento.telefono_establecimiento}}" type="text" name="phone" id="phone" class="form-control" maxlength="30" placeholder="{{lang.establecimientos.phone}}" required>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <b><label for="">{{lang.establecimientos.address}}{{lang.required}}</label></b>
+                                <input value="{{establecimiento.direccion_establecimiento}}" type="text" name="address" id="address" class="form-control" maxlength="255" placeholder="{{lang.establecimientos.address}}" required>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-12 text-center">
+                                <input value="{{establecimiento.id_establecimiento}}" type="hidden" name="establecimiento_id" id="establecimiento_id" >
+                                <input value="{{establecimiento.id_establecimiento_user}}" type="hidden" name="id_establecimiento_user" id="id_establecimiento_user" >
+                                <button type="submit" class="btn btn-success" >{{lang.button.update}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>

@@ -75,6 +75,7 @@ module.exports = {
         admin: 'Administrador',
         management_establecimientos: 'Gestión de Establecimientos',
         establecimiento_admin: 'Administrador del Establecimiento',
-        establecimiento_name: 'Nombre del establecimiento'
+        establecimiento_name: 'Nombre del establecimiento',
+        update_establecimiento: 'Actualizar establecimiento'
     }
 };
