@@ -54,8 +54,8 @@ app.use((req, res, next) => {
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
 app.use('/establecimientos', require('./routes/establecimientos'));
-app.use('/links', require('./routes/links'));
 app.use('/users', require('./routes/users'));
+app.use('/products', require('./routes/products'));
 
 
 //Public

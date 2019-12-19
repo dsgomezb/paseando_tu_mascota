@@ -41,7 +41,8 @@ module.exports = {
         view_profile: 'Ver perfil',
         users: 'Usuarios',
         establishments: 'Establecimientos',
-        products: 'Productos'
+        products: 'Productos',
+        order: 'Pedidos'
     },
     users: {
         create: 'Crear',
@@ -76,6 +77,29 @@ module.exports = {
         management_establecimientos: 'Gestión de Establecimientos',
         establecimiento_admin: 'Administrador del Establecimiento',
         establecimiento_name: 'Nombre del establecimiento',
-        update_establecimiento: 'Actualizar establecimiento'
+        update_establecimiento: 'Actualizar establecimiento',
+    },
+    products:{
+        create: 'Crear',
+        create_product: 'Crear nuevo producto',
+        update_user: 'Actualizar producto',
+        new: 'Nuevo',
+        new_product: 'Nuevo producto',
+        detail: 'Detalle del producto',
+        management_products: 'Gestión de productos',
+        internal_code: 'Código interno',
+        unitary_value_product: 'Valor unitario',
+        category_product: 'Categoria',
+        presentation_product: 'Presentación',
+        description: 'Descripción',
+        iva: 'IVA',
+        name: 'Nombre',
+        establecimiento: 'Establecimiento',
+        image: 'Imagen',
+        product_iva: 'Producto con IVA'
+    },
+    category:{
+        new_category: 'Nueva categoria',
+        N: 'N°',
     }
 };

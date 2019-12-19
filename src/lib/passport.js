@@ -9,7 +9,7 @@ passport.use('local.signin', new LocalStrategy({
     passReqToCallback: true
 }, async (req, username, password, done) => {
     let status_active = 1;
-    const rows = await pool.query('SELECT * FROM users WHERE username = ? and status_user = ?', [username, status_active]);
+    const rows = await pool.query('SELECT * FROM users AS us INNER JOIN user_profile AS up ON us.id_user = up.id_user INNER JOIN profile AS pro ON pro.id_profile = up.id_profile WHERE us.username = ? and us.status_user = ?', [username, status_active]);
     if(rows.length > 0){
         const user = rows[0];
         const validPassword = await helpers.matchPassword(password, user.password);
@@ -59,6 +59,6 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-    const rows = await pool.query('SELECT * FROM users WHERE id_user = ?', [id]);
+    const rows = await pool.query('SELECT * FROM users AS us INNER JOIN user_profile AS up ON us.id_user = up.id_user INNER JOIN profile AS pro ON pro.id_profile = up.id_profile WHERE us.id_user = ?', [id]);
     done(null, rows[0]);
 });

@@ -1271,3 +1271,42 @@ CREATE TABLE establecimiento_user(
 
 ALTER TABLE establecimiento_user ADD FOREIGN KEY(id_establecimiento) REFERENCES establecimiento(id_establecimiento);
 ALTER TABLE establecimiento_user ADD FOREIGN KEY(id_user) REFERENCES users(id_user);
+
+-- CATEGORY PRODUCT TABLE
+
+CREATE TABLE category_product(
+  id_category_product INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name_category_product VARCHAR(250) NOT NULL,
+  status_category_product smallint(30) NOT NULL
+);
+
+-- PRESENTATION PRODUCT TABLE
+
+CREATE TABLE presentation_product(
+  id_presentation_product INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name_presentation_product VARCHAR(250) NOT NULL,
+  status_presentation_product smallint(30) NOT NULL
+);
+
+CREATE TABLE product(
+      id_product INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      id_category_product INT(30) NOT NULL,
+      id_presentation_product INT(30) NOT NULL,
+      id_establecimiento bigint(20) NOT NULL,
+      name_product VARCHAR(500) NOT NULL,
+      description_product VARCHAR(500),
+      unitary_value_product FLOAT NOT NULL,
+      iva_product FLOAT,
+      value_iva_product FLOAT,
+      internal_code_product VARCHAR(50) NULL,
+      image_url_product VARCHAR(500),
+      status_product smallint(30) NOT NULL,
+      created_at timestamp NULL,
+      updated_at timestamp NULL,
+      deleted_at timestamp NULL
+);
+
+ALTER TABLE product ADD FOREIGN KEY(status_product) REFERENCES parameters(id);
+ALTER TABLE product ADD FOREIGN KEY(id_category_product) REFERENCES category_product(id_category_product);
+ALTER TABLE product ADD FOREIGN KEY(id_presentation_product) REFERENCES presentation_product(id_presentation_product);
+ALTER TABLE product ADD FOREIGN KEY(id_establecimiento) REFERENCES establecimiento(id_establecimiento);
