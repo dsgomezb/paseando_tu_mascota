@@ -101,5 +101,14 @@ module.exports = {
     category:{
         new_category: 'Nueva categoria',
         N: 'N°',
+        create_category: 'Crear nueva categoria de producto',
+        name: 'Nombre',
+        status: 'Estado'
+    },
+    presentation_product:{
+        new_presentation_product: 'Nueva presentación de producto',
+        create_presentation_product: 'Crear nueva presentación de producto',
+        name: 'Nombre',
+        status: 'Estado'
     }
 };

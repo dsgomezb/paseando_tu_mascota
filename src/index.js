@@ -9,6 +9,7 @@ const { database } = require('./keys');
 const passport = require('passport');
 const lang = require('./lib/lang/es');
 var favicon = require('serve-favicon');
+const fileUpload = require('express-fileupload')
 
 //Inicializaciones
 const app = express();
@@ -40,6 +41,7 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(fileUpload());
 
 //Global Variables
 app.use((req, res, next) => {

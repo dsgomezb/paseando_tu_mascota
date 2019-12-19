@@ -6,11 +6,12 @@
         </div>    
     </div>
     <div class="row">    
-        <div class="col-md-6">
+        <div class="col-md-9">
             <a href="/products/create" class="btn btn-success">{{lang.products.new_product}}</a>          
-            <a href="#" class="btn btn-success">{{lang.category.new_category}}</a>          
+            <a href="#" id="button_new_category" class="btn btn-success">{{lang.category.new_category}}</a>
+            <a href="#" id="button_new_presentation_product" class="btn btn-success">{{lang.presentation_product.new_presentation_product}}</a>        
         </div>
-        <div class="col-md-6">
+        <div class="col-md-3">
         </div>     
     </div>    
     <div class="row">
@@ -60,4 +61,6 @@
 </div>
 </div>
     {{> modal/modal_detail_product }}
+    {{> modal/modal_new_category_product }}
+    {{> modal/modal_new_presentation_product }}
 </div>
