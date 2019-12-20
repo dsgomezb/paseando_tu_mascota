@@ -8,11 +8,11 @@
         <div class="col-md-12 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <form id="form_save">
+                    <form id="form_save_product">
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <b><label for="">{{lang.products.name}}{{lang.required}}</label></b>
-                                <input type="text" name="name_product" id="name_product" class="form-control" maxlength="500" placeholder="{{lang.products.product_name}}" required>
+                                <input type="text" name="name_product" id="name_product" class="form-control" maxlength="500" placeholder="{{lang.products.name}}" required>
                             </div>
                             <div class="form-group col-md-6">
                                 <b><label for="">{{lang.products.establecimiento}}{{lang.required}}</label></b>
@@ -28,11 +28,11 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <b><label for="">{{lang.products.description}}</label></b>
-                                <textarea name="description_product" id="description_product" class="form-control" maxlength="500" placeholder="{{lang.products.unitary_value_product}}" ></textarea>
+                                <textarea name="description_product" id="description_product" class="form-control" maxlength="500" placeholder="{{lang.products.description}}" ></textarea>
                             </div>
                             <div class="form-group col-md-6">
                                 <b><label for="">{{lang.products.internal_code}}{{lang.required}}</label></b>
-                                <input type="text" name="internal_code" id="internal_code" class="form-control" maxlength="50" placeholder="{{lang.products.product_name}}" required>
+                                <input type="text" name="internal_code" id="internal_code" class="form-control" maxlength="50" placeholder="{{lang.products.internal_code}}" required>
                             </div>
                         </div>
 
@@ -72,11 +72,16 @@
                             </div>
                         </div>
                         <div class="row">
-                           <div class="form-group col-md-6">
-                                <b><label for="">{{lang.products.image}}{{lang.required}}</label></b>
-                                <input type="file" name="image_product" id="image_product">
+                            <div class="form-group col-md-6">
+                                <b><label for="">{{lang.products.status}}{{lang.required}}</label></b>
+                                <select name="status_product" id="status_product" class="form-control">
+                                    <option value="3">Disponible</option>
+                                    <option value="4">No disponible</option>
+                                </select>
                             </div>
                             <div class="form-group col-md-6">
+                                <b><label for="">{{lang.products.image}}{{lang.required}}</label></b>
+                                <input type="file" name="image_product" id="image_product">
                             </div>
                         </div>
                         <div class="row">

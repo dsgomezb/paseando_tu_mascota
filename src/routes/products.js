@@ -10,7 +10,7 @@ const helpers = require('../lib/helpers');
 router.get('/', isLoggedIn, async (req, res) => {
     const id_user = req.user.id_user;
     //const id_profile_user = req.user.id_profile;
-    var  products = await pool.query('SELECT * FROM product AS pro INNER JOIN establecimiento AS est ON est.id_establecimiento = pro.id_establecimiento INNER JOIN establecimiento_user AS est_usr ON est_usr.id_establecimiento = est.id_establecimiento INNER JOIN users AS usr ON usr.id_user = est_usr.id_user INNER JOIN municipios AS mun ON mun.id_muni = est.id_muni WHERE est_usr.id_user != ? ORDER BY est.created_at desc', [id_user]);
+    var products = await pool.query('SELECT * FROM product AS pro INNER JOIN establecimiento AS est ON est.id_establecimiento = pro.id_establecimiento INNER JOIN establecimiento_user AS est_usr ON est_usr.id_establecimiento = est.id_establecimiento INNER JOIN users AS usr ON usr.id_user = est_usr.id_user INNER JOIN municipios AS mun ON mun.id_muni = est.id_muni WHERE est_usr.id_user = ? ORDER BY est.created_at desc', [id_user]);
     res.render('products/list', {products});
 });
 
@@ -65,6 +65,40 @@ router.post('/register_presentation_product', isLoggedIn, async (req, res) => {
             res.send(false);
         }
     }
+});
+
+//Ruta para registrar un nuevo producto
+router.post('/register_product', isLoggedIn, async (req, res) => {
+    let data = req.body;
+    const { name_product, id_establecimiento, description_product, internal_code_product, id_category_product, id_presentation_product, unitary_value_product, iva_product, value_iva_product, image_product, status_product} = data;
+    const newProduct = {
+        name_product,
+        id_establecimiento,
+        description_product,
+        internal_code_product,
+        id_category_product,
+        id_presentation_product,
+        unitary_value_product,
+        iva_product,
+        value_iva_product,
+        status_product
+    };
+    const name_product_result = await pool.query('SELECT name_product FROM product WHERE name_product = ? AND id_establecimiento = ?', [newProduct.name_product, newProduct.id_establecimiento]);
+    const internal_code_product_result = await pool.query('SELECT internal_code_product FROM product WHERE internal_code_product = ? AND id_establecimiento = ?', [newProduct.internal_code_product, newProduct.id_establecimiento]);
+
+    if(name_product_result.length > 0){
+        res.send('name_product');
+    }else if(internal_code_product_result.length > 0){
+        res.send('internal_code_product');
+    }else{
+        const query_presentation_product = await pool.query('INSERT INTO product SET ?', [newProduct]);
+        if(query_presentation_product){
+            res.send(true);
+        }else{
+            res.send(false);
+        }
+    }
+    res.send(false);
 });
 
 module.exports = router;

@@ -10,7 +10,11 @@ module.exports = {
         active: 'Activar',
         act: 'Activo',
         inactive: 'Inactivar',
-        inact: 'Inactivo'
+        inact: 'Inactivo',
+        available: 'Disponible',
+        unavailable: 'No disponible',
+        enable: 'Habilitar',
+        unable: 'Inhabilitar'
     },
     general: {
         depto: 'Departamento',
@@ -96,7 +100,10 @@ module.exports = {
         name: 'Nombre',
         establecimiento: 'Establecimiento',
         image: 'Imagen',
-        product_iva: 'Producto con IVA'
+        product_iva: 'Producto con IVA',
+        status: 'Estado',
+        N: 'N°',
+        name: 'Nombre'
     },
     category:{
         new_category: 'Nueva categoria',

@@ -36,5 +36,13 @@ var lang = {
     presentation_product:{
         name_presentation_product: 'Esta presentación ya se encuentra registrada',
         exit_register: 'Presentación registrada correctamente'
+    },
+    product:{
+        name_product: 'Este nombre ya se encuentra registrado',
+        internal_code_product: 'Este código interno ya se encuentra registrado',
+        establecimiento_required: 'Debe seleccionar un establecimiento',
+        category_required: 'Debe seleccionar una categoria',
+        presentation_required: 'Debe seleccionar una presentación',
+        exit_register: 'Producto registrado exitosamente'
     }
 }
