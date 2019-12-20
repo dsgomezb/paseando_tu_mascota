@@ -121,6 +121,16 @@ $(document).ready(function(){
                                     window.location.href = "/establecimientos"
                                 }
                             });
+                        }else if(data == false){
+                            Swal.fire({
+                                title: lang.error,
+                                text: lang.general.error_save,
+                                icon: 'error',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,                    
+                            });
+                            return false;
                         }
             },
             error: function(err) {
@@ -182,9 +192,7 @@ $(document).ready(function(){
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(data){
-                        if(data.success != false){
-                            //Si se recibe respuesta del servidor de que se inactivo el usuario, 
-                            //se muestra nuevo mensaje de confirmacion que le informa la inactivacion y posteriormente se recarga la pagina
+                        if(data == true){
                             Swal.fire({
                                 title: lang.exit,
                                 text: lang.exit_inactive,
@@ -198,7 +206,17 @@ $(document).ready(function(){
                                     document.location.reload();
                                 }
                             });
-                        }   
+                        }else if(data == false){
+                            Swal.fire({
+                                title: lang.error,
+                                text: lang.general.error_save,
+                                icon: 'error',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,                    
+                            });
+                            return false;
+                        }
                     },
                     error: function(err){
                     var msg = 'Status: ' + err.status + ': ' + err.responseText;
@@ -232,9 +250,7 @@ $(document).ready(function(){
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(data){
-                        if(data.success != false){
-                            //Si se recibe respuesta del servidor de que se activo el establecimiento, 
-                            //se muestra nuevo mensaje de confirmacion que le informa la inactivacion y posteriormente se recarga la pagina
+                        if(data == true){
                             Swal.fire({
                                 title: lang.exit,
                                 text: lang.exit_active,
@@ -248,7 +264,17 @@ $(document).ready(function(){
                                     document.location.reload();
                                 }
                             });
-                        }   
+                        }else if(data == false){
+                            Swal.fire({
+                                title: lang.error,
+                                text: lang.general.error_save,
+                                icon: 'error',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,                    
+                            });
+                            return false;
+                        }  
                     },
                     error: function(err){
                     var msg = 'Status: ' + err.status + ': ' + err.responseText;
@@ -262,7 +288,6 @@ $(document).ready(function(){
 
     //Se hace la peticion ajax para guardar el establecimiento
     $('#form_update').on('submit', (e) => {
-        console.log("aq");
         e.preventDefault();
         //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
         var formData = new Object();
@@ -338,6 +363,16 @@ $(document).ready(function(){
                                     window.location.href = "/establecimientos"
                                 }
                             });
+                        }else if(data == false){
+                            Swal.fire({
+                                title: lang.error,
+                                text: lang.general.error_save,
+                                icon: 'error',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,                    
+                            });
+                            return false;
                         }
             },
             error: function(err) {

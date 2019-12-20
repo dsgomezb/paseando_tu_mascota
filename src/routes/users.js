@@ -45,8 +45,12 @@ router.post('/register', isLoggedIn, async (req, res) => {
             id_profile,
             status_user_profile
         };
-        await pool.query('INSERT INTO user_profile SET ?', [newPorfileUSer]);
-        res.send(true);
+        const query_user_profile = await pool.query('INSERT INTO user_profile SET ?', [newPorfileUSer]);
+        if(query_user && query_user_profile){
+            res.send(true);
+        }else{
+            res.send(false);
+        }
     }
 });
 
@@ -83,8 +87,12 @@ router.get('/inactive/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     let deleted_at = new Date();
     let status_user = 2;
-    await pool.query('UPDATE users set status_user = ?, deleted_at = ? WHERE id_user = ?',[status_user, deleted_at, id]);
-    res.send('true');
+    const query_inactive = await pool.query('UPDATE users set status_user = ?, deleted_at = ? WHERE id_user = ?',[status_user, deleted_at, id]);
+    if(query_inactive){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
 });
 
 //Ruta para activar un usuario
@@ -92,8 +100,12 @@ router.get('/active/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     let deleted_at = null;
     let status_user = 1;
-    await pool.query('UPDATE users set status_user = ?, deleted_at = ? WHERE id_user = ?',[status_user, deleted_at, id]);
-    res.send('true');
+    const query_active = await pool.query('UPDATE users set status_user = ?, deleted_at = ? WHERE id_user = ?',[status_user, deleted_at, id]);
+    if(query_active){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
 });
 
 //Ruta para cargar la informacion del usuario en el formulario de edición
@@ -138,8 +150,12 @@ router.post('/update', isLoggedIn, async (req, res) => {
         }else{
             newUser.password = password_result[0].password;
         }
-        await pool.query('UPDATE users SET ? WHERE id_user = ?', [newUser, user_id]);
-        res.send(true);
+        const query_user = await pool.query('UPDATE users SET ? WHERE id_user = ?', [newUser, user_id]);
+        if(query_user){
+            res.send(true);
+        }else{
+            res.send(false);
+        }
     }
 });
 module.exports = router;

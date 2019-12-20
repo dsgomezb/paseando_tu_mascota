@@ -67,8 +67,12 @@ router.post('/register', isLoggedIn, async (req, res) => {
             id_establecimiento,
             id_user,
         };
-        await pool.query('INSERT INTO establecimiento_user SET ?', [newUserEst]);
-        res.send(true);
+        const query_estable = await pool.query('INSERT INTO establecimiento_user SET ?', [newUserEst]);
+        if(query_estable){
+            res.send(true);
+        }else{
+            res.send(false);
+        }
     }
 });
 
@@ -85,8 +89,12 @@ router.get('/inactive/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     let deleted_at = new Date();
     let status_user = 2;
-    await pool.query('UPDATE establecimiento set status_establecimiento = ?, deleted_at = ? WHERE id_establecimiento = ?',[status_user, deleted_at, id]);
-    res.send('true');
+    const query_inactive = await pool.query('UPDATE establecimiento set status_establecimiento = ?, deleted_at = ? WHERE id_establecimiento = ?',[status_user, deleted_at, id]);
+    if(query_inactive){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
 });
 
 //Ruta para activar un establecimiento
@@ -94,8 +102,12 @@ router.get('/active/:id', isLoggedIn, async (req, res) => {
     const { id } = req.params;
     let deleted_at = null;
     let status_user = 1;
-    await pool.query('UPDATE establecimiento set status_establecimiento = ?, deleted_at = ? WHERE id_establecimiento = ?',[status_user, deleted_at, id]);
-    res.send('true');
+    const query_active = await pool.query('UPDATE establecimiento set status_establecimiento = ?, deleted_at = ? WHERE id_establecimiento = ?',[status_user, deleted_at, id]);
+    if(query_active){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
 });
 
 //Ruta para cargar la informacion del usuario en el formulario de edición
@@ -137,8 +149,10 @@ router.post('/update', isLoggedIn, async (req, res) => {
     }else{
         const query_user = await pool.query('UPDATE establecimiento SET ? WHERE id_establecimiento = ?', [newEstablecimiento, establecimiento_id]);
         const query_user_est = await pool.query('UPDATE establecimiento_user SET id_user = ? WHERE id_establecimiento_user = ?', [id_user, id_establecimiento_user]);
-        if(query_user){
+        if(query_user && query_user_est){
             res.send(true);
+        }else{
+            res.send(false); 
         }
     }
 });

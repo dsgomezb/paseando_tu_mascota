@@ -74,9 +74,7 @@ $(document).ready(function(){
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(data){
-                        if(data.success != false){
-                            //Si se recibe respuesta del servidor de que se borro el usuario, 
-                            //se muestra nuevo mensaje de confirmacion que le informa la eliminacion y posteriormente se recarga la pagina
+                        if(data == true){
                             Swal.fire({
                                 title: lang.exit,
                                 text: lang.exit_inactive,
@@ -90,7 +88,17 @@ $(document).ready(function(){
                                     document.location.reload();
                                 }
                             });
-                        }   
+                        }else if(data == false){
+                            Swal.fire({
+                                title: lang.error,
+                                text: lang.general.error_save,
+                                icon: 'error',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,                    
+                            });
+                            return false;
+                        }    
                     },
                     error: function(err){
                     var msg = 'Status: ' + err.status + ': ' + err.responseText;
@@ -125,9 +133,7 @@ $(document).ready(function(){
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     success: function(data){
-                        if(data.success != false){
-                            //Si se recibe respuesta del servidor de que se borro el usuario, 
-                            //se muestra nuevo mensaje de confirmacion que le informa la eliminacion y posteriormente se recarga la pagina
+                        if(data == true){
                             Swal.fire({
                                 title: lang.exit,
                                 text: lang.exit_active,
@@ -141,6 +147,16 @@ $(document).ready(function(){
                                     document.location.reload();
                                 }
                             });
+                        }else if(data == false){
+                            Swal.fire({
+                                title: lang.error,
+                                text: lang.general.error_save,
+                                icon: 'error',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,                    
+                            });
+                            return false;
                         }   
                     },
                     error: function(err){
@@ -224,6 +240,16 @@ $(document).ready(function(){
                             window.location.href = "/users"
                         }
                     });
+                }else if(data == false){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.general.error_save,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                    return false;
                 }
             },
             error: function(err) {
@@ -296,6 +322,16 @@ $(document).ready(function(){
                             window.location.href = "/users"
                         }
                     });
+                }else if(data == false){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.general.error_save,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                    return false;
                 }
             },
             error: function(err) {
