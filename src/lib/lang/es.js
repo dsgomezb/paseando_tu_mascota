@@ -1,5 +1,8 @@
 module.exports = {
     required: '*',
+    constant:{
+        ruta_local: 'G:\\establecimientos\\src\\public\\archivos\\'
+    },
     detail: {
         action: 'Acción',
         view: 'Ver',

@@ -27,17 +27,18 @@ $(document).ready(function(){
 
     $("#unitary_value_product").keyup(function(){
         var unitary_value_product =  $("#unitary_value_product").val();
-        var iva_product =  $("#iva").val();
+        var iva_product =  $("#iva_product").val();
         var product_iva = (unitary_value_product*iva_product)/100;
-        $("#product_iva").val(product_iva);
+        product_iva = parseFloat(unitary_value_product)+parseFloat(product_iva);
+        $("#value_iva_product").val(product_iva);
     });
 
-    $("#iva").keyup(function(){
+    $("#iva_product").keyup(function(){
         var unitary_value_product =  $("#unitary_value_product").val();
-        var iva_product =  $("#iva").val();
+        var iva_product =  $("#iva_product").val();
         var product_iva = (unitary_value_product*iva_product)/100;
-        product_iva = parseInt(unitary_value_product)+parseInt(product_iva);
-        $("#product_iva").val(product_iva);
+        product_iva = parseFloat(unitary_value_product)+parseFloat(product_iva);
+        $("#value_iva_product").val(product_iva);
     });
 
     $("#button_new_category").on("click", function(){
@@ -167,20 +168,32 @@ $(document).ready(function(){
     //Se hace la peticion ajax para guardar la el producto
     $('#form_save_product').on('submit', (e) => {
         e.preventDefault();
+        var data = new FormData(e.target);
         //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
+        $('#form_save_product').serialize();
         var formData = new Object();
-        formData.name_product = $("#name_product").val();
-        formData.id_establecimiento = $("#id_establecimiento").val();
-        formData.description_product = $("#description_product").val();
-        formData.internal_code_product = $("#internal_code").val();
-        formData.id_category_product = $("#category_product").val();
-        formData.id_presentation_product = $("#presentation_product").val();
-        formData.unitary_value_product = $("#unitary_value_product").val();
-        formData.iva_product = $("#iva").val();
-        formData.value_iva_product = $("#product_iva").val();
-        formData.image_product = $("#image_product").val();
-        formData.status_product = $("#status_product").val();
-
+        var id_establecimiento = $("#id_establecimiento").val();
+        var id_category_product = $("#id_category_product").val();
+        var id_presentation_product = $("#id_presentation_product").val();
+        var image_product = $("#image_product").val();
+        console.log($("#value_iva_product").val());
+        if(image_product != ''){
+            var fileExtension = image_product.substring(image_product.lastIndexOf('.') + 1);
+            data.append('fileExtension',fileExtension);
+    
+            if(fileExtension != 'jpg' && fileExtension != 'png' && fileExtension != 'jpeg'){
+                Swal.fire({
+                    title: lang.error,
+                    text: lang.product.extension_error,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: lang.accept,                    
+                });
+                return false;
+            }
+        }
+        
         if(formData.id_establecimiento == 0){
             Swal.fire({
                 title: lang.error,
@@ -216,13 +229,15 @@ $(document).ready(function(){
             });
             return false;
         }
-
+        
         //Petición ajax para envío de la info del form
         $.ajax({
             type: 'POST',
             url: '/products/register_product',
-            data: formData,
+            data: data,
             cache: false,
+            contentType: false,
+            processData: false ,
             success: function(data){
                 if(data == 'name_product'){
                     Swal.fire({
@@ -274,6 +289,6 @@ $(document).ready(function(){
             }
         });
         return false;
-
     });
+    
 });

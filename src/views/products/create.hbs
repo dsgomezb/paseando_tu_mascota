@@ -8,7 +8,7 @@
         <div class="col-md-12 mx-auto">
             <div class="card">
                 <div class="card-body">
-                    <form id="form_save_product">
+                    <form enctype="multipart/form-data" id="form_save_product" action="/products/register_product" method="POST">
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <b><label for="">{{lang.products.name}}{{lang.required}}</label></b>
@@ -32,7 +32,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <b><label for="">{{lang.products.internal_code}}{{lang.required}}</label></b>
-                                <input type="text" name="internal_code" id="internal_code" class="form-control" maxlength="50" placeholder="{{lang.products.internal_code}}" required>
+                                <input type="text" name="internal_code_product" id="internal_code_product" class="form-control" maxlength="50" placeholder="{{lang.products.internal_code}}" required>
                             </div>
                         </div>
 
@@ -40,7 +40,7 @@
                         <div class="row">
                             <div class="form-group col-md-6">
                                 <b><label for="">{{lang.products.category_product}}{{lang.required}}</label></b>
-                                <select class="form-control" name="category_product" id="category_product" style="cursor: pointer;">
+                                <select class="form-control" name="id_category_product" id="id_category_product" style="cursor: pointer;">
                                     <option value="0">Seleccione</option>
                                     {{#each category_product}}
                                         <option value="{{id_category_product}}">{{name_category_product}}</option>
@@ -49,7 +49,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <b><label for="">{{lang.products.presentation_product}}{{lang.required}}</label></b>
-                                <select class="form-control" name="presentation_product" id="presentation_product" style="cursor: pointer;">
+                                <select class="form-control" name="id_presentation_product" id="id_presentation_product" style="cursor: pointer;">
                                     <option value="0">Seleccione</option>
                                     {{#each presentation_product}}
                                         <option value="{{id_presentation_product}}">{{name_presentation_product}}</option>
@@ -60,15 +60,15 @@
                         <div class="row">
                            <div class="form-group col-md-4">
                                 <b><label for="">{{lang.products.unitary_value_product}}{{lang.required}}</label></b>
-                                <input type="number" name="unitary_value_product" id="unitary_value_product" class="form-control" placeholder="{{lang.products.unitary_value_product}}" required>
+                                <input type="number" name="unitary_value_product" id="unitary_value_product" class="form-control" placeholder="{{lang.products.unitary_value_product}}" required step="any">
                             </div>
                             <div class="form-group col-md-4">
                                 <b><label for="">{{lang.products.iva}}</label></b>
-                                <input type="number" name="iva" id="iva" class="form-control" placeholder="{{lang.products.iva}}" >
+                                <input type="number" name="iva_product" id="iva_product" class="form-control" placeholder="{{lang.products.iva}}" step="any">
                             </div>
                             <div class="form-group col-md-4">
                                 <b><label for="">{{lang.products.product_iva}}</label></b>
-                                <input type="text" id="product_iva" class="form-control" placeholder="{{lang.products.product_iva}}" disabled >
+                                <input type="text" name="value_iva_product" id="value_iva_product" class="form-control" placeholder="{{lang.products.product_iva}}" disabled step="any">
                             </div>
                         </div>
                         <div class="row">
@@ -81,7 +81,7 @@
                             </div>
                             <div class="form-group col-md-6">
                                 <b><label for="">{{lang.products.image}}{{lang.required}}</label></b>
-                                <input type="file" name="image_product" id="image_product">
+                                <input type="file" name="image_product" id="image_product" accept="image/jpg, image/png, image/jpeg">
                             </div>
                         </div>
                         <div class="row">
