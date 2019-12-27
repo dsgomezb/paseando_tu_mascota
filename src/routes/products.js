@@ -5,11 +5,33 @@ const { isLoggedIn } = require('../lib/auth');
 const { isNotLoggedIn } = require('../lib/auth');
 const pool = require('../database');
 const helpers = require('../lib/helpers');
-const fileUpload = require('express-fileupload')
 const es = require('../lib/lang/es');
 
-const multer = require("multer");
+//Ruta para marcar como no disponible un producto
+router.get('/unavailable/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    let deleted_at = new Date();
+    let status_product = 4;
+    const query_unavailable = await pool.query('UPDATE product set status_product = ?, deleted_at = ? WHERE id_product = ?',[status_product, deleted_at, id]);
+    if(query_unavailable){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
+});
 
+//Ruta para marcar como no disponible un producto
+router.get('/available/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    let deleted_at = new Date();
+    let status_product = 3;
+    const query_available = await pool.query('UPDATE product set status_product = ?, deleted_at = ? WHERE id_product = ?',[status_product, deleted_at, id]);
+    if(query_available){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
+});
 
 //Ruta para registrar un nuevo producto
 router.post('/register_product', async (req, res) => {
@@ -17,8 +39,7 @@ router.post('/register_product', async (req, res) => {
 
     let created_at = new Date();
     const { name_product, id_establecimiento, description_product, internal_code_product, id_category_product, id_presentation_product, unitary_value_product, iva_product, status_product} = data;
-    console.log(unitary_value_product);
-    console.log(iva_product);
+
     let value_iva_product = (unitary_value_product*iva_product)/100; 
     value_iva_product = parseFloat(unitary_value_product)+parseFloat(value_iva_product);
     const newProduct = {
@@ -34,8 +55,6 @@ router.post('/register_product', async (req, res) => {
         status_product,
         created_at
     };
-
-    console.log(value_iva_product);
 
     const name_product_result = await pool.query('SELECT name_product FROM product WHERE name_product = ? AND id_establecimiento = ?', [newProduct.name_product, newProduct.id_establecimiento]);
     const internal_code_product_result = await pool.query('SELECT internal_code_product FROM product WHERE internal_code_product = ? AND id_establecimiento = ?', [newProduct.internal_code_product, newProduct.id_establecimiento]);

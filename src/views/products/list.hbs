@@ -46,10 +46,10 @@
                             {{#if_eq status_product "3" }}   
                                 <a href="#" class="detail btn btn-primary btn-sm" data-id="{{id_product}}"><i class="fa fa-align-justify fa-lg" title="{{../lang.detail.detail}}"></i></a>
                                 <a href="/products/edit/{{id_product}}" class="btn btn-secondary btn-sm"><i class="fa fa-edit fa-lg" title="{{../lang.detail.edit}}"></i></a>
-                                <a href="#" class="inactive btn btn-danger btn-sm" data-id="{{id_product}}"><i class="fa fa-ban fa-lg" title="{{../lang.detail.unable}}"></i></a>
+                                <a href="#" class="no_disponible btn btn-danger btn-sm" data-id="{{id_product}}"><i class="fa fa-ban fa-lg" title="{{../lang.detail.unavailable}}"></i></a>
                             {{/if_eq}}
                             {{#if_eq status_product "4" }} 
-                                <a href="#" class="active btn btn-success btn-sm" data-id="{{id_product}}"><i class="fa fa-check fa-lg" title="{{../lang.detail.enable}}"></i></a>
+                                <a href="#" class="disponible btn btn-success btn-sm" data-id="{{id_product}}"><i class="fa fa-check fa-lg" title="{{../lang.detail.available}}"></i></a>
                             {{/if_eq }}    
                         </td>
                     </tr>

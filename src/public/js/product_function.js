@@ -291,4 +291,120 @@ $(document).ready(function(){
         return false;
     });
     
+    //Se hace la peticion ajax para marcar como no disponible un establecimiento
+    $("#products_table").on("click", ".no_disponible", function(){
+        //Se muestra ventana alert donde se pregunta al usuario si desea confirmar la inactivación
+        Swal.fire({
+            title: lang.product.unavailable,
+            text: lang.product.unavailable_sure,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: lang.accept,
+            cancelButtonText: lang.cancel
+        }).then((result)=>{
+            //Si el usuario acepta, se hace la peticion para inactivarse
+            if(result.value){
+                var id =  $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    url: "/products/unavailable/"+id,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(data){
+                        if(data == true){
+                            Swal.fire({
+                                title: lang.exit,
+                                text: lang.product.exit_unavailable,
+                                icon: 'success',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,
+                                allowOutsideClick: false
+                            }).then((result)=>{
+                                if(result.value){
+                                    //Se recarga la pagina al dar clic en aceptar
+                                    document.location.reload();
+                                }
+                            });
+                        }else if(data == false){
+                            Swal.fire({
+                                title: lang.error,
+                                text: lang.general.error_save,
+                                icon: 'error',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,                    
+                            });
+                            return false;
+                        }
+                    },
+                    error: function(err){
+                    var msg = 'Status: ' + err.status + ': ' + err.responseText;
+                    console.log(msg);
+                    }
+                });
+            }
+        });
+        return false;
+    });
+
+    //Se hace la peticion ajax para marcar como disponible un establecimiento
+    $("#products_table").on("click", ".disponible", function(){
+        //Se muestra ventana alert donde se pregunta al usuario si desea confirmar la inactivación
+        Swal.fire({
+            title: lang.product.available,
+            text: lang.product.available_sure,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: lang.accept,
+            cancelButtonText: lang.cancel
+        }).then((result)=>{
+            //Si el usuario acepta, se hace la peticion para inactivarse
+            if(result.value){
+                var id =  $(this).data('id');
+                $.ajax({
+                    type: "GET",
+                    url: "/products/available/"+id,
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function(data){
+                        if(data == true){
+                            Swal.fire({
+                                title: lang.exit,
+                                text: lang.product.exit_available,
+                                icon: 'success',
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,
+                                allowOutsideClick: false
+                            }).then((result)=>{
+                                if(result.value){
+                                    //Se recarga la pagina al dar clic en aceptar
+                                    document.location.reload();
+                                }
+                            });
+                        }else if(data == false){
+                            Swal.fire({
+                                title: lang.error,
+                                text: lang.general.error_save,
+                                icon: 'error',
+                                showCancelButton: false,
+                                confirmButtonColor: '#3085d6',
+                                confirmButtonText: lang.accept,                    
+                            });
+                            return false;
+                        }
+                    },
+                    error: function(err){
+                    var msg = 'Status: ' + err.status + ': ' + err.responseText;
+                    console.log(msg);
+                    }
+                });
+            }
+        });
+        return false;
+    });
+
 });
