@@ -407,4 +407,37 @@ $(document).ready(function(){
         return false;
     });
 
+        //Se hace la peticion ajax para ver el detalle del establecimiento
+        $("#products_table").on("click", ".detail", function(){
+            var id =  $(this).data('id');
+            $.ajax({
+                type: "GET",
+                url: "/products/detail/"+id,
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function(data){
+                    if(data.success != false){
+                        //Se llenan los labels del modal con los valores que devuelve la peticion
+                        $("#name_product").text(data.name_product);
+                        $("#description_product").text(data.description_product);
+                        $("#name_category_product").text(data.name_category_product);
+                        $("#name_presentation_product").text(data.name_presentation_product);
+                        $("#name_establecimiento").text(data.name_establecimiento);
+                        $("#internal_code_product").text(data.internal_code_product);
+                        $("#unitary_value_product").text(data.unitary_value_product);
+                        $("#iva_product").text(data.iva_product);
+                        $("#value_iva_product").text(data.value_iva_product);
+                        $("#image_product").attr("src",data.image_url_product);
+                        $("#image_product").attr("title",data.name_product);
+                        $("#detalle").modal();
+                    }
+                },
+                error: function(err) {
+                var msg = 'Status: ' + err.status + ': ' + err.responseText;
+                console.log(msg);
+                }
+            });
+            return false;
+        });
+
 });

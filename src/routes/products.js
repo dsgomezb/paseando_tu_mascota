@@ -65,14 +65,16 @@ router.post('/register_product', async (req, res) => {
         return res.send('internal_code_product');
     }else{
         let image_url_product = null;
+        let image_name_bd = null;
         if(req.files != null){
             let image = req.files.image_product;
             let extension = req.body.fileExtension;
             let internal_code = data.internal_code_product;
+            image_name_bd = es.constant.ruta_imagen_local + 'imagen' + internal_code + "-" + Date.now() + '.' + extension;
             image_url_product = es.constant.ruta_local + 'imagen' + internal_code + "-" + Date.now() + '.' + extension;
             await image.mv(image_url_product);
         }
-        newProduct.image_url_product = image_url_product;
+        newProduct.image_url_product = image_name_bd;
         const query_presentation_product = await pool.query('INSERT INTO product SET ?', [newProduct]);
         if(query_presentation_product){
             return res.send(true);
@@ -143,6 +145,14 @@ router.post('/register_presentation_product', isLoggedIn, async (req, res) => {
             res.send(false);
         }
     }
+});
+
+//Ruta para obtener los datos al detalle del establecimiento
+router.get('/detail/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    const establecimiento = await pool.query('SELECT * FROM product AS pro INNER JOIN category_product AS cat_pro ON cat_pro.id_category_product = pro.id_category_product INNER JOIN presentation_product AS pre_pro ON pre_pro.id_presentation_product = pro.id_presentation_product INNER JOIN establecimiento AS est ON est.id_establecimiento = pro.id_establecimiento WHERE pro.id_product = ?', [id]);
+    const data = establecimiento[0];
+    res.json(data);
 });
 
 module.exports = router;
