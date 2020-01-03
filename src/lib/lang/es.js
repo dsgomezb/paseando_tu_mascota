@@ -90,7 +90,7 @@ module.exports = {
     products:{
         create: 'Crear',
         create_product: 'Crear nuevo producto',
-        update_user: 'Actualizar producto',
+        update_product: 'Actualizar producto',
         new: 'Nuevo',
         new_product: 'Nuevo producto',
         detail: 'Detalle del producto',

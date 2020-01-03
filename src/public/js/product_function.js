@@ -165,18 +165,16 @@ $(document).ready(function(){
         return false;
     });
 
-    //Se hace la peticion ajax para guardar la el producto
+    //Se hace la peticion ajax para guardar el producto
     $('#form_save_product').on('submit', (e) => {
         e.preventDefault();
         var data = new FormData(e.target);
         //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
         $('#form_save_product').serialize();
-        var formData = new Object();
         var id_establecimiento = $("#id_establecimiento").val();
         var id_category_product = $("#id_category_product").val();
         var id_presentation_product = $("#id_presentation_product").val();
         var image_product = $("#image_product").val();
-        console.log($("#value_iva_product").val());
         if(image_product != ''){
             var fileExtension = image_product.substring(image_product.lastIndexOf('.') + 1);
             data.append('fileExtension',fileExtension);
@@ -194,7 +192,7 @@ $(document).ready(function(){
             }
         }
         
-        if(formData.id_establecimiento == 0){
+        if(id_establecimiento == 0){
             Swal.fire({
                 title: lang.error,
                 text: lang.product.establecimiento_required,
@@ -206,7 +204,7 @@ $(document).ready(function(){
             return false;
         }
 
-        if(formData.id_category_product == 0){
+        if(id_category_product == 0){
             Swal.fire({
                 title: lang.error,
                 text: lang.product.category_required,
@@ -218,7 +216,7 @@ $(document).ready(function(){
             return false;
         }
 
-        if(formData.id_presentation_product == 0){
+        if(id_presentation_product == 0){
             Swal.fire({
                 title: lang.error,
                 text: lang.product.presentation_required,
@@ -407,37 +405,161 @@ $(document).ready(function(){
         return false;
     });
 
-        //Se hace la peticion ajax para ver el detalle del establecimiento
-        $("#products_table").on("click", ".detail", function(){
-            var id =  $(this).data('id');
-            $.ajax({
-                type: "GET",
-                url: "/products/detail/"+id,
-                contentType: "application/json; charset=utf-8",
-                dataType: "json",
-                success: function(data){
-                    if(data.success != false){
-                        //Se llenan los labels del modal con los valores que devuelve la peticion
-                        $("#name_product").text(data.name_product);
-                        $("#description_product").text(data.description_product);
-                        $("#name_category_product").text(data.name_category_product);
-                        $("#name_presentation_product").text(data.name_presentation_product);
-                        $("#name_establecimiento").text(data.name_establecimiento);
-                        $("#internal_code_product").text(data.internal_code_product);
-                        $("#unitary_value_product").text(data.unitary_value_product);
-                        $("#iva_product").text(data.iva_product);
-                        $("#value_iva_product").text(data.value_iva_product);
-                        $("#image_product").attr("src",data.image_url_product);
-                        $("#image_product").attr("title",data.name_product);
-                        $("#detalle").modal();
-                    }
-                },
-                error: function(err) {
-                var msg = 'Status: ' + err.status + ': ' + err.responseText;
-                console.log(msg);
+    //Se hace la peticion ajax para ver el detalle del establecimiento
+    $("#products_table").on("click", ".detail", function(){
+        var id =  $(this).data('id');
+        $.ajax({
+            type: "GET",
+            url: "/products/detail/"+id,
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){
+                if(data.success != false){
+                    //Se llenan los labels del modal con los valores que devuelve la peticion
+                    $("#name_product").text(data.name_product);
+                    $("#description_product").text(data.description_product);
+                    $("#name_category_product").text(data.name_category_product);
+                    $("#name_presentation_product").text(data.name_presentation_product);
+                    $("#name_establecimiento").text(data.name_establecimiento);
+                    $("#internal_code_product").text(data.internal_code_product);
+                    $("#unitary_value_product").text(data.unitary_value_product);
+                    $("#iva_product").text(data.iva_product);
+                    $("#value_iva_product").text(data.value_iva_product);
+                    $("#image_product").attr("src",data.image_url_product);
+                    $("#image_product").attr("title",data.name_product);
+                    $("#detalle").modal();
                 }
+            },
+            error: function(err) {
+            var msg = 'Status: ' + err.status + ': ' + err.responseText;
+            console.log(msg);
+            }
+        });
+        return false;
+    });
+
+    //Se hace la peticion ajax para guardar el producto
+    $('#form_update_product').on('submit', (e) => {
+        e.preventDefault();
+        var data = new FormData(e.target);
+        //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
+        $('#form_update_product').serialize();
+        var id_establecimiento = $("#id_establecimiento").val();
+        var id_category_product = $("#id_category_product").val();
+        var id_presentation_product = $("#id_presentation_product").val();
+        var image_product = $("#image_product").val();
+        if(image_product != ''){
+            var fileExtension = image_product.substring(image_product.lastIndexOf('.') + 1);
+            data.append('fileExtension',fileExtension);
+    
+            if(fileExtension != 'jpg' && fileExtension != 'png' && fileExtension != 'jpeg'){
+                Swal.fire({
+                    title: lang.error,
+                    text: lang.product.extension_error,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: lang.accept,                    
+                });
+                return false;
+            }
+        }
+        
+        if(id_establecimiento == 0){
+            Swal.fire({
+                title: lang.error,
+                text: lang.product.establecimiento_required,
+                icon: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: lang.accept,                    
             });
             return false;
+        }
+
+        if(id_category_product == 0){
+            Swal.fire({
+                title: lang.error,
+                text: lang.product.category_required,
+                icon: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: lang.accept,                    
+            });
+            return false;
+        }
+
+        if(id_presentation_product == 0){
+            Swal.fire({
+                title: lang.error,
+                text: lang.product.presentation_required,
+                icon: 'error',
+                showCancelButton: false,
+                confirmButtonColor: '#3085d6',
+                confirmButtonText: lang.accept,                    
+            });
+            return false;
+        }
+        
+        //Petición ajax para envío de la info del form
+        $.ajax({
+            type: 'POST',
+            url: '/products/update',
+            data: data,
+            cache: false,
+            contentType: false,
+            processData: false ,
+            success: function(data){
+                if(data == 'name_product'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.product.name_product,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == 'internal_code_product'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.product.internal_code_product,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == true){
+                    Swal.fire({
+                        title: lang.exit,
+                        text: lang.product.exit_register,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    }).then((result)=>{
+                        if(result.value){
+                            //Se recarga la pagina al dar clic en aceptar
+                            window.location.href = "/products"
+                        }
+                    });
+                }else if(data == false){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.general.error_save,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                    return false;
+                }
+            },
+            error: function(err) {
+            var msg = 'Status: ' + err.status;
+            console.log(msg);
+            }
         });
+        return false;
+    });
 
 });

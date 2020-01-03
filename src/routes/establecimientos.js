@@ -110,7 +110,7 @@ router.get('/active/:id', isLoggedIn, async (req, res) => {
     }
 });
 
-//Ruta para cargar la informacion del usuario en el formulario de edición
+//Ruta para cargar la informacion del establecimiento en el formulario de edición
 router.get('/edit/:id', isLoggedIn, async (req, res) => {
     const id_user = req.user.id_user;
     const { id } = req.params;
