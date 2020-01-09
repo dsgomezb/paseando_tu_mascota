@@ -43,6 +43,13 @@ var lang = {
         establecimiento_required: 'Debe seleccionar un establecimiento',
         category_required: 'Debe seleccionar una categoria',
         presentation_required: 'Debe seleccionar una presentación',
-        exit_register: 'Producto registrado exitosamente'
+        exit_register: 'Producto registrado exitosamente',
+        extension_error: 'La extensión de la imagen no se encuentra permitida',
+        unavailable: 'No disponible',
+        unavailable_sure: '¿Esta seguro que desea marcar este producto como no disponible?',
+        available: 'Disponible',
+        available_sure: '¿Esta seguro que desea marcar este producto como disponible?',
+        exit_unavailable: 'Producto marcado como no disponible',
+        exit_available: 'Producto marcado como disponible'
     }
 }

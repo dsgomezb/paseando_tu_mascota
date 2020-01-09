@@ -1,5 +1,9 @@
 module.exports = {
     required: '*',
+    constant:{
+        ruta_local: 'G:\\establecimientos\\src\\public\\archivos\\',
+        ruta_imagen_local: 'archivos\\'
+    },
     detail: {
         action: 'Acción',
         view: 'Ver',
@@ -86,7 +90,7 @@ module.exports = {
     products:{
         create: 'Crear',
         create_product: 'Crear nuevo producto',
-        update_user: 'Actualizar producto',
+        update_product: 'Actualizar producto',
         new: 'Nuevo',
         new_product: 'Nuevo producto',
         detail: 'Detalle del producto',
@@ -103,7 +107,8 @@ module.exports = {
         product_iva: 'Producto con IVA',
         status: 'Estado',
         N: 'N°',
-        name: 'Nombre'
+        name: 'Nombre',
+        detail: 'Detalle del producto'
     },
     category:{
         new_category: 'Nueva categoria',
