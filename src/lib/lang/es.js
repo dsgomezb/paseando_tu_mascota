@@ -122,5 +122,13 @@ module.exports = {
         create_presentation_product: 'Crear nueva presentación de producto',
         name: 'Nombre',
         status: 'Estado'
+    },
+    orders:{
+        management_orders: 'Gestión de Pedidos',
+        new_order_status: 'Nuevo estado de pedidos',
+        establishment: 'Establecimiento',
+        user: 'usuario',
+        id: 'Identificador',
+        N: 'N°'
     }
 };

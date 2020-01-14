@@ -1310,3 +1310,45 @@ ALTER TABLE product ADD FOREIGN KEY(status_product) REFERENCES parameters(id);
 ALTER TABLE product ADD FOREIGN KEY(id_category_product) REFERENCES category_product(id_category_product);
 ALTER TABLE product ADD FOREIGN KEY(id_presentation_product) REFERENCES presentation_product(id_presentation_product);
 ALTER TABLE product ADD FOREIGN KEY(id_establecimiento) REFERENCES establecimiento(id_establecimiento);
+
+CREATE TABLE user_address(
+  id_user_address INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_user INT(30) NOT NULL,
+  description_user_address VARCHAR(500),
+  user_address vARCHAR(500) NOT NULL,
+  id_muni bigint(20) NOT NULL
+);
+
+ALTER TABLE user_address ADD FOREIGN KEY(id_user) REFERENCES users(id);
+ALTER TABLE user_address ADD FOREIGN KEY(id_muni) REFERENCES municipios(id_muni);
+
+CREATE TABLE order_status(
+    id_order_status INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    name_order_status VARCHAR(250),
+    description_order_status VARCHAR(500)
+);
+
+CREATE TABLE master_order(
+      id_master_order INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      id_user_address INT NOT NULL,
+      id_order_status INT NOT NULL,
+      id_establecimiento bigint(20) NOT NULL,
+      total_value_order FLOAT,
+      created_at timestamp NULL,
+      updated_at timestamp NULL,
+      deleted_at timestamp NULL
+);
+
+ALTER TABLE master_order ADD FOREIGN KEY(id_user_address) REFERENCES user_address(id_user_address);
+ALTER TABLE master_order ADD FOREIGN KEY(id_order_status) REFERENCES order_status(id_order_status);
+ALTER TABLE master_order ADD FOREIGN KEY(id_establecimiento) REFERENCES establecimiento(id_establecimiento);
+
+CREATE TABLE detail_order(
+      id_detail_order INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+      id_master_order INT NOT NULL,
+      id_product INT NOT NULL,
+      total_value_order FLOAT
+);
+
+ALTER TABLE detail_order ADD FOREIGN KEY(id_master_order) REFERENCES master_order(id_master_order);
+ALTER TABLE detail_order ADD FOREIGN KEY(id_product) REFERENCES product(id_product);
