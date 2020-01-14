@@ -24,7 +24,7 @@ $(document).ready(function(){
         });
     }).draw();
 
-
+});
     $("#unitary_value_product").keyup(function(){
         var unitary_value_product =  $("#unitary_value_product").val();
         var iva_product =  $("#iva_product").val();
@@ -112,7 +112,7 @@ $(document).ready(function(){
         e.preventDefault();
         //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
         var formData = new Object();
-        formData.name_presentation_product = $("#name_presentation_product").val();
+        formData.name_presentation_product = $("#name_presentation_product1").val();
         formData.status_presentation_product = $("#status_presentation_product").val();
 
         //Petición ajax para envío de la info del form
@@ -562,4 +562,3 @@ $(document).ready(function(){
         return false;
     });
 
-});
