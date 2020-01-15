@@ -20,6 +20,8 @@
                         <th>{{lang.orders.N}}</th>
                         <th>{{lang.orders.id}}</th>
                         <th>{{lang.orders.user}}</th>
+                        <th>{{lang.orders.address}}</th>
+                        <th>{{lang.orders.total_value}}</th>
                         <th>{{lang.orders.establishment}}</th>
                         <th>{{lang.detail.status}}</th>
                         <th class="text-center">{{lang.detail.action}}</th>
@@ -31,6 +33,8 @@
                         <td></td>
                         <td>{{id_master_order}}</td>
                         <td>{{names}}</td>
+                        <td>{{user_address}}</td>
+                        <td>{{total_value_order}}</td>
                         <td>{{name_establecimiento}}</td>
                         <td>{{name_order_status}}</td>
                         <td class="text-center">  
@@ -48,4 +52,5 @@
 
 </div>
 </div>
+    {{> modal/modal_detail_order }}
 </div>

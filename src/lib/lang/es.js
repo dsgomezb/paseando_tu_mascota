@@ -83,7 +83,7 @@ module.exports = {
         phone: 'Teléfono',
         admin: 'Administrador',
         management_establecimientos: 'Gestión de Establecimientos',
-        establecimiento_admin: 'Administrador del Establecimiento',
+        establecimiento_admin: 'Administrador',
         establecimiento_name: 'Nombre del establecimiento',
         update_establecimiento: 'Actualizar establecimiento',
     },
@@ -127,8 +127,24 @@ module.exports = {
         management_orders: 'Gestión de Pedidos',
         new_order_status: 'Nuevo estado de pedidos',
         establishment: 'Establecimiento',
-        user: 'usuario',
+        user: 'Usuario',
         id: 'Identificador',
-        N: 'N°'
+        address: 'Dirección',
+        N: 'N°',
+        order: 'Pedido',
+        id_master_order: 'Número del Pedido',
+        customer_name: 'Nombre del cliente',
+        customer_address: 'Dirección del cliente',
+        order_status: 'Estado del pedido',
+        total_value_order: 'Valor total pedido',
+        total_value: 'Valor total',
+        customer_phone: 'Teléfono cliente',
+        customer_email: 'Correo cliente',
+        id_product: 'N°',
+        name_product: 'Nombre',
+        name_presentation_product: 'Presentación',
+        value_iva_product: 'Valor con iva',
+        order_detail: 'Detalle del pedido'
+
     }
 };
