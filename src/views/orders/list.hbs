@@ -39,8 +39,7 @@
                         <td>{{name_order_status}}</td>
                         <td class="text-center">  
                             <a href="#" class="detail btn btn-primary btn-sm" data-id="{{id_master_order}}"><i class="fa fa-align-justify fa-lg" title="{{../lang.detail.detail}}"></i></a>
-                            <a href="#" class="edit_status btn btn-secondary btn-sm" data-id="{{id_master_order}}"><i class="fa fa-edit fa-lg" title="{{../lang.detail.edit}}"></i></a>
-                            <a href="#" class="no_disponible btn btn-danger btn-sm" data-id="{{id_master_order}}"><i class="fa fa-ban fa-lg" title="{{../lang.detail.unavailable}}"></i></a> 
+                            <a href="#" class="edit_status btn btn-success btn-sm" data-id="{{id_master_order}}"><i class="fa fa-bell fa-lg" title="{{../lang.detail.status_change}}"></i></a>
                         </td>
                     </tr>
                     {{/each}}
@@ -52,5 +51,6 @@
 
 </div>
 </div>
-    {{> modal/modal_detail_order }}
+    {{> modal/modal_detail_order }}    
+    {{> modal/modal_change_status_order }}
 </div>

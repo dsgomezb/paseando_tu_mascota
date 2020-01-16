@@ -286,7 +286,7 @@ $(document).ready(function(){
         return false;
     });
 
-    //Se hace la peticion ajax para guardar el establecimiento
+    //Se hace la peticion ajax para actualizar el establecimiento
     $('#form_update').on('submit', (e) => {
         e.preventDefault();
         //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back

@@ -28,4 +28,28 @@ router.get('/detail/:id', isLoggedIn, async (req, res) => {
     res.json({order_master: order_master, order: order});
 });
 
+//Ruta para obtener los estados de un pedido
+router.get('/status_params/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    const actually_status_order = await pool.query("SELECT * FROM master_order AS mast INNER JOIN order_status AS ord ON ord.id_order_status = mast.id_order_status WHERE mast.id_master_order = ?",[id]);
+    console.log(actually_status_order);
+    const order_status = await pool.query("SELECT * FROM order_status WHERE id_order_status != ?", [actually_status_order[0].id_order_status]);
+    res.json({order_status, id});
+});
+
+
+
+//Ruta para cambiar el estado de un pedido
+router.post('/chenge_status_order', isLoggedIn, async (req, res) => {
+    let data = req.body;
+    const {status_order, id_master_order_modal} = data;
+    console.log(data);
+    const query_status_result = await pool.query('UPDATE master_order SET id_order_status = ? WHERE id_master_order = ?', [status_order, id_master_order_modal]);
+    if(query_status_result){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
+});
+
 module.exports = router;

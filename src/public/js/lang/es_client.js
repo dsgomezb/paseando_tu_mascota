@@ -51,5 +51,8 @@ var lang = {
         available_sure: '¿Esta seguro que desea marcar este producto como disponible?',
         exit_unavailable: 'Producto marcado como no disponible',
         exit_available: 'Producto marcado como disponible'
+    },
+    orders:{
+        exit_update_status: 'Estado del pedido actualizado correctamente'
     }
 }

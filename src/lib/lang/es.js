@@ -18,7 +18,8 @@ module.exports = {
         available: 'Disponible',
         unavailable: 'No disponible',
         enable: 'Habilitar',
-        unable: 'Inhabilitar'
+        unable: 'Inhabilitar',
+        status_change: 'Cambiar estado'
     },
     general: {
         depto: 'Departamento',
@@ -144,7 +145,8 @@ module.exports = {
         name_product: 'Nombre',
         name_presentation_product: 'Presentación',
         value_iva_product: 'Valor con iva',
-        order_detail: 'Detalle del pedido'
-
+        order_detail: 'Detalle del pedido',
+        change_order_status: 'Cambiar estado del pedido',
+        status_order: 'Nuevo estado del pedido'
     }
 };

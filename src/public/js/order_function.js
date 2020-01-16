@@ -59,3 +59,70 @@ $("#orders_table").on("click", ".detail", function(){
     return false;
 });
 
+//Se hace la peticion ajax para cambiar el estado del pedido
+$("#orders_table").on("click", ".edit_status", function(){
+    var id =  $(this).data('id');
+    $.ajax({
+        type: "GET",
+        url: "/orders/status_params/"+id,
+        contentType: "application/json; charset=utf-8",
+        dataType: "json",
+        success: function(data){
+            if(data.success != false){
+                //Se llenan los labels del modal con los valores que devuelve la peticion
+                $("#status_order").empty();
+                $("#id_master_order_modal").val(data.id);
+                $.each(data.order_status, function(id,value){
+                    $("#status_order").append('<option value="'+value.id_order_status+'">'+value.name_order_status+'</option>');
+                });
+                $("#modal_change_status_order").modal();
+            }
+        },
+        error: function(err) {
+        var msg = 'Status: ' + err.status + ': ' + err.responseText;
+        console.log(msg);
+        }
+    });
+    return false;
+});
+
+
+
+//Se hace la peticion ajax para cambiar el estado del pedido
+$('#form_save_order_status').on('submit', (e) => {
+    e.preventDefault();
+    //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
+    var formData = new Object();
+    formData.status_order = $("#status_order").val();
+    formData.id_master_order_modal = $("#id_master_order_modal").val();
+
+    //Petición ajax para envío de la info del form
+    $.ajax({
+        type: 'POST',
+        url: '/orders/chenge_status_order',
+        data: formData,
+        cache: false,
+        success: function(data){
+            if(data == true){
+                Swal.fire({
+                    title: lang.exit,
+                    text: lang.orders.exit_update_status,
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: lang.accept,                    
+                }).then((result)=>{
+                    if(result.value){
+                        //Se recarga la pagina al dar clic en aceptar
+                        window.location.href = "/orders"
+                    }
+                });
+            }
+        },
+        error: function(err) {
+        var msg = 'Status: ' + err.status;
+        console.log(msg);
+        }
+    });
+    return false;
+});
