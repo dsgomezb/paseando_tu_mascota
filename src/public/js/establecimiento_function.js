@@ -24,6 +24,8 @@ $(document).ready(function(){
         });
     }).draw();
 
+});
+
     $("#depto").on("change", function(){
         var id_depto =  $(this).val();
         $.ajax({
@@ -383,5 +385,3 @@ $(document).ready(function(){
         return false;
         
     });
-
-});

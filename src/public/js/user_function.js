@@ -23,7 +23,8 @@ $(document).ready(function(){
             cell.innerHTML = i+1;
         });
     }).draw();
-
+    
+});
     //Se hace la peticion ajax para ver el detalle del usuario
     $("#users_table").on("click", ".detail", function(){
         var id =  $(this).data('id');
@@ -341,5 +342,3 @@ $(document).ready(function(){
         });
         return false;
     });
-    
-});
