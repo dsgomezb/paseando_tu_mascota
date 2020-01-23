@@ -31,8 +31,14 @@ router.get('/get_municipios/:id_depto', isLoggedIn, async (req, res) => {
 //Ruta para crear nuevos establecimientos en el sistema
 router.get('/create', isLoggedIn, async (req, res) => {
     const id_user = req.user.id_user;
-    const users = await pool.query('SELECT * FROM users AS u INNER JOIN user_profile AS up ON u.id_user = up.id_user INNER JOIN profile AS p ON p.id_profile = up.id_profile WHERE u.id_user != ? ORDER BY u.created_at desc', [id_user]);
-    const deptos = await pool.query('SELECT * FROM departamentos ORDER BY name_depto');
+    const id_profile_user = req.user.id_profile;
+    var users = {};
+    if(id_profile_user == '1'){
+        users = await pool.query('SELECT * FROM users AS u INNER JOIN user_profile AS up ON u.id_user = up.id_user INNER JOIN profile AS p ON p.id_profile = up.id_profile WHERE u.id_user != ? ORDER BY u.created_at desc', [id_user]);
+    }else if(id_profile_user == '2'){
+        users = await pool.query('SELECT * FROM users AS u INNER JOIN user_profile AS up ON u.id_user = up.id_user INNER JOIN profile AS p ON p.id_profile = up.id_profile WHERE u.id_user = ? ORDER BY u.created_at desc', [id_user]);        
+    }
+     deptos = await pool.query('SELECT * FROM departamentos ORDER BY name_depto');
     res.render('establecimientos/create', {users, deptos});
 });
 
@@ -113,10 +119,16 @@ router.get('/active/:id', isLoggedIn, async (req, res) => {
 //Ruta para cargar la informacion del establecimiento en el formulario de edición
 router.get('/edit/:id', isLoggedIn, async (req, res) => {
     const id_user = req.user.id_user;
+    const id_profile_user = req.user.id_profile;
     const { id } = req.params;
     const establecimientos = await pool.query('SELECT * FROM establecimiento AS est INNER JOIN establecimiento_user AS est_usr ON est_usr.id_establecimiento = est.id_establecimiento INNER JOIN municipios AS muni ON muni.id_muni = est.id_muni INNER JOIN departamentos AS depto ON depto.id_depto = muni.id_depto INNER JOIN users AS usr ON usr.id_user = est_usr.id_user WHERE est.id_establecimiento = ? ORDER BY est.created_at desc', [id]);
     const establecimiento = establecimientos[0];
-    const users = await pool.query('SELECT * FROM users AS u INNER JOIN user_profile AS up ON u.id_user = up.id_user INNER JOIN profile AS p ON p.id_profile = up.id_profile WHERE u.id_user != ? AND u.id_user != ? ORDER BY u.created_at desc', [id_user, establecimiento.id_user]);
+    var users = {};
+    if(id_profile_user == 1){
+        users = await pool.query('SELECT * FROM users AS u INNER JOIN user_profile AS up ON u.id_user = up.id_user INNER JOIN profile AS p ON p.id_profile = up.id_profile WHERE u.id_user != ? AND u.id_user != ? ORDER BY u.created_at desc', [id_user, establecimiento.id_user]);
+    }else if(id_profile_user == 2){
+        users = await pool.query('SELECT * FROM users AS u INNER JOIN user_profile AS up ON u.id_user = up.id_user INNER JOIN profile AS p ON p.id_profile = up.id_profile WHERE u.id_user != ? AND u.id_user = ? ORDER BY u.created_at desc', [id_user, establecimiento.id_user]);
+    }
     const deptos = await pool.query('SELECT * FROM departamentos WHERE id_depto != ? ORDER BY name_depto ', [establecimiento.id_depto]);
     const muni = await pool.query('SELECT * FROM municipios WHERE id_depto = ? AND id_muni != ?', [establecimiento.id_depto, establecimiento.id_muni]);
     res.render('establecimientos/edit', {establecimiento, users, deptos, muni});

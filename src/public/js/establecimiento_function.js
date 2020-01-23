@@ -383,5 +383,13 @@ $(document).ready(function(){
             }
         });
         return false;
-        
     });
+
+    var map;
+    function initMap() {
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: 5.057294, lng: -75.486537},
+        zoom: 16
+      });
+      google.maps.Marker({position: {lat: 5.057294, lng: -75.486537}, map: map});
+    }
