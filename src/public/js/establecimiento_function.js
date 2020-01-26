@@ -386,10 +386,15 @@ $(document).ready(function(){
     });
 
     var map;
-    function initMap() {
+    function initMap(){
+        var myLatLng = {lat: 5.057294, lng: -75.486537};
       map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: 5.057294, lng: -75.486537},
+        center: myLatLng,
         zoom: 16
       });
-      google.maps.Marker({position: {lat: 5.057294, lng: -75.486537}, map: map});
+      var marker = new google.maps.Marker({
+        position: myLatLng,
+        map: map,
+        title: 'Zona refrescante'
+      });
     }
