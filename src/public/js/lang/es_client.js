@@ -28,6 +28,8 @@ var lang = {
         direccion_establecimiento: 'Esta direccion ya se encuentra registrada',
         exit_register: 'Establecimiento registrado exitosamente',
         exit_updated: 'Establecimiento actualizado exitosamente',
+        incorrect_address: 'La dirección introducida es incorrecta, por favor verifique',
+        complete_address_required: 'El resultado de la dirección es requerido, Porfavor buscar nuevamente'
     },
     category:{
         name_category_product: 'Esta categoria ya se encuentra registrada',

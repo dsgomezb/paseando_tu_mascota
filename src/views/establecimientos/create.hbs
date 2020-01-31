@@ -50,10 +50,20 @@
                                 <b><label for="">{{lang.establecimientos.phone}}{{lang.required}}</label></b>
                                 <input type="text" name="phone" id="phone" class="form-control" maxlength="30" placeholder="{{lang.establecimientos.phone}}" required>
                             </div>
-                            <div class="form-group col-md-6">
+                            <div class="form-group col-md-4">
                                 <b><label for="">{{lang.establecimientos.address}}{{lang.required}}</label></b>
                                 <input type="text" name="address" id="address" class="form-control" maxlength="255" placeholder="{{lang.establecimientos.address}}" required>
                             </div>
+                            <div class="form-group col-md-2">
+                                <b><label for="">*</label></b>
+                                <a class="btn btn-info" id="get_map">
+                                    {{lang.button.search_address}}
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6"><input type="hidden" class="search_latitude" id="latitud"><input type="hidden" class="search_longitude" id="longitud"></div>
+                            <div class="form-group col-md-6"><b>Resultado: </b><input type="text" class="search_addr" size="45" required disabled><input type="hidden" class="search_addr2"></div>
                         </div>
                         <div class="row">
                             <div class="form-group col-md-12 text-center">

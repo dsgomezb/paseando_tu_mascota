@@ -1,61 +1,68 @@
-CREATE DATABASE establecimiento_online;
+-- phpMyAdmin SQL Dump
+-- version 4.8.3
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1:3306
+-- Tiempo de generación: 31-01-2020 a las 04:07:29
+-- Versión del servidor: 5.7.23
+-- Versión de PHP: 7.1.22
 
-USE establecimiento_online;
-
--- USER TABLE
-CREATE TABLE users(
-    id INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    username VARCHAR(100) NOT NULL,
-    password VARCHAR(80) NOT NULL,
-    names VARCHAR(250) NOT NULL,
-    document VARCHAR(30) NOT NULL,
-    email VARCHAR(250) NOT NULL,
-    phone VARCHAR(250) NOT NULL,
-    status smallint(30) NOT NULL,
-    created_at timestamp,
-    updated_at timestamp,
-    deleted_at timestamp
-);
-
--- PARAMETERS TABLE
-CREATE TABLE parameters(
-    id SMALLINT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    description VARCHAR(250)
-);
-
-ALTER TABLE users ADD FOREIGN KEY(status) REFERENCES parameters(id);
-
--- PROFILE TABLE
-
-CREATE TABLE profile(
-    id INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name_profile VARCHAR(255) NOT NULL,
-    description VARCHAR(255) NULL,
-    status smallint(30) NOT NULL
-);
-
-ALTER TABLE profile ADD FOREIGN KEY(status) REFERENCES parameters(id);
-
-CREATE TABLE user_profile(
-    id INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    id_user INT(30) NOT NULL,
-    id_profile INT(30) NOT NULL,
-    status smallint(30) NOT NULL
-);
-
-ALTER TABLE user_profile ADD FOREIGN KEY(id_user) REFERENCES users(id);
-ALTER TABLE user_profile ADD FOREIGN KEY(id_profile) REFERENCES profile(id);
-ALTER TABLE user_profile ADD FOREIGN KEY(status) REFERENCES parameters(id);
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
---DEPARTAMENTOS TABLA
-CREATE TABLE departamentos (
-  id_depto bigint(20) NOT NULL primary key,
-  name_depto varchar(255) NOT NULL,
-  codigo_depto int(20) NOT NULL
-);
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-INSERT INTO departamentos (id_depto, name_depto, codigo_depto) VALUES
+--
+-- Base de datos: `establecimiento_online`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `category_product`
+--
+
+DROP TABLE IF EXISTS `category_product`;
+CREATE TABLE IF NOT EXISTS `category_product` (
+  `id_category_product` int(30) NOT NULL AUTO_INCREMENT,
+  `name_category_product` varchar(250) NOT NULL,
+  `status_category_product` smallint(30) NOT NULL,
+  PRIMARY KEY (`id_category_product`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `category_product`
+--
+
+INSERT INTO `category_product` (`id_category_product`, `name_category_product`, `status_category_product`) VALUES
+(3, 'licores nacionales', 3),
+(4, 'licores importados', 3);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `departamentos`
+--
+
+DROP TABLE IF EXISTS `departamentos`;
+CREATE TABLE IF NOT EXISTS `departamentos` (
+  `id_depto` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name_depto` varchar(255) NOT NULL,
+  `codigo_depto` int(20) NOT NULL,
+  PRIMARY KEY (`id_depto`)
+) ENGINE=MyISAM AUTO_INCREMENT=34 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `departamentos`
+--
+
+INSERT INTO `departamentos` (`id_depto`, `name_depto`, `codigo_depto`) VALUES
 (1, 'Antioquia', 5),
 (2, 'Atlantico', 8),
 (3, 'D. C. Santa Fe de Bogotá', 11),
@@ -90,24 +97,155 @@ INSERT INTO departamentos (id_depto, name_depto, codigo_depto) VALUES
 (32, 'Vaupes', 97),
 (33, 'Vichada', 99);
 
-ALTER TABLE departamentos
-  MODIFY id_depto bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=34;
-
--- MUNICIPIOS TABLE
-
-CREATE TABLE municipios (
-  id_muni bigint(20) NOT NULL PRIMARY KEY,
-  id_depto bigint(20) NOT NULL,
-  codigo_muni int(11) NOT NULL,
-  nombre_muni varchar(255) NOT NULL
-);
-
+-- --------------------------------------------------------
 
 --
--- Dumping data for table 'municipios'
+-- Estructura de tabla para la tabla `detail_order`
 --
 
-INSERT INTO municipios (id_muni, id_depto, codigo_muni, nombre_muni) VALUES
+DROP TABLE IF EXISTS `detail_order`;
+CREATE TABLE IF NOT EXISTS `detail_order` (
+  `id_detail_order` int(11) NOT NULL AUTO_INCREMENT,
+  `id_master_order` int(11) NOT NULL,
+  `id_product` int(11) NOT NULL,
+  `total_value_order` float DEFAULT NULL,
+  PRIMARY KEY (`id_detail_order`),
+  KEY `id_master_order` (`id_master_order`),
+  KEY `id_product` (`id_product`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `detail_order`
+--
+
+INSERT INTO `detail_order` (`id_detail_order`, `id_master_order`, `id_product`, `total_value_order`) VALUES
+(1, 1, 86, 38880),
+(2, 1, 84, 34680);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `establecimiento`
+--
+
+DROP TABLE IF EXISTS `establecimiento`;
+CREATE TABLE IF NOT EXISTS `establecimiento` (
+  `id_establecimiento` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name_establecimiento` varchar(255) NOT NULL,
+  `direccion_establecimiento` varchar(255) NOT NULL,
+  `latitud` float DEFAULT NULL,
+  `longitud` float DEFAULT NULL,
+  `direccion_completa` varchar(500) DEFAULT NULL,
+  `telefono_establecimiento` varchar(30) DEFAULT NULL,
+  `id_muni` bigint(20) NOT NULL,
+  `status_establecimiento` smallint(30) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_establecimiento`),
+  KEY `status` (`status_establecimiento`),
+  KEY `id_muni` (`id_muni`)
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `establecimiento`
+--
+
+INSERT INTO `establecimiento` (`id_establecimiento`, `name_establecimiento`, `direccion_establecimiento`, `latitud`, `longitud`, `direccion_completa`, `telefono_establecimiento`, `id_muni`, `status_establecimiento`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 'Estanquillo 11', 'calle 47A 1', NULL, NULL, NULL, '88890987', 6, 1, '2019-12-17 15:12:25', NULL, NULL),
+(2, 'Estanquillo Los amigos', 'calle 47A 21', 5.05104, -75.5004, NULL, '888909871', 1, 1, '2019-12-17 15:10:52', NULL, NULL),
+(3, 'Zona Refrescante', 'Zona Refrescante, El Cable, Cra. 23 #No. 64-17, Manizales, Caldas', 5.05729, -75.4865, NULL, '(036)8810588', 338, 1, '2020-01-23 02:39:18', NULL, NULL),
+(4, 'tienda mixta', 'calle 37A-91', NULL, NULL, NULL, '888900', 338, 1, '2019-12-23 19:06:15', NULL, NULL),
+(15, 'casa', 'calle 7a Manizales', 5.07542, -75.528, 'Cl. 7a, Manizales, Caldas, Colombia', '8880678', 338, 1, '2020-01-31 04:06:33', NULL, NULL),
+(12, 'Estanquillo Balu', 'Calle 67 #31-09 Manizales', 5.05263, -75.4951, NULL, '8890078', 338, 1, '2020-01-31 03:08:09', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `establecimiento_user`
+--
+
+DROP TABLE IF EXISTS `establecimiento_user`;
+CREATE TABLE IF NOT EXISTS `establecimiento_user` (
+  `id_establecimiento_user` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_establecimiento` bigint(20) NOT NULL,
+  `id_user` bigint(20) NOT NULL,
+  PRIMARY KEY (`id_establecimiento_user`),
+  KEY `id_establecimiento` (`id_establecimiento`),
+  KEY `id_user` (`id_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=16 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `establecimiento_user`
+--
+
+INSERT INTO `establecimiento_user` (`id_establecimiento_user`, `id_establecimiento`, `id_user`) VALUES
+(1, 1, 61),
+(2, 2, 60),
+(3, 3, 60),
+(4, 4, 62),
+(5, 5, 60),
+(6, 6, 60),
+(7, 7, 60),
+(8, 8, 60),
+(9, 9, 60),
+(10, 10, 60),
+(11, 11, 60),
+(12, 12, 60),
+(13, 13, 60),
+(14, 14, 60),
+(15, 15, 60);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `master_order`
+--
+
+DROP TABLE IF EXISTS `master_order`;
+CREATE TABLE IF NOT EXISTS `master_order` (
+  `id_master_order` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user_address` int(11) NOT NULL,
+  `id_order_status` int(11) NOT NULL,
+  `id_establecimiento` bigint(20) NOT NULL,
+  `total_value_order` float DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_master_order`),
+  KEY `id_user_address` (`id_user_address`),
+  KEY `id_order_status` (`id_order_status`),
+  KEY `id_establecimiento` (`id_establecimiento`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `master_order`
+--
+
+INSERT INTO `master_order` (`id_master_order`, `id_user_address`, `id_order_status`, `id_establecimiento`, `total_value_order`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(1, 1, 6, 2, 73560, '2020-01-14 17:00:00', NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `municipios`
+--
+
+DROP TABLE IF EXISTS `municipios`;
+CREATE TABLE IF NOT EXISTS `municipios` (
+  `id_muni` bigint(20) NOT NULL AUTO_INCREMENT,
+  `id_depto` bigint(20) NOT NULL,
+  `codigo_muni` int(11) NOT NULL,
+  `nombre_muni` varchar(255) NOT NULL,
+  PRIMARY KEY (`id_muni`),
+  KEY `id_depto` (`id_depto`)
+) ENGINE=MyISAM AUTO_INCREMENT=1127 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `municipios`
+--
+
+INSERT INTO `municipios` (`id_muni`, `id_depto`, `codigo_muni`, `nombre_muni`) VALUES
 (1, 1, 1, 'MEDELLIN'),
 (2, 1, 2, 'ABEJORRAL'),
 (3, 1, 4, 'ABRIAQUI'),
@@ -1235,122 +1373,253 @@ INSERT INTO municipios (id_muni, id_depto, codigo_muni, nombre_muni) VALUES
 (1125, 33, 760, 'SAN JOSE DE OCUNE'),
 (1126, 33, 773, 'CUMARIBO');
 
+-- --------------------------------------------------------
+
 --
--- Indexes for table 'municipios'
+-- Estructura de tabla para la tabla `order_status`
 --
-ALTER TABLE municipios
-  MODIFY id_muni bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1127;
 
-ALTER TABLE municipios
-ADD CONSTRAINT  FOREIGN KEY ('id_depto') REFERENCES 'departamentos' ('id_depto');
+DROP TABLE IF EXISTS `order_status`;
+CREATE TABLE IF NOT EXISTS `order_status` (
+  `id_order_status` int(11) NOT NULL AUTO_INCREMENT,
+  `name_order_status` varchar(250) DEFAULT NULL,
+  `description_order_status` varchar(500) DEFAULT NULL,
+  PRIMARY KEY (`id_order_status`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
--- ESTABLECIMIENTOS TABLE
+--
+-- Volcado de datos para la tabla `order_status`
+--
 
-CREATE TABLE establecimiento(
-    id_establecimiento bigint(20) NOT NULL primary key AUTO_INCREMENT,
-    name_establecimiento varchar(255) NOT NULL,
-    direccion_establecimiento varchar(255) NOT NULL,
-    latitud FLOAT NULL,
-    longitud FLOAT NULL,
-    telefono_establecimiento varchar(30) NULL,
-    id_muni bigint(20) NOT NULL,
-    status_establecimiento smallint(30) NOT NULL,
-    created_at timestamp NULL,
-    updated_at timestamp NULL,
-    deleted_at timestamp NULL
-);
-ALTER TABLE establecimiento ADD direccion_completa VARCHAR(500) NULL AFTER longitud;
-ALTER TABLE establecimiento ADD FOREIGN KEY(status) REFERENCES parameters(id);
-ALTER TABLE establecimiento ADD FOREIGN KEY(id_muni) REFERENCES municipios(id_muni);
+INSERT INTO `order_status` (`id_order_status`, `name_order_status`, `description_order_status`) VALUES
+(1, 'Realizado', 'Pedido realizado por parte del cliente'),
+(2, 'Confirmado', 'Pedido confirmado por el establecimiento'),
+(3, 'Cancelado', 'Pedido cancelado por parte del cliente o por parte del establecimiento'),
+(4, 'En preparación', 'Pedido en preparación por parte del establecimiento'),
+(5, 'En camino', 'Pedido en camino del establecimiento al cliente'),
+(6, 'Entregado', 'Pedido entregado al cliente');
 
--- ESTABLECIMIENTOS USERS TABLE
+-- --------------------------------------------------------
 
-CREATE TABLE establecimiento_user(
-    id_establecimiento_user bigint(20) NOT NULL primary key AUTO_INCREMENT,
-    id_establecimiento bigint(20) NOT NULL,
-    id_user bigint(20) NOT NULL
-);
+--
+-- Estructura de tabla para la tabla `parameters`
+--
 
-ALTER TABLE establecimiento_user ADD FOREIGN KEY(id_establecimiento) REFERENCES establecimiento(id_establecimiento);
-ALTER TABLE establecimiento_user ADD FOREIGN KEY(id_user) REFERENCES users(id_user);
+DROP TABLE IF EXISTS `parameters`;
+CREATE TABLE IF NOT EXISTS `parameters` (
+  `id` smallint(30) NOT NULL AUTO_INCREMENT,
+  `description` varchar(250) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- CATEGORY PRODUCT TABLE
+--
+-- Volcado de datos para la tabla `parameters`
+--
 
-CREATE TABLE category_product(
-  id_category_product INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  name_category_product VARCHAR(250) NOT NULL,
-  status_category_product smallint(30) NOT NULL
-);
+INSERT INTO `parameters` (`id`, `description`) VALUES
+(1, 'Activo'),
+(2, 'Eliminado'),
+(3, 'Disponible'),
+(4, 'No disponible');
 
--- PRESENTATION PRODUCT TABLE
+-- --------------------------------------------------------
 
-CREATE TABLE presentation_product(
-  id_presentation_product INT(30) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  name_presentation_product VARCHAR(250) NOT NULL,
-  status_presentation_product smallint(30) NOT NULL
-);
+--
+-- Estructura de tabla para la tabla `presentation_product`
+--
 
-CREATE TABLE product(
-      id_product INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      id_category_product INT(30) NOT NULL,
-      id_presentation_product INT(30) NOT NULL,
-      id_establecimiento bigint(20) NOT NULL,
-      name_product VARCHAR(500) NOT NULL,
-      description_product VARCHAR(500),
-      unitary_value_product FLOAT NOT NULL,
-      iva_product FLOAT,
-      value_iva_product FLOAT,
-      internal_code_product VARCHAR(50) NULL,
-      image_url_product VARCHAR(500),
-      status_product smallint(30) NOT NULL,
-      created_at timestamp NULL,
-      updated_at timestamp NULL,
-      deleted_at timestamp NULL
-);
+DROP TABLE IF EXISTS `presentation_product`;
+CREATE TABLE IF NOT EXISTS `presentation_product` (
+  `id_presentation_product` int(30) NOT NULL AUTO_INCREMENT,
+  `name_presentation_product` varchar(250) NOT NULL,
+  `status_presentation_product` smallint(30) NOT NULL,
+  PRIMARY KEY (`id_presentation_product`)
+) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
-ALTER TABLE product ADD FOREIGN KEY(status_product) REFERENCES parameters(id);
-ALTER TABLE product ADD FOREIGN KEY(id_category_product) REFERENCES category_product(id_category_product);
-ALTER TABLE product ADD FOREIGN KEY(id_presentation_product) REFERENCES presentation_product(id_presentation_product);
-ALTER TABLE product ADD FOREIGN KEY(id_establecimiento) REFERENCES establecimiento(id_establecimiento);
+--
+-- Volcado de datos para la tabla `presentation_product`
+--
 
-CREATE TABLE user_address(
-  id_user_address INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-  id_user INT(30) NOT NULL,
-  description_user_address VARCHAR(500),
-  user_address vARCHAR(500) NOT NULL,
-  id_muni bigint(20) NOT NULL
-);
+INSERT INTO `presentation_product` (`id_presentation_product`, `name_presentation_product`, `status_presentation_product`) VALUES
+(1, 'caja', 3),
+(2, 'media', 4),
+(3, 'botella', 3),
+(5, 'cuarto', 3),
+(6, 'lata', 3);
 
-ALTER TABLE user_address ADD FOREIGN KEY(id_user) REFERENCES users(id);
-ALTER TABLE user_address ADD FOREIGN KEY(id_muni) REFERENCES municipios(id_muni);
+-- --------------------------------------------------------
 
-CREATE TABLE order_status(
-    id_order_status INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name_order_status VARCHAR(250),
-    description_order_status VARCHAR(500)
-);
+--
+-- Estructura de tabla para la tabla `product`
+--
 
-CREATE TABLE master_order(
-      id_master_order INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      id_user_address INT NOT NULL,
-      id_order_status INT NOT NULL,
-      id_establecimiento bigint(20) NOT NULL,
-      total_value_order FLOAT,
-      created_at timestamp NULL,
-      updated_at timestamp NULL,
-      deleted_at timestamp NULL
-);
+DROP TABLE IF EXISTS `product`;
+CREATE TABLE IF NOT EXISTS `product` (
+  `id_product` int(11) NOT NULL AUTO_INCREMENT,
+  `id_category_product` int(30) NOT NULL,
+  `id_presentation_product` int(30) NOT NULL,
+  `id_establecimiento` bigint(20) DEFAULT NULL,
+  `name_product` varchar(500) NOT NULL,
+  `description_product` varchar(500) DEFAULT NULL,
+  `unitary_value_product` float NOT NULL,
+  `iva_product` float DEFAULT NULL,
+  `value_iva_product` float DEFAULT NULL,
+  `internal_code_product` varchar(50) DEFAULT NULL,
+  `image_url_product` varchar(500) DEFAULT NULL,
+  `status_product` smallint(30) NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_product`),
+  KEY `status_product` (`status_product`),
+  KEY `id_category_product` (`id_category_product`),
+  KEY `id_presentation_product` (`id_presentation_product`),
+  KEY `id_establecimiento` (`id_establecimiento`)
+) ENGINE=MyISAM AUTO_INCREMENT=90 DEFAULT CHARSET=latin1;
 
-ALTER TABLE master_order ADD FOREIGN KEY(id_user_address) REFERENCES user_address(id_user_address);
-ALTER TABLE master_order ADD FOREIGN KEY(id_order_status) REFERENCES order_status(id_order_status);
-ALTER TABLE master_order ADD FOREIGN KEY(id_establecimiento) REFERENCES establecimiento(id_establecimiento);
+--
+-- Volcado de datos para la tabla `product`
+--
 
-CREATE TABLE detail_order(
-      id_detail_order INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      id_master_order INT NOT NULL,
-      id_product INT NOT NULL,
-      total_value_order FLOAT
-);
+INSERT INTO `product` (`id_product`, `id_category_product`, `id_presentation_product`, `id_establecimiento`, `name_product`, `description_product`, `unitary_value_product`, `iva_product`, `value_iva_product`, `internal_code_product`, `image_url_product`, `status_product`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(86, 3, 1, 2, 'Aguardiante', 'Blanco', 36000, 8, 38880, '1000002', 'archivos\\imagen1000002-1578012001154.png', 3, '2020-01-03 00:40:01', NULL, '2020-01-03 00:39:25'),
+(84, 3, 3, 2, 'Ron Viejo de caldas', 'Amarillo', 34000, 2, 34680, '130009', 'archivos\\imagen130009-1577463341333.png', 3, '2019-12-27 16:15:41', NULL, NULL);
 
-ALTER TABLE detail_order ADD FOREIGN KEY(id_master_order) REFERENCES master_order(id_master_order);
-ALTER TABLE detail_order ADD FOREIGN KEY(id_product) REFERENCES product(id_product);
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `profile`
+--
+
+DROP TABLE IF EXISTS `profile`;
+CREATE TABLE IF NOT EXISTS `profile` (
+  `id_profile` int(30) NOT NULL AUTO_INCREMENT,
+  `name_profile` varchar(255) NOT NULL,
+  `description_profile` varchar(255) DEFAULT NULL,
+  `status_profile` smallint(30) NOT NULL,
+  PRIMARY KEY (`id_profile`),
+  KEY `status` (`status_profile`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `profile`
+--
+
+INSERT INTO `profile` (`id_profile`, `name_profile`, `description_profile`, `status_profile`) VALUES
+(1, 'Super administrador', 'Usuario superadmin el cual tiene permisos para todo en el sistema', 1),
+(2, 'Administrador de establecimiento', 'Usuario dueño de uno o muchos establecimientos', 1),
+(3, 'Cliente', 'Usuario final, el cuál puede pedir domicilios', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `sessions`
+--
+
+DROP TABLE IF EXISTS `sessions`;
+CREATE TABLE IF NOT EXISTS `sessions` (
+  `session_id` varchar(128) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `expires` int(11) UNSIGNED NOT NULL,
+  `data` text CHARACTER SET utf8mb4 COLLATE utf8mb4_bin,
+  PRIMARY KEY (`session_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `sessions`
+--
+
+INSERT INTO `sessions` (`session_id`, `expires`, `data`) VALUES
+('z-LYpAMT66TjeqU0_TBUweLGI3kGeGfX', 1580529998, '{\"cookie\":{\"originalMaxAge\":null,\"expires\":null,\"httpOnly\":true,\"path\":\"/\"},\"flash\":{},\"passport\":{\"user\":60}}');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `users`
+--
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE IF NOT EXISTS `users` (
+  `id_user` int(30) NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL,
+  `password` varchar(80) NOT NULL,
+  `names` varchar(250) NOT NULL,
+  `document` varchar(30) NOT NULL,
+  `email` varchar(250) NOT NULL,
+  `phone` varchar(250) NOT NULL,
+  `status_user` smallint(30) NOT NULL DEFAULT '1',
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  `deleted_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id_user`),
+  KEY `status` (`status_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=63 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `users`
+--
+
+INSERT INTO `users` (`id_user`, `username`, `password`, `names`, `document`, `email`, `phone`, `status_user`, `created_at`, `updated_at`, `deleted_at`) VALUES
+(57, 'diana.gomez', '$2a$10$rWaJqlFMQj9wt5L69Z8fueXGEnrIyQYkcm0wgpw5gC2AR6vab411C', 'Diana Carolina', '24338537', 'diana.gomez605@gmail.com', '88809560', 2, '2019-12-04 13:56:25', '2019-12-04 15:30:52', '2019-12-04 15:34:29'),
+(60, 'joaquin.licorera', '$2a$10$x.jTqa/neKfvRvj8MnSFOucHq1nxnLnPoQUFoYIJpEhccy7BJGSYi', 'Joaquin licorera', '24325888', '232311@gmail.com', '1212111', 1, '2019-12-04 20:01:39', '2019-12-18 02:15:19', NULL),
+(61, 'pedrito.perez', '$2a$10$9ZBC8wKhxDr8LdSwFt8Z3uioLyfCP69mANebTBgxF1ndvFRarBbU6', 'pedro perez angulo', '12334444', 'pedrito@gmail.com', '122111', 1, '2019-12-17 15:12:11', '2019-12-17 15:12:41', NULL),
+(62, 'pedro.marcano', '$2a$10$JNushhzThS5HVHqL9N8qBeatKSwKuZUOyTW1vTZlaqh5PFtHiVzNq', 'pedro marcano', '123344511', 'pedrito.marcano@gmail.com', '8889767', 1, '2019-12-23 19:04:46', '2019-12-23 19:05:13', NULL),
+(46, 'danigb66', '$2a$10$Wem4onat3pCWyVUjrpAwLuQvDiLopenjDnOZaJyc.4O7X9OGOsvTS', 'Daniel Stiven Gómez', '1053833671', 'danigb66@gmail.com', '8880478', 1, '2019-11-25 02:53:15', '2019-11-27 23:07:21', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user_address`
+--
+
+DROP TABLE IF EXISTS `user_address`;
+CREATE TABLE IF NOT EXISTS `user_address` (
+  `id_user_address` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(30) NOT NULL,
+  `description_user_address` varchar(500) DEFAULT NULL,
+  `user_address` varchar(500) NOT NULL,
+  `id_muni` bigint(20) NOT NULL,
+  PRIMARY KEY (`id_user_address`),
+  KEY `id_user` (`id_user`),
+  KEY `id_muni` (`id_muni`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `user_address`
+--
+
+INSERT INTO `user_address` (`id_user_address`, `id_user`, `description_user_address`, `user_address`, `id_muni`) VALUES
+(1, 57, 'casa', 'calle 37A # 32A - 82', 338);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `user_profile`
+--
+
+DROP TABLE IF EXISTS `user_profile`;
+CREATE TABLE IF NOT EXISTS `user_profile` (
+  `id_user_profile` int(30) NOT NULL AUTO_INCREMENT,
+  `id_user` int(30) NOT NULL,
+  `id_profile` int(30) NOT NULL,
+  `status_user_profile` smallint(30) NOT NULL,
+  PRIMARY KEY (`id_user_profile`),
+  KEY `id_user` (`id_user`),
+  KEY `id_profile` (`id_profile`),
+  KEY `status` (`status_user_profile`)
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `user_profile`
+--
+
+INSERT INTO `user_profile` (`id_user_profile`, `id_user`, `id_profile`, `status_user_profile`) VALUES
+(1, 46, 1, 1),
+(2, 57, 3, 1),
+(3, 60, 2, 1),
+(4, 61, 2, 1),
+(5, 62, 2, 1);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

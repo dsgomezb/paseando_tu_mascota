@@ -46,13 +46,17 @@ router.get('/create', isLoggedIn, async (req, res) => {
 router.post('/register', isLoggedIn, async (req, res) => {
     let data = req.body;
     const { name_establecimiento, direccion_establecimiento, telefono_establecimiento, id_muni, id_user} = data;
-
     let status_establecimiento = 1;
     let created_at = new Date();
-
+    latitud = parseFloat(data.latitud);
+    longitud = parseFloat(data.longitud);
+    var direccion_completa = data.direccion_completa;
     const newEstablecimiento = {
         name_establecimiento,
         direccion_establecimiento,
+        latitud,
+        longitud,
+        direccion_completa,
         telefono_establecimiento,
         id_muni,
         status_establecimiento,
@@ -138,13 +142,18 @@ router.get('/edit/:id', isLoggedIn, async (req, res) => {
 router.post('/update', isLoggedIn, async (req, res) => {
     let data = req.body;
     const { name_establecimiento, direccion_establecimiento, telefono_establecimiento, id_muni, id_user, establecimiento_id, id_establecimiento_user} = data;
-
+    latitud = parseFloat(data.latitud);
+    longitud = parseFloat(data.longitud);
+    var direccion_completa = data.direccion_completa;
     let status_establecimiento = 1;
     let created_at = new Date();
 
     const newEstablecimiento = {
         name_establecimiento,
         direccion_establecimiento,
+        latitud,
+        longitud,
+        direccion_completa,
         telefono_establecimiento,
         id_muni,
         status_establecimiento,

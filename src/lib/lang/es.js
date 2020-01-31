@@ -36,7 +36,8 @@ module.exports = {
         edit: 'Editar',
         delete: 'Eliminar',
         save_links: 'Guarda tus enlaces',
-        close: 'Cerrar'
+        close: 'Cerrar',
+        search_address: 'Buscar Dirección'
     },
     links: {
         not_links_create :'No hay links creados aun',
