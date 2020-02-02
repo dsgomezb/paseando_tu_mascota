@@ -32,6 +32,10 @@ router.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile');
 });
 
+router.get('/profile/edit', isLoggedIn, (req, res) => {
+    res.render('profile/edit');
+});
+
 router.get('/logout', isLoggedIn, (req, res) => {
     req.logout();
     res.redirect('/signin');

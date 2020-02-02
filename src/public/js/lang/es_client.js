@@ -18,7 +18,8 @@ var lang = {
         document_invalid: 'Este documento ya se encuentra registrado',
         exit_register: 'Usuario registrado exitosamente',
         exit_updated: 'Usuario actualizado exitosamente',
-        profile_required: 'Debe seleccionar un perfil válido'
+        profile_required: 'Debe seleccionar un perfil válido',
+        exit_updated_profile: 'Perfil actualizado exitosamente'
     },
     establecimiento:{
         user_required: 'Debe seleccionar un administrador de establecimiento',

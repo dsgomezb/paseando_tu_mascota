@@ -1,10 +1,28 @@
 <div class="container p-4">
     <div class="row">
-        <div class="col-md-4 mx-auto">
+        <div class="col-md-12 mx-auto">
             <div class="card text-center">
                 <div class="card-body">
-                    <h3>Bienvenido {{user.names}}</h3>
-                    <a href="/establecimientos" class="btn btn-primary m-4">Gestiona tus establecimientos</a>
+                    <h3 class="text-primary">{{lang.users.my_profile}}</h3>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4"><b>{{lang.users.name}}:</b> {{user.names}}</div>
+                        <div class="col-md-4"><b>{{lang.users.document}}:</b> {{user.document}}</div>
+                        <div class="col-md-4"><b>{{lang.users.email}}:</b> {{user.email}}</div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-4"><b>{{lang.users.phone}}:</b> {{user.phone}}</div>
+                        <div class="col-md-4"><b>{{lang.users.profile}}:</b> {{user.name_profile}}</div>
+                        <div class="col-md-4"><b>{{lang.users.username}}:</b> {{user.username}}</div>
+                    </div>
+                    <br>
+                    <div class="row">
+                        <div class="col-md-4"></div>  
+                        <div class="col-md-4" style="margin-bottom: 15px">
+                            <a href="/profile/edit" class="btn btn-success">{{lang.users.edit_profile}}</a>          
+                        </div>
+                        <div class="col-md-4"></div>
+                    </div>
                 </div>
             </div>
         </div>

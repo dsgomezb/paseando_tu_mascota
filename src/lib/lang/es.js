@@ -69,7 +69,10 @@ module.exports = {
         detail: 'Detalle del usuario',
         profile_select: 'Seleccione el perfil',
         profile: 'Perfil',
-        management_users: 'Gestión de Usuarios'
+        management_users: 'Gestión de Usuarios',
+        my_profile: 'Mi perfil',
+        edit_profile: 'Editar Perfil',
+        update_profile: 'Actualizar Perfil'
     },
     establecimientos: {
         create: 'Crear',

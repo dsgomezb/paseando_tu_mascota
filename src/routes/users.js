@@ -117,14 +117,13 @@ router.get('/edit/:id', isLoggedIn, async (req, res) => {
 });
 
 //Ruta para actualizar un usuario existente en el sistema desde un usuario admin
-router.post('/update', isLoggedIn, async (req, res) => {
+router.post('/update_profile', isLoggedIn, async (req, res) => {
     
     let data = req.body;
-    const { username, password, names, document, email, phone, user_id } = data;
+    const { password, names, document, email, phone, user_id } = data;
 
     let updated_at = new Date();
     const newUser = {
-        username,
         password,
         names,
         document,
@@ -133,15 +132,12 @@ router.post('/update', isLoggedIn, async (req, res) => {
         updated_at
     };
     
-    const username_result = await pool.query('SELECT username FROM users WHERE username = ? and id_user != ?', [newUser.username, user_id]);
     const document_result = await pool.query('SELECT document FROM users WHERE document = ? and id_user != ?', [newUser.document, user_id]);
     const email_result = await pool.query('SELECT email FROM users WHERE email = ? and id_user != ?', [newUser.email, user_id]);
     const password_result = await pool.query('SELECT password FROM users WHERE id_user = ?', [user_id]);
 
     if(document_result.length > 0){
         res.send('document');
-    }else if(username_result.length > 0){
-        res.send('username');
     }else if(email_result.length > 0){
         res.send('email');
     }else{

@@ -342,3 +342,74 @@ $(document).ready(function(){
         });
         return false;
     });
+
+    //Se hace la peticion ajax para actualizar el usuario
+    $('#form_update_profile').on('submit', (e) => {
+        e.preventDefault();
+        //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
+        var formData = new Object();
+        formData.document = $("#document").val();
+        formData.names = $("#names").val();
+        formData.email = $("#email").val();
+        formData.phone = $("#phone").val();
+        formData.password = $("#password").val();
+        formData.user_id = $("#user_id").val();
+
+        //Petición ajax paa envío de la info del form
+        $.ajax({
+            type: 'POST',
+            url: '/users/update_profile',
+            data: formData,
+            cache: false,
+            success: function(data){
+                if(data == 'document'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.user.document_invalid,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == 'email'){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.user.email_invalid,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                }else if(data == true){
+                    Swal.fire({
+                        title: lang.exit,
+                        text: lang.user.exit_updated_profile,
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    }).then((result)=>{
+                        if(result.value){
+                            //Se recarga la pagina al dar clic en aceptar
+                            window.location.href = "/profile"
+                        }
+                    });
+                }else if(data == false){
+                    Swal.fire({
+                        title: lang.error,
+                        text: lang.general.error_save,
+                        icon: 'error',
+                        showCancelButton: false,
+                        confirmButtonColor: '#3085d6',
+                        confirmButtonText: lang.accept,                    
+                    });
+                    return false;
+                }
+            },
+            error: function(err) {
+            var msg = 'Status: ' + err.status;
+            console.log(msg);
+            }
+        });
+        return false;
+    });
