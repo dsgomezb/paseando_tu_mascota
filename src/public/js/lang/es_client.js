@@ -57,5 +57,9 @@ var lang = {
     },
     orders:{
         exit_update_status: 'Estado del pedido actualizado correctamente'
+    },
+    shedules:{
+        exit_register: 'Horario registrado exitosamente',
+        name_schedule: 'Este nombre de horario ya se encuentra registrado',
     }
 }

@@ -52,7 +52,8 @@ module.exports = {
         users: 'Usuarios',
         establishments: 'Establecimientos',
         products: 'Productos',
-        order: 'Pedidos'
+        order: 'Pedidos',
+        schedule: 'Horarios'
     },
     users: {
         create: 'Crear',
@@ -78,7 +79,7 @@ module.exports = {
         create: 'Crear',
         create_establecimiento: 'Crear nuevo establecimiento',
         update_user: 'Actualizar establecimiento',
-        new: 'Nuevo Establecimiento ',
+        new: 'Nuevo Establecimiento',
         N: 'N°',
         detail: 'Detalle del establecimiento',
         code: 'Código',
@@ -91,6 +92,28 @@ module.exports = {
         establecimiento_admin: 'Administrador',
         establecimiento_name: 'Nombre del establecimiento',
         update_establecimiento: 'Actualizar establecimiento',
+    },
+    schedules:{
+        management_schedule: 'Gestión de Horarios',
+        new: 'Adicionar Horario',
+        N: 'N°',
+        name: 'Nombre',
+        code: 'Código',
+        detail: 'Detalle del establecimiento',
+        establishment: 'Establecimiento',
+        name: 'Nombre',
+        description: 'Descripción',
+        day: 'Día',
+        init_hour:'Hora inicio (24 hr)',
+        end_hour:'Hora fin (24 hr)',
+        monday: 'Lunes',
+        tuesday: 'Martes',
+        wednesday: 'Miércoles',
+        thursday: 'Jueves',
+        friday: 'Viernes',
+        saturday: 'Sábado',
+        sunday: 'Domingo',
+        detail: 'Detalle del Horario'
     },
     products:{
         create: 'Crear',

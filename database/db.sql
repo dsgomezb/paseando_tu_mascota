@@ -1325,20 +1325,20 @@ ALTER TABLE user_address ADD FOREIGN KEY(id_user) REFERENCES users(id);
 ALTER TABLE user_address ADD FOREIGN KEY(id_muni) REFERENCES municipios(id_muni);
 
 CREATE TABLE order_status(
-    id_order_status INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    name_order_status VARCHAR(250),
-    description_order_status VARCHAR(500)
+  id_order_status INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  name_order_status VARCHAR(250),
+  description_order_status VARCHAR(500)
 );
 
 CREATE TABLE master_order(
-      id_master_order INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
-      id_user_address INT NOT NULL,
-      id_order_status INT NOT NULL,
-      id_establecimiento bigint(20) NOT NULL,
-      total_value_order FLOAT,
-      created_at timestamp NULL,
-      updated_at timestamp NULL,
-      deleted_at timestamp NULL
+  id_master_order INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_user_address INT NOT NULL,
+  id_order_status INT NOT NULL,
+  id_establecimiento bigint(20) NOT NULL,
+  total_value_order FLOAT,
+  created_at timestamp NULL,
+  updated_at timestamp NULL,
+  deleted_at timestamp NULL
 );
 
 ALTER TABLE master_order ADD FOREIGN KEY(id_user_address) REFERENCES user_address(id_user_address);
@@ -1354,3 +1354,39 @@ CREATE TABLE detail_order(
 
 ALTER TABLE detail_order ADD FOREIGN KEY(id_master_order) REFERENCES master_order(id_master_order);
 ALTER TABLE detail_order ADD FOREIGN KEY(id_product) REFERENCES product(id_product);
+
+CREATE TABLE schedule(
+  id_schedule INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_establecimiento bigint(20) NOT NULL,
+  name_schedule VARCHAR(250) NOT NULL,
+  description_schedule VARCHAR(500) NULL,
+  status_schedule smallint(30) NOT NULL,
+  created_at timestamp NULL,
+  updated_at timestamp NULL,
+  deleted_at timestamp NULL
+);
+
+ALTER TABLE schedule ADD FOREIGN KEY(id_establecimiento) REFERENCES establecimiento(id_establecimiento);
+ALTER TABLE schedule ADD FOREIGN KEY(status_schedule) REFERENCES parameters(id);
+
+
+CREATE TABLE schedule_detail(
+  id_schedule_detail INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  id_schedule INT NOT NULL,
+  start_hour_monday TIME NULL,
+  end_hour_monday TIME NULL,
+  start_hour_tuesday TIME NULL,
+  end_hour_tuesday TIME NULL,
+  start_hour_wednesday TIME NULL,
+  end_hour_wednesday TIME NULL,
+  start_hour_thursday TIME NULL,
+  end_hour_thursday TIME NULL,
+  start_hour_friday TIME NULL,
+  end_hour_friday TIME NULL,
+  start_hour_saturday TIME NULL,
+  end_hour_saturday TIME NULL,
+  start_hour_sunday TIME NULL,
+  end_hour_sunday TIME NULL
+);
+
+ALTER TABLE schedule_detail ADD FOREIGN KEY(id_schedule) REFERENCES schedule(id_schedule);

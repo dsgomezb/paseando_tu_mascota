@@ -75,6 +75,7 @@ app.use('/establecimientos', require('./routes/establecimientos'));
 app.use('/users', require('./routes/users'));
 app.use('/products', require('./routes/products'));
 app.use('/orders', require('./routes/orders'));
+app.use('/schedules', require('./routes/schedules'));
 
 
 //Public
