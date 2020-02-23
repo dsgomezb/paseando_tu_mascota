@@ -84,6 +84,6 @@ app.use(express.static(path.join(__dirname, 'lib')));
 app.use(express.static('public/archivos'));
 
 //Starting the server
-app.listen((process.env.PORT || 5000), function(){
+app.listen((process.env.PORT || 3000), function(){
     console.log('server port: '+app.get('port'));
 });
