@@ -27,6 +27,10 @@ app.engine('.hbs', exphbs({
     helpers: require('./lib/handlebars')
 }));
 app.set('view engine', '.hbs');
+//Public
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'lib')));
+app.use(express.static('public/archivos'));
 app.use(favicon(path.join(__dirname, 'public/img/images_logo', 'favicon.png')))
 
 //Middlewars
@@ -76,12 +80,6 @@ app.use('/users', require('./routes/users'));
 app.use('/products', require('./routes/products'));
 app.use('/orders', require('./routes/orders'));
 app.use('/schedules', require('./routes/schedules'));
-
-
-//Public
-app.use(express.static(path.join(__dirname, 'public')));
-app.use(express.static(path.join(__dirname, 'lib')));
-app.use(express.static('public/archivos'));
 
 //Starting the server
 app.listen((process.env.PORT || 3000), function(){
