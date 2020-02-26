@@ -31,7 +31,7 @@ app.set('view engine', '.hbs');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'lib')));
 app.use(express.static('public/archivos'));
-app.use(favicon(path.join(__dirname, 'public/img/images_logo', 'favicon.png')))
+//app.use(favicon(path.join(__dirname, 'public/img/images_logo', 'favicon.png')))
 
 //Middlewars
 app.use(session({
