@@ -30,8 +30,8 @@ app.set('view engine', '.hbs');
 //Public
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'lib')));
-//app.use(express.static('public/archivos'));
-//app.use(favicon(path.join(__dirname, 'public/img/images_logo', 'favicon.png')))
+app.use(express.static('public/archivos'));
+app.use(favicon(path.join(__dirname, 'public/img/images_logo', 'favicon.png')))
 
 //Middlewars
 app.use(session({
@@ -73,7 +73,7 @@ app.use((req, res, next) => {
 });
 
 //Rutas
-//app.use(require('./routes'));
+app.use(require('./routes'));
 app.use(require('./routes/authentication'));
 app.use('/establecimientos', require('./routes/establecimientos'));
 app.use('/users', require('./routes/users'));
