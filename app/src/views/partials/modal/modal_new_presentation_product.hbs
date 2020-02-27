@@ -1,0 +1,55 @@
+<!-- Modal crear nueva categoria de producto-->
+<div class="modal inmodal" id="modal_button_new_presentation_product" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Encabezado del modal -->
+            <div class="modal-header text-center bg-light">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- /Encabezado del modal -->
+            <!-- Cuerpo del modal -->
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12 text-center">
+                            <h2 class="text-success">{{lang.presentation_product.create_presentation_product}}</h2>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12 mx-auto">
+                            <form id="form_save_presentation_product">
+                                <div class="row">
+                                    <div class="form-group col-md-6">
+                                        <b><label for="">{{lang.presentation_product.name}}{{lang.required}}</label></b>
+                                        <input type="text" name="name_presentation_product1" id="name_presentation_product1" class="form-control" maxlength="250" placeholder="{{lang.presentation_product.name}}" required>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <b><label for="">{{lang.presentation_product.status}}{{lang.required}}</label></b>
+                                        <select name="status_presentation_product" id="status_presentation_product" class="form-control">
+                                            <option value="3">Disponible</option>
+                                            <option value="4">No disponible</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-md-12 text-center">
+                                        <button type="submit" class="btn btn-success" >{{lang.button.save}}</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /Cuerpo del modal -->
+            <!-- Pie del modal -->
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lang.button.close}}</button>
+            </div>
+            <!-- /Pie del modal -->
+        </div>
+    </div>
+</div>
+<!-- /Modal crear nueva categoria de producto-->

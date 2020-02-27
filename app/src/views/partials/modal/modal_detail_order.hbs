@@ -1,0 +1,107 @@
+<!-- Modal detalle establecimiento-->
+<div class="modal inmodal" id="detalle" role="dialog" aria-hidden="true" data-backdrop="static">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!-- Encabezado del modal -->
+            <div class="modal-header text-center bg-light">
+                <h4 class="modal-title ">{{lang.orders.order}}</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <!-- /Encabezado del modal -->
+            <!-- Cuerpo del modal -->
+            <div class="modal-body">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.orders.id_master_order}}</b>
+                            </label>
+                            <label id="id_master_order"></label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.orders.establishment}}</b>
+                            </label>
+                            <label id="name_establecimiento"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.orders.customer_name}}</b>
+                            </label>
+                            <label id="names"></label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.orders.customer_address}}</b>
+                            </label>
+                            <label id="user_address"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.orders.customer_phone}}</b>
+                            </label>
+                            <label id="phone"></label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.orders.customer_email}}</b>
+                            </label>
+                            <label id="email"></label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.orders.order_status}}</b>
+                            </label>
+                            <label id="name_order_status"></label>
+                        </div>
+                        <div class="col-md-6">
+                            <label>
+                                <b>{{lang.orders.total_value_order}}</b>
+                            </label>
+                            <label id="total_value_order"></label>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="container-fluid">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5 class="text-info">{{lang.orders.order_detail}}</h5>
+                            </div>
+                        </div>
+                        <div class="row"></div>
+                    </div>
+                </div>
+                <div class="container-fluid">
+                    <table class="table table-hover" id="detail_order_table">
+                        <thead>
+                            <tr>
+                                <th scope="col">{{lang.orders.id_product}}</th>
+                                <th scope="col">{{lang.orders.name_product}}</th>
+                                <th scope="col">{{lang.orders.name_presentation_product}}</th>
+                                <th scope="col">{{lang.orders.value_iva_product}}</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- /Cuerpo del modal -->
+            <!-- Pie del modal -->
+            <div class="modal-footer text-center">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">{{lang.button.close}}</button>
+            </div>
+            <!-- /Pie del modal -->
+        </div>
+    </div>
+</div>
+<!-- /Modal detalle establecimiento-->

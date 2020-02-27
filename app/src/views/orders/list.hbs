@@ -1,0 +1,56 @@
+
+<div class="container p-4">
+    <div class="row">    
+        <div class="col-md-12" style="text-align: center; margin-bottom: 10px">
+            <h2 class="text-primary">{{lang.orders.management_orders}}</h2>         
+        </div>    
+    </div>
+    <div class="row">    
+        <div class="col-md-9" style="margin-bottom: 15px">        
+            <!--<a href="#" id="button_new_order_status" class="btn btn-success">{{lang.orders.new_order_status}}</a>-->
+        </div>
+        <div class="col-md-3">
+        </div>     
+    </div>    
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <table id="orders_table" class="table table table-hover display nowrap" width="100%">
+                <thead>
+                    <tr>
+                        <th>{{lang.orders.N}}</th>
+                        <th>{{lang.orders.id}}</th>
+                        <th>{{lang.orders.user}}</th>
+                        <th>{{lang.orders.address}}</th>
+                        <th>{{lang.orders.total_value}}</th>
+                        <th>{{lang.orders.establishment}}</th>
+                        <th>{{lang.detail.status}}</th>
+                        <th class="text-center">{{lang.detail.action}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#each orders}}
+                    <tr>
+                        <td></td>
+                        <td>{{id_master_order}}</td>
+                        <td>{{names}}</td>
+                        <td>{{user_address}}</td>
+                        <td>{{total_value_order}}</td>
+                        <td>{{name_establecimiento}}</td>
+                        <td>{{name_order_status}}</td>
+                        <td class="text-center">  
+                            <a href="#" class="detail btn btn-primary btn-sm" data-id="{{id_master_order}}"><i class="fa fa-align-justify fa-lg" title="{{../lang.detail.detail}}"></i></a>
+                            <a href="#" class="edit_status btn btn-success btn-sm" data-id="{{id_master_order}}"><i class="fa fa-bell fa-lg" title="{{../lang.detail.status_change}}"></i></a>
+                        </td>
+                    </tr>
+                    {{/each}}
+                </tbody>    
+            </table>
+        </div>
+    </div>
+    <!-- Button trigger modal -->
+
+</div>
+</div>
+    {{> modal/modal_detail_order }}    
+    {{> modal/modal_change_status_order }}
+</div>
