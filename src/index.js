@@ -73,15 +73,19 @@ app.use((req, res, next) => {
 });
 
 //Rutas
-app.use(require('./routes'));
-app.use(require('./routes/authentication'));
-app.use('/establecimientos', require('./routes/establecimientos'));
-app.use('/users', require('./routes/users'));
-app.use('/products', require('./routes/products'));
-app.use('/orders', require('./routes/orders'));
-app.use('/schedules', require('./routes/schedules'));
+// app.use(require('./routes'));
+// app.use(require('./routes/authentication'));
+// app.use('/establecimientos', require('./routes/establecimientos'));
+// app.use('/users', require('./routes/users'));
+// app.use('/products', require('./routes/products'));
+// app.use('/orders', require('./routes/orders'));
+// app.use('/schedules', require('./routes/schedules'));
 
+router.get('/', (req, res) => {
+    res.send('Test');
+});
 //Starting the server
 app.listen((process.env.PORT || 3000), function(){
     console.log('server port: '+app.get('port'));
 });
+
