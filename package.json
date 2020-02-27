@@ -30,7 +30,8 @@
     "path": "^0.12.7",
     "pg": "^7.17.0",
     "serve-favicon": "^2.5.0",
-    "timeago.js": "^4.0.2"
+    "timeago.js": "^4.0.2",
+    "webpack-dev-server": "^3.10.3"
   },
   "devDependencies": {
     "nodemon": "^1.19.4"
@@ -39,7 +40,7 @@
     "type": "git",
     "url": "git+https://danigb66@bitbucket.org/danigb66/establecimientos.git"
   },
-  "engines":{
+  "engines": {
     "node": "12.14.0",
     "npm": "6.13.4"
   },
