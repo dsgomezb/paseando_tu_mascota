@@ -39,6 +39,10 @@
     "type": "git",
     "url": "git+https://danigb66@bitbucket.org/danigb66/establecimientos.git"
   },
+  "engines":{
+    "node": "12.14.0",
+    "npm": "6.13.4"
+  },
   "homepage": "https://bitbucket.org/danigb66/establecimientos#readme",
   "description": ""
 }
