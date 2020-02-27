@@ -40,6 +40,7 @@ app.use(session({
     saveUninitialized: false,
     store:  new MySQLStore(database)
 }));
+
 app.use((req, res, next) => {
 
 // Dominio que tengan acceso (ej. 'http://example.com')
