@@ -81,7 +81,7 @@ app.use((req, res, next) => {
 // app.use('/orders', require('./routes/orders'));
 // app.use('/schedules', require('./routes/schedules'));
 
-router.get('/', (req, res) => {
+app.get('/', (req, res) => {
     res.send('Test');
 });
 //Starting the server
