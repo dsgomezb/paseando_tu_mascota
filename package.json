@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "./src/index.js",
   "scripts": {
-    "heroku-postbuild": "next build",
-    "start": "next start -p $PORT"
+    "start": "node src"
   },
   "keywords": [],
   "author": "",
