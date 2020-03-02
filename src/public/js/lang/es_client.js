@@ -61,5 +61,9 @@ var lang = {
     shedules:{
         exit_register: 'Horario registrado exitosamente',
         name_schedule: 'Este nombre de horario ya se encuentra registrado',
+        available: 'Disponible',
+        available_sure: '¿Esta seguro que desea marcar este horario como disponible?',
+        exit_unavailable: 'Horario marcado como no disponible',
+        exit_available: 'Horario marcado como disponible'
     }
 }

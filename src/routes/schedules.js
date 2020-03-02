@@ -6,6 +6,28 @@ const { isNotLoggedIn } = require('../lib/auth');
 const pool = require('../database');
 const helpers = require('../lib/helpers');
 
+//Ruta para cargar la informacion del producto en el formulario de edición
+router.get('/edit/:id', isLoggedIn, async (req, res) => {
+    const id_user = req.user.id_user;
+    const { id } = req.params;
+});
+
+//Ruta para marcar como no disponible un Horario
+router.get('/available/:id', isLoggedIn, async (req, res) => {
+    const { id } = req.params;
+    let deleted_at = new Date();
+    let status_schedule = 3;
+    let status_schedule_una = 4;
+    const establecimiento = await pool.query('SELECT id_establecimiento FROM schedule WHERE id_schedule = ?',[id]);
+    const query_una = await pool.query('UPDATE schedule set status_schedule = ? WHERE id_establecimiento = ?',[status_schedule_una, establecimiento[0].id_establecimiento]);
+    const query_available = await pool.query('UPDATE schedule set status_schedule = ? WHERE id_schedule = ?',[status_schedule,  id]);
+    if(query_available){
+        res.send(true);
+    }else{
+        res.send(false);
+    }
+});
+
 //Ruta para listar todos los establecimientos del sistema
 router.get('/', isLoggedIn, async (req, res) => {
     const id_user = req.user.id_user;
@@ -23,7 +45,7 @@ router.get('/create', isLoggedIn, async (req, res) => {
 router.post('/save', isLoggedIn, async (req, res) => {
     let data = req.body;
     let created_at = new Date();
-    let status_schedule = 3;
+    let status_schedule = 4;
     const { id_establecimiento, 
         name_schedule, 
         description_schedule, 
@@ -89,5 +111,7 @@ router.get('/detail/:id', isLoggedIn, async (req, res) => {
     const data = schedules[0];
     res.json(data);
 });
+
+
 
 module.exports = router;
