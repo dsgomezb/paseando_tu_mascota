@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "./src/index.js",
   "scripts": {
-    "prestart": "next build",
-    "start": "next start -p ${PORT}"
+    "heroku-postbuild": "next build",
+    "start": "next start -p $PORT"
   },
   "keywords": [],
   "author": "",
@@ -34,9 +34,6 @@
     "serve-favicon": "^2.5.0",
     "timeago.js": "^4.0.2",
     "webpack-dev-server": "^3.10.3",
-    "nodemon": "^1.19.4"
-  },
-  "devDependencies": {
     "nodemon": "^1.19.4"
   },
   "repository": {
