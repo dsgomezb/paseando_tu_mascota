@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "./src/index.js",
   "scripts": {
-    "prestart" : "next build",
-    "start": "node src"
+    "dev": "node src",
+    "build": "next build",
+    "postinstall": "npm run build",
+    "start": "NODE_ENV=production node src"
   },
   "keywords": [],
   "author": "",
