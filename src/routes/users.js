@@ -9,62 +9,76 @@ const helpers = require('../lib/helpers');
 
 //Ruta para registrar un nuevo usuario del sistema desde un usuario admin
 router.post('/register', isLoggedIn, async (req, res) => {
-    let data = req.body;
-    const { username, password, names, document, email, phone, id_profile } = data;
+    if(req.user.id_profile == 1){
+        let data = req.body;
+        const { username, password, names, document, email, phone, id_profile } = data;
 
-    let status_user = 1;
-    let status_user_profile = 1;
-    let created_at = new Date();
-    const newUser = {
-        username,
-        password,
-        names,
-        document,
-        email,
-        phone,
-        status_user,
-        created_at
-    };
-
-    const username_result = await pool.query('SELECT username FROM users WHERE username = ?', [newUser.username]);
-    const document_result = await pool.query('SELECT document FROM users WHERE document = ?', [newUser.document]);
-    const email_result = await pool.query('SELECT email FROM users WHERE email = ?', [newUser.email]);
-    
-    if(document_result.length > 0){
-        res.send('document');
-    }else if(username_result.length > 0){
-        res.send('username');
-    }else if(email_result.length > 0){
-        res.send('email');
-    }else{
-        newUser.password = await helpers.encryptPassword(password);
-        const query_user = await pool.query('INSERT INTO users SET ?', [newUser]);
-        const id_user = query_user.insertId;
-        const newPorfileUSer = {
-            id_user,
-            id_profile,
-            status_user_profile
+        let status_user = 1;
+        let status_user_profile = 1;
+        let created_at = new Date();
+        const newUser = {
+            username,
+            password,
+            names,
+            document,
+            email,
+            phone,
+            status_user,
+            created_at
         };
-        const query_user_profile = await pool.query('INSERT INTO user_profile SET ?', [newPorfileUSer]);
-        if(query_user && query_user_profile){
-            res.send(true);
+
+        const username_result = await pool.query('SELECT username FROM users WHERE username = ?', [newUser.username]);
+        const document_result = await pool.query('SELECT document FROM users WHERE document = ?', [newUser.document]);
+        const email_result = await pool.query('SELECT email FROM users WHERE email = ?', [newUser.email]);
+        
+        if(document_result.length > 0){
+            res.send('document');
+        }else if(username_result.length > 0){
+            res.send('username');
+        }else if(email_result.length > 0){
+            res.send('email');
         }else{
-            res.send(false);
+            newUser.password = await helpers.encryptPassword(password);
+            const query_user = await pool.query('INSERT INTO users SET ?', [newUser]);
+            const id_user = query_user.insertId;
+            const newPorfileUSer = {
+                id_user,
+                id_profile,
+                status_user_profile
+            };
+            const query_user_profile = await pool.query('INSERT INTO user_profile SET ?', [newPorfileUSer]);
+            if(query_user && query_user_profile){
+                res.send(true);
+            }else{
+                res.send(false);
+            }
         }
+    }else{
+        res.send(false);
     }
 });
 
 //Ruta para listar todos los usuarios del sistema
 router.get('/', isLoggedIn, async (req, res) => {
-    const id_user = req.user.id_user;
-    const users = await pool.query("SELECT * FROM users as u inner join user_profile as up on u.id_user = up.id_user inner join profile as p on p.id_profile = up.id_profile WHERE u.id_user != ? ORDER BY u.created_at desc", [id_user]);
-    res.render('users/list', {users});
+    if(req.user.id_profile == 1){
+        const id_user = req.user.id_user;
+        const users = await pool.query("SELECT * FROM users as u inner join user_profile as up on u.id_user = up.id_user inner join profile as p on p.id_profile = up.id_profile WHERE u.id_user != ? ORDER BY u.created_at desc", [id_user]);
+        res.render('users/list', {users});
+    }else{
+        res.status(401);
+        res.render('partials/errors/route');
+    } 
 });
 
 //Ruta para crear nuevos usuarios en el sistema
 router.get('/create', isLoggedIn, async (req, res) => {
-    const profile = await pool.query('SELECT * FROM profile ORDER BY name_profile desc');
-    res.render('users/create', {profile});
+    if(req.user.id_profile == 1){
+        const profile = await pool.query('SELECT * FROM profile ORDER BY name_profile desc');
+        res.render('users/create', {profile});
+    }else{
+        res.status(401);
+        res.render('partials/errors/route');
+    }
 });
 
 //Ruta para registrar un nuevo usuario en la base de datos
@@ -76,20 +90,29 @@ router.post('/signup', passport.authenticate('local.signup', {
 
 //Ruta para obtener los datos al detalle del usuario
 router.get('/detail/:id', isLoggedIn, async (req, res) => {
-    const { id } = req.params;
-    const users = await pool.query('SELECT * FROM users as u inner join user_profile as up on u.id_user = up.id_user inner join profile as p on p.id_profile = up.id_profile WHERE u.id_user = ? ORDER BY u.created_at desc', [id]);
-    const data = users[0];
-    res.json(data);
+    if(req.user.id_profile == 1){
+        const { id } = req.params;
+        const users = await pool.query('SELECT * FROM users as u inner join user_profile as up on u.id_user = up.id_user inner join profile as p on p.id_profile = up.id_profile WHERE u.id_user = ? ORDER BY u.created_at desc', [id]);
+        const data = users[0];
+        res.json(data);
+    }else{
+        const data = "";
+        res.json(data);
+    }
 });
 
 //Ruta para inactivar un usuario
 router.get('/inactive/:id', isLoggedIn, async (req, res) => {
-    const { id } = req.params;
-    let deleted_at = new Date();
-    let status_user = 2;
-    const query_inactive = await pool.query('UPDATE users set status_user = ?, deleted_at = ? WHERE id_user = ?',[status_user, deleted_at, id]);
-    if(query_inactive){
-        res.send(true);
+    if(req.user.id_profile == 1){
+        const { id } = req.params;
+        let deleted_at = new Date();
+        let status_user = 2;
+        const query_inactive = await pool.query('UPDATE users set status_user = ?, deleted_at = ? WHERE id_user = ?',[status_user, deleted_at, id]);
+        if(query_inactive){
+            res.send(true);
+        }else{
+            res.send(false);
+        }
     }else{
         res.send(false);
     }
@@ -97,12 +120,16 @@ router.get('/inactive/:id', isLoggedIn, async (req, res) => {
 
 //Ruta para activar un usuario
 router.get('/active/:id', isLoggedIn, async (req, res) => {
-    const { id } = req.params;
-    let deleted_at = null;
-    let status_user = 1;
-    const query_active = await pool.query('UPDATE users set status_user = ?, deleted_at = ? WHERE id_user = ?',[status_user, deleted_at, id]);
-    if(query_active){
-        res.send(true);
+    if(req.user.id_profile == 1){
+        const { id } = req.params;
+        let deleted_at = null;
+        let status_user = 1;
+        const query_active = await pool.query('UPDATE users set status_user = ?, deleted_at = ? WHERE id_user = ?',[status_user, deleted_at, id]);
+        if(query_active){
+            res.send(true);
+        }else{
+            res.send(false);
+        }
     }else{
         res.send(false);
     }
@@ -110,48 +137,56 @@ router.get('/active/:id', isLoggedIn, async (req, res) => {
 
 //Ruta para cargar la informacion del usuario en el formulario de edición
 router.get('/edit/:id', isLoggedIn, async (req, res) => {
-    const { id } = req.params;
-    const users = await pool.query('SELECT * FROM users as u inner join user_profile as up on u.id_user = up.id_user inner join profile as p on p.id_profile = up.id_profile WHERE u.id_user = ?', [id]);
-    const user = users[0];
-    res.render('users/edit', {user});
+    if(req.user.id_profile == 1){
+        const { id } = req.params;
+        const users = await pool.query('SELECT * FROM users as u inner join user_profile as up on u.id_user = up.id_user inner join profile as p on p.id_profile = up.id_profile WHERE u.id_user = ?', [id]);
+        const userr = users[0];
+        res.render('users/edit', {userr});
+    }else{
+        res.status(401);
+        res.render('partials/errors/route');
+    }
 });
 
 //Ruta para actualizar un usuario existente en el sistema desde un usuario admin
-router.post('/update_profile', isLoggedIn, async (req, res) => {
-    
-    let data = req.body;
-    const { password, names, document, email, phone, user_id } = data;
+router.post('/update', isLoggedIn, async (req, res) => {
+    if(req.user.id_profile == 1){
+        let data = req.body;
+        const { password, names, document, email, phone, user_id } = data;
 
-    let updated_at = new Date();
-    const newUser = {
-        password,
-        names,
-        document,
-        email,
-        phone,
-        updated_at
-    };
-    
-    const document_result = await pool.query('SELECT document FROM users WHERE document = ? and id_user != ?', [newUser.document, user_id]);
-    const email_result = await pool.query('SELECT email FROM users WHERE email = ? and id_user != ?', [newUser.email, user_id]);
-    const password_result = await pool.query('SELECT password FROM users WHERE id_user = ?', [user_id]);
+        let updated_at = new Date();
+        const newUser = {
+            password,
+            names,
+            document,
+            email,
+            phone,
+            updated_at
+        };
+        
+        const document_result = await pool.query('SELECT document FROM users WHERE document = ? and id_user != ?', [newUser.document, user_id]);
+        const email_result = await pool.query('SELECT email FROM users WHERE email = ? and id_user != ?', [newUser.email, user_id]);
+        const password_result = await pool.query('SELECT password FROM users WHERE id_user = ?', [user_id]);
 
-    if(document_result.length > 0){
-        res.send('document');
-    }else if(email_result.length > 0){
-        res.send('email');
+        if(document_result.length > 0){
+            res.send('document');
+        }else if(email_result.length > 0){
+            res.send('email');
+        }else{
+            if(password != ''){
+                newUser.password = await helpers.encryptPassword(password);
+            }else{
+                newUser.password = password_result[0].password;
+            }
+            const query_user = await pool.query('UPDATE users SET ? WHERE id_user = ?', [newUser, user_id]);
+            if(query_user){
+                res.send(true);
+            }else{
+                res.send(false);
+            }
+        }
     }else{
-        if(password != ''){
-            newUser.password = await helpers.encryptPassword(password);
-        }else{
-            newUser.password = password_result[0].password;
-        }
-        const query_user = await pool.query('UPDATE users SET ? WHERE id_user = ?', [newUser, user_id]);
-        if(query_user){
-            res.send(true);
-        }else{
-            res.send(false);
-        }
+        res.send(false);
     }
 });
 module.exports = router;

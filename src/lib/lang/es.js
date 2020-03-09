@@ -113,7 +113,8 @@ module.exports = {
         friday: 'Viernes',
         saturday: 'Sábado',
         sunday: 'Domingo',
-        detail: 'Detalle del Horario'
+        detail: 'Detalle del Horario',
+        update_schedule: 'Actualizar Horario',
     },
     products:{
         create: 'Crear',
@@ -175,5 +176,9 @@ module.exports = {
         order_detail: 'Detalle del pedido',
         change_order_status: 'Cambiar estado del pedido',
         status_order: 'Nuevo estado del pedido'
+    },
+    errors:{
+        route_error: "Esta Ruta no existe, por favor verifique",
+        profile: 'Regresar'
     }
 };

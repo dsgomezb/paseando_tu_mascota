@@ -154,6 +154,76 @@ $('#form_save_shedule').on('submit', (e) => {
     return false;
 });
 
+//Se hace la peticion ajax para actualizar un horario
+$('#form_update_shedule').on('submit', (e) => {
+    e.preventDefault();
+    var data = new FormData(e.target);
+    //Se construye un nuevo objeto JSON y se ingresan todos la informacion del formulario para enviarla al back
+    $('#form_save_product').serialize();
+    var id_establecimiento = $("#id_establecimiento").val();
+    if(id_establecimiento == 0){
+        Swal.fire({
+            title: lang.error,
+            text: lang.product.establecimiento_required,
+            icon: 'error',
+            showCancelButton: false,
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: lang.accept,                    
+        });
+        return false;
+    }
+    //Petición ajax para envío de la info del form
+    $.ajax({
+        type: 'POST',
+        url: '/schedules/update',
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false ,
+        success: function(data){
+            if(data == 'schedule_name'){
+                Swal.fire({
+                    title: lang.error,
+                    text: lang.shedules.name_schedule,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: lang.accept,                    
+                });
+            }else if(data == true){
+                Swal.fire({
+                    title: lang.exit,
+                    text: lang.shedules.exit_update_schedule,
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: lang.accept,                    
+                }).then((result)=>{
+                    if(result.value){
+                        //Se recarga la pagina al dar clic en aceptar
+                        window.location.href = "/schedules"
+                    }
+                });
+            }else if(data == false){
+                Swal.fire({
+                    title: lang.error,
+                    text: lang.general.error_save,
+                    icon: 'error',
+                    showCancelButton: false,
+                    confirmButtonColor: '#3085d6',
+                    confirmButtonText: lang.accept,                    
+                });
+                return false;
+            }
+        },
+        error: function(err) {
+        var msg = 'Status: ' + err.status;
+        console.log(msg);
+        }
+    });
+    return false;
+});
+
 //Se hace la peticion ajax para ver el detalle del horario
 $("#schedules_table").on("click", ".detail", function(){
     var id =  $(this).data('id');

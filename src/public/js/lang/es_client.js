@@ -64,6 +64,7 @@ var lang = {
         available: 'Disponible',
         available_sure: '¿Esta seguro que desea marcar este horario como disponible?',
         exit_unavailable: 'Horario marcado como no disponible',
-        exit_available: 'Horario marcado como disponible'
+        exit_available: 'Horario marcado como disponible',
+        exit_update_schedule: 'Horario actualizado correctamente'
     }
 }
