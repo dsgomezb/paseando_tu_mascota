@@ -1,3 +1,13 @@
 {
-    "mensaje": "Hola a todos"
+    "general": {
+        "establishment_name": "Mi trago ya !!!",
+        "welcome": "Bienvenido"
+    },
+    "menu":{
+        "home": "Inicio",
+        "route_profile":"profile",
+        "profile": "profile",
+        "route_login": "login"
+    }
+
 }

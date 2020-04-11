@@ -1,5 +1,7 @@
 {
   "name": "front",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular"
 }

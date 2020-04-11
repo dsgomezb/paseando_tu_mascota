@@ -3,8 +3,8 @@ import { Component, OnInit } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import {TranslateModule} from '@ngx-translate/core';
 import { TranslateService } from "@ngx-translate/core";
+import { i18nMessages } from './TranslateLoader';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -21,6 +21,11 @@ export class AppComponent implements OnInit {
     {
       title: 'Outbox',
       url: '/folder/Outbox',
+      icon: 'paper-plane'
+    },
+    {
+      title: i18nMessages["home"],
+      url: '/home/Outbox',
       icon: 'paper-plane'
     }
   ];
@@ -49,4 +54,5 @@ export class AppComponent implements OnInit {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }
   }
+  
 }
