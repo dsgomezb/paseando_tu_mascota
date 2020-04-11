@@ -1,3 +1,4 @@
+<!--Aqui esta la seccion del menu-->
 <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
@@ -9,11 +10,11 @@
           <ion-menu-toggle auto-hide="false">
             <ion-item  routerDirection="root" routerLink="{{ 'menu.login' | translate }}" lines="none" detail="false">
               <ion-icon slot="start" name="home-outline"></ion-icon>
-              <ion-label>{{ "menu.route_profile" | translate }}</ion-label>
+              <ion-label>{{ "menu.route_login" | translate }}</ion-label>
             </ion-item>
             <ion-item  routerDirection="root" routerLink="{{ 'menu.profile' | translate }}" lines="none" detail="false">
               <ion-icon slot="start" name="home-outline"></ion-icon>
-              <ion-label>{{ "menu.route_login" | translate }}</ion-label>
+              <ion-label>{{ "menu.route_profile" | translate }}</ion-label>
             </ion-item>
           </ion-menu-toggle>
         </ion-list>
