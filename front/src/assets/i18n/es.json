@@ -3,12 +3,37 @@
         "establishment_name": "Mi trago ya !!!",
         "welcome": "Bienvenido"
     },
-    "menu":{
+    "menu": {
         "home": "Inicio",
         "route_profile":"profile",
         "profile": "profile",
         "login": "login",
-        "route_login": "login"
+        "route_login": "login",
+        "close_sesion": "Cerrar Sesión"
+    },
+    "login": {
+        "init_session": "Iniciar Sesión",
+        "user": "Usuario",
+        "password": "Contraseña",
+        "deposit": "Ingresar",
+        "register":"Registrarse",
+        "forgot_password": "Olvidaste tu contraseña?"
+    },
+    "Components":{
+        "App":{
+            "mensaje": "cacorrosss"
+        }
+    },
+    "ResponseServer":{
+
+    },
+    "Menu": {
+
+    },
+    "General":{
+        "errors":{
+            "username_and_password": "Usuario y contraseña requeridos"
+        }
     }
 
 }

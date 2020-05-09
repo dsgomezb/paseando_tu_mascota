@@ -6,7 +6,8 @@ const { isNotLoggedIn } = require('../lib/auth');
 const pool = require('../database');
 const helpers = require('../lib/helpers');
 const es = require('../lib/lang/es');
-
+const jwt = require('express-jwt');
+const secret  = { secret: process.env.SECRET || 'example' }
 //Ruta para marcar como no disponible un producto
 router.get('/unavailable/:id', isLoggedIn, async (req, res) => {
     if(req.user.id_profile == 2){
