@@ -212,7 +212,6 @@ router.post('/api/get_info_user', async (req, res) => {
 
 //Actualizar información de usuario desde movil
 router.post('/api/update_user_api', async (req, res) => {
-    console.log(req.body);
     const { id_user, document, names, email, phone } = req.body;
     const update_user = await pool.query('UPDATE users SET names = ?, document = ?, email = ?, phone = ? WHERE id_user = ?', [names, document, email, phone, id_user]);
     if(update_user){

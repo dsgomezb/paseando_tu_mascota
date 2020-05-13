@@ -61,7 +61,6 @@ userInfo = {
   }
 
   async get_info_user() {
-    console.log("en profile get: "+this.id_user);
     this.userData.user_id = this.id_user;
       this.request.postData('users/api/get_info_user',this.userData, {}).then(data => {
         if(data.code == 1){
@@ -73,8 +72,6 @@ userInfo = {
           this.user_info.phone = data.data.phone;
           this.user_info.id_user = data.data.id_user;
           //this.router.navigate(['/profile']);
-          console.log(this.user_info);
-
         }
        });
     

@@ -64,7 +64,7 @@ export class LoginPage implements OnInit {
           this.storageService.token_user = data.token;
           localStorage.setItem('token', data.token);
           localStorage.setItem('user_id', data.user_id);
-          this.navCtrl.navigateForward('/profile');
+          this.navCtrl.navigateForward('/home');
           //this.router.navigate(['/profile']);
         }
         this.data = data;

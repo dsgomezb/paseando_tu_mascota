@@ -78,6 +78,9 @@ export class AppComponent implements OnInit {
     });
   }
 
+  close(){
+    this.menu.close();
+  }
   /*isUserInSession() {
     var token_user = localStorage.getItem('token');
     this.token = localStorage.getItem('token');

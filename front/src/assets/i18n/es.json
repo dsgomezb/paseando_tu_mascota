@@ -9,7 +9,19 @@
         "profile": "Mi perfil",
         "login": "login",
         "route_login": "login",
-        "close_sesion": "Cerrar Sesión"
+        "close_sesion": "Cerrar Sesión",
+        "address": "Mis Direcciones"
+    },
+    "routes":{
+        "profile": "profile",
+        "address": "address",
+        "home": "home"
+    },
+    "home":{
+        "title": "Inicio"
+    },
+    "address": {
+        "title": "Mis Direcciones"
     },
     "login": {
         "init_session": "Iniciar Sesión",
