@@ -1,26 +1,19 @@
 <!--Aqui esta la seccion del menu-->
 <ion-app>
 
-    <ion-menu contentId="main-content" menuId="menu">
+    <ion-menu side="start" menuId="custom" contentId="main-content" class="my-custom-menu" *ngIf="storageService.token_user != ''">
       <ion-content>
         <ion-list id="inbox-list">
           <ion-list-header>{{ "general.establishment_name" | translate }}</ion-list-header>
           <ion-note>{{ "general.welcome" | translate }}</ion-note>
-
-          <ion-menu-toggle auto-hide="false">
-            <ion-item  routerLink="{{ 'menu.login' | translate }}" lines="none" detail="false">
-              <ion-icon slot="start" name="home-outline"></ion-icon>
-              <ion-label>{{ "menu.route_login" | translate }}</ion-label>
-            </ion-item>
             <ion-item  routerLink="{{ 'menu.profile' | translate }}" lines="none" detail="false">
-              <ion-icon slot="start" name="home-outline"></ion-icon>
-              <ion-label>{{ "menu.route_profile" | translate }}</ion-label>
+              <ion-icon slot="start" name="person-outline"></ion-icon>
+              <ion-label>{{ "menu.profile" | translate }}</ion-label>
             </ion-item>
             <ion-item (click)="logout()" lines="none" detail="false">
               <ion-icon slot="start" name="power"></ion-icon>
               <ion-label>{{ "menu.close_sesion" | translate }}</ion-label>
             </ion-item>
-          </ion-menu-toggle>
         </ion-list>
       </ion-content>
     </ion-menu>

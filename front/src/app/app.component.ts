@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 
-import { Platform, MenuController } from '@ionic/angular';
+import { Platform, MenuController, NavController} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from "@ngx-translate/core";
 import { i18nMessages } from './TranslateLoader';
 import { SERVICES } from "./constants/services";
+import { StorageService } from "./storage.service";
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -14,7 +15,8 @@ import { SERVICES } from "./constants/services";
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
-  menuId = SERVICES.menuId;
+  //menuId = SERVICES.menuId;
+  public token;
   public appPages = [
     {
       title: 'Inbox',
@@ -38,12 +40,16 @@ export class AppComponent implements OnInit {
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private translate: TranslateService,
+    public translate: TranslateService,
     private menu: MenuController,
-    private router: Router
+    private router: Router,
+    public storageService: StorageService,
+    private navCtrl: NavController,
   ) {
+    this.token = localStorage.getItem('token');
     this.initializeApp();
   }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
@@ -51,7 +57,7 @@ export class AppComponent implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.use('es');
-      this.isUserInSession();
+      //this.isUserInSession();
 
       this.translate.get("Components").subscribe(components => {
         i18nMessages.Components = components;
@@ -72,25 +78,32 @@ export class AppComponent implements OnInit {
     });
   }
 
-  isUserInSession() {
+  /*isUserInSession() {
     var token_user = localStorage.getItem('token');
-    console.log(token_user);
+    this.token = localStorage.getItem('token');
+    console.log("token: "+this.token);
     if(token_user){
       this.openMenu();
     }else{
       this.closeMenu();
       this.router.navigate(['/']);
     }
-  }
+  }*/
 
   ngOnInit() {
+    /*if(localStorage.getItem('token') == null){
+      this.menu.enable(false);
+      this.menu.close();
+    }*/
+
+    
     /*const path = window.location.pathname.split('folder/')[1];
     if (path !== undefined) {
       this.selectedIndex = this.appPages.findIndex(page => page.title.toLowerCase() === path.toLowerCase());
     }*/
   }
 
-  openMenu() {
+/*  openMenu() {
     this.menu.enable(true, this.menuId);
     this.menu.open(this.menuId);
   }
@@ -98,12 +111,15 @@ export class AppComponent implements OnInit {
   closeMenu() {
     this.menu.enable(false, this.menuId);
     this.menu.close(this.menuId);
-  }
+  }*/
 
   async logout() {
-    localStorage.clear();
-    this.closeMenu();
+    //localStorage.clear();
+    //this.closeMenu();
+    this.storageService.token_user = '';
     this.router.navigate(['/']);
+    //this.navCtrl.navigateForward('/');
+
   }
   
 }

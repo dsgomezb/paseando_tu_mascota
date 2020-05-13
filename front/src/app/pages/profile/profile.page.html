@@ -3,10 +3,57 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>Profile</ion-title>
+    <ion-title>{{ "profile.profile_title" | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <form (ngSubmit)="update_user()">
+  <ion-card>
+    <ion-card-content>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">{{ "profile.name" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
+              <ion-input type="text" name="name_user" [value]="user_info.names" [(ngModel)]="user_info.names"></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">{{ "profile.document" | translate }}<ion-text color="danger">*</ion-text></ion-label>
+              <ion-input type="text" name="document_user" [value]="user_info.document" [(ngModel)]="user_info.document" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">{{ "profile.phone" | translate }}<ion-text color="danger">*</ion-text></ion-label>
+              <ion-input type="text" name="phone_user" [value]="user_info.phone" [(ngModel)]="user_info.phone" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked">{{ "profile.email" | translate }}<ion-text color="danger">*</ion-text></ion-label>
+              <ion-input type="hidden" name="id_user" [value]="user_info.id_user" [(ngModel)]="user_info.id_user" required></ion-input>
+              <ion-input type="text" name="email_user" [value]="user_info.email" [(ngModel)]="user_info.email" required></ion-input>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button type="submit" expand="block" color="primary">{{ "profile.update_info" | translate }}</ion-button>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+  </form>
 </ion-content>

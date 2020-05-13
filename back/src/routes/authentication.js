@@ -47,7 +47,6 @@ router.get('/logout', isLoggedIn, (req, res) => {
 
 //Ruta api para autenticar usuarios desde la móvil
 router.post('/api/signin', async (req, res) => {
-    console.log(req.body);
     const { username, password } = req.body;
     let status_active = 1;
     const rows = await pool.query('SELECT * FROM users AS us INNER JOIN user_profile AS up ON us.id_user = up.id_user INNER JOIN profile AS pro ON pro.id_profile = up.id_profile WHERE us.username = ? and us.status_user = ?', [username, status_active]);
@@ -60,7 +59,8 @@ router.post('/api/signin', async (req, res) => {
             data = {
                 "exito": "El usuario existe",
                 "token": token_final,
-                "code": "0"
+                "code": "0",
+                "user_id": user.id_user
             };
         }else{
             data = {
@@ -75,14 +75,6 @@ router.post('/api/signin', async (req, res) => {
         };
     }
     res.status(200).json(data);
-});
-
-router.post('/api/prueba', functions.verifyToken, async (req, res) => {
-    res.json({"caco": "uno", "mari": "209"});
-});
-
-router.post('/api/prueba_free', async (req, res) => {
-    res.json({"mateo": "gayyy", "pruab": "aaaa"});
 });
 
 module.exports = router;

@@ -189,4 +189,45 @@ router.post('/update', isLoggedIn, async (req, res) => {
         res.send(false);
     }
 });
+
+//Capturar id de usuario, consultar informacion de éste y enviarla al front para perfil
+router.post('/api/get_info_user', async (req, res) => {
+    console.log(req.body);
+    const { user_id } = req.body;
+    const rows = await pool.query('SELECT us.id_user as id_user, us.names, us.document, us.email, us.phone FROM users AS us INNER JOIN user_profile AS up ON us.id_user = up.id_user INNER JOIN profile AS pro ON pro.id_profile = up.id_profile WHERE us.id_user = ?', [user_id]);
+    if(rows.length > 0){
+        const user = rows[0];
+        data = {
+            "code": "0",
+            "data": user
+        };
+    }else{
+        data = {
+            "code": "1",
+            "error": "El usuario no existe"
+        };
+    }
+    res.status(200).json(data);
+});
+
+//Actualizar información de usuario desde movil
+router.post('/api/update_user_api', async (req, res) => {
+    console.log(req.body);
+    const { id_user, document, names, email, phone } = req.body;
+    const update_user = await pool.query('UPDATE users SET names = ?, document = ?, email = ?, phone = ? WHERE id_user = ?', [names, document, email, phone, id_user]);
+    if(update_user){
+        data = {
+            "code": "0",
+            "message": "Usuario actualizado correctamente",
+            "update": true
+        };
+    }else{
+        data = {
+            "code": "1",
+            "update": false,
+            "error": "Error al actualizar usuario"
+        };
+    }
+    res.status(200).json(data);
+});
 module.exports = router;

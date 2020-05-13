@@ -6,7 +6,7 @@
     "menu": {
         "home": "Inicio",
         "route_profile":"profile",
-        "profile": "profile",
+        "profile": "Mi perfil",
         "login": "login",
         "route_login": "login",
         "close_sesion": "Cerrar Sesión"
@@ -18,6 +18,14 @@
         "deposit": "Ingresar",
         "register":"Registrarse",
         "forgot_password": "Olvidaste tu contraseña?"
+    },
+    "profile": {
+        "profile_title": "Mi perfil",
+        "name": "Nombre Completo",
+        "document": "Documento de identidad",
+        "email": "Email",
+        "update_info": "Actualizar Información",
+        "phone": "Teléfono"
     },
     "Components":{
         "App":{
@@ -32,7 +40,8 @@
     },
     "General":{
         "errors":{
-            "username_and_password": "Usuario y contraseña requeridos"
+            "username_and_password": "Usuario y contraseña requeridos",
+            "data_update_profile_user": "Todos los campos de este formulario son obligatorios"
         }
     }
 

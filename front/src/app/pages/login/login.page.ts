@@ -10,7 +10,7 @@ import { RequestService } from '../../services/http/request.service';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { ToastService  } from '../../services/toaster/toast.service';
 import { SERVICES } from "../../constants/services";
-
+import { StorageService } from "../../storage.service";
 //import { SERVICES } from "../../constants/services";
 //import { HttpClientModule, HttpClient } from '@angular/common/http';
 @Component({
@@ -34,7 +34,8 @@ export class LoginPage implements OnInit {
     private toast: ToastService,
     private menu: MenuController,
     private router: Router,
-    private navCtrl: NavController
+    private navCtrl: NavController,
+    public storageService: StorageService
   ) { 
     this.initializeApp();
   }
@@ -60,9 +61,9 @@ export class LoginPage implements OnInit {
         if(data.code == 1 || data.code == 2){
           this.toast.presentToast(data.error, "error-toast", 3000);
         }else if(data.code == 0){
-          console.log("llegamos aqui");
+          this.storageService.token_user = data.token;
           localStorage.setItem('token', data.token);
-          console.log(data.token);
+          localStorage.setItem('user_id', data.user_id);
           this.navCtrl.navigateForward('/profile');
           //this.router.navigate(['/profile']);
         }
