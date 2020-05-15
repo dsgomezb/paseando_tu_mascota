@@ -3,10 +3,34 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ "address.title" | translate }}</ion-title>
+    <ion-title color="primary"><b>{{ "address.title" | translate }}</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button expand="block" color="primary">{{ "address.add_address" | translate }}</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-card *ngFor="let user_add of user_address">
+    <ion-item>
+      <ion-icon name="home-outline" slot="start"></ion-icon>
+      <ion-label>{{user_add.address_title}}</ion-label>
+    </ion-item>
+
+    <ion-card-content>
+      {{user_add.nombre_muni}} <br>
+      <b>{{user_add.user_address}}</b> <br>
+      {{user_add.description_user_address}}
+    </ion-card-content>
+    <div class="center">
+      <ion-button size="small" fill="outline" color="success" title='{{ "general.edit" | translate }}'><ion-icon name="pencil-outline"></ion-icon></ion-button>
+      <ion-button size="small" fill="outline" color="danger" title='{{ "general.delete" | translate }}'><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+    </div>
+  </ion-card>
 
 </ion-content>

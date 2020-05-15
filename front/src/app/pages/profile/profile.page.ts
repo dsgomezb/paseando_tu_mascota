@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { Platform } from '@ionic/angular';
+import { Platform, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { TranslateService } from "@ngx-translate/core";
@@ -43,6 +43,7 @@ userInfo = {
     private translate: TranslateService,
     public request: RequestService,
     private toast: ToastService,
+    private navCtrl: NavController,
   ) { 
     //this.initializeApp();
     this.id_user = localStorage.getItem('user_id');
@@ -88,6 +89,7 @@ userInfo = {
           this.toast.presentToast(data.error, "error-toast", 3000);
         }else if(data.code == 0){
           this.toast.presentToast(data.message, "success-toast", 3000);
+          this.navCtrl.navigateForward('/home');
         }
         //this.data = data;
        });

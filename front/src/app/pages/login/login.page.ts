@@ -65,7 +65,6 @@ export class LoginPage implements OnInit {
           localStorage.setItem('token', data.token);
           localStorage.setItem('user_id', data.user_id);
           this.navCtrl.navigateForward('/home');
-          //this.router.navigate(['/profile']);
         }
         this.data = data;
        });

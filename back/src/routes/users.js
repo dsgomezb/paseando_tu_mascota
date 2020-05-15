@@ -192,7 +192,6 @@ router.post('/update', isLoggedIn, async (req, res) => {
 
 //Capturar id de usuario, consultar informacion de éste y enviarla al front para perfil
 router.post('/api/get_info_user', async (req, res) => {
-    console.log(req.body);
     const { user_id } = req.body;
     const rows = await pool.query('SELECT us.id_user as id_user, us.names, us.document, us.email, us.phone FROM users AS us INNER JOIN user_profile AS up ON us.id_user = up.id_user INNER JOIN profile AS pro ON pro.id_profile = up.id_profile WHERE us.id_user = ?', [user_id]);
     if(rows.length > 0){
@@ -229,4 +228,27 @@ router.post('/api/update_user_api', async (req, res) => {
     }
     res.status(200).json(data);
 });
+
+//Capturar id de usuario, consultar direcciones que tiene asociadas y enviarlas al front para gestion de direcciones
+router.post('/api/get_address_user', async (req, res) => {
+    console.log(req.body);
+    const { user_id } = req.body;
+    const user_address = await pool.query('SELECT us_add.address_title as address_title, us_add.user_address as user_address, us_add.description_user_address as description_user_address, \
+        us_add.id_user_address, mun.nombre_muni FROM users AS us INNER JOIN user_address AS us_add ON us.id_user = us_add.id_user\
+        INNER JOIN municipios AS mun ON mun.id_muni = us_add.id_muni WHERE us.id_user = ?', [user_id]);
+    if(user_address.length > 0){
+        data = {
+            "code": "0",
+            "data": user_address
+        };
+    }else{
+        data = {
+            "code": "1",
+            "error": "El usuario no tiene direcciones asociadas"
+        };
+    }
+    console.log(data);
+    res.status(200).json(data);
+});
+
 module.exports = router;

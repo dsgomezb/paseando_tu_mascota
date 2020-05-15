@@ -1,7 +1,9 @@
 {
     "general": {
         "establishment_name": "Mi trago ya !!!",
-        "welcome": "Bienvenido"
+        "welcome": "Bienvenido",
+        "delete": "Eliminar",
+        "edit": "Editar"
     },
     "menu": {
         "home": "Inicio",
@@ -21,7 +23,9 @@
         "title": "Inicio"
     },
     "address": {
-        "title": "Mis Direcciones"
+        "title": "Mis Direcciones",
+        "new_address": "Nueva Dirección",
+        "add_address": "Agregar Dirección"
     },
     "login": {
         "init_session": "Iniciar Sesión",
