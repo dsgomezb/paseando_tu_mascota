@@ -17,7 +17,8 @@
     "routes":{
         "profile": "profile",
         "address": "address",
-        "home": "home"
+        "home": "home",
+        "add-address": "add-address"
     },
     "home":{
         "title": "Inicio"
