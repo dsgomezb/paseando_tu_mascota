@@ -8,6 +8,7 @@ import { AddAddressPageRoutingModule } from './add-address-routing.module';
 
 import { AddAddressPage } from './add-address.page';
 import { TranslateModule } from '@ngx-translate/core';
+import { IonicSelectableModule } from 'ionic-selectable';
 
 @NgModule({
   imports: [
@@ -15,7 +16,8 @@ import { TranslateModule } from '@ngx-translate/core';
     FormsModule,
     IonicModule,
     AddAddressPageRoutingModule,
-    TranslateModule
+    TranslateModule,
+    IonicSelectableModule
   ],
   declarations: [AddAddressPage]
 })

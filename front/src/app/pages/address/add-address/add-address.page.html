@@ -3,10 +3,65 @@
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
     </ion-buttons>
-    <ion-title>{{ "address.new_address" | translate }}</ion-title>
+    <ion-title color="primary"><b>{{ "address.new_address" | translate }}</b></ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
+<ion-content padding>
+  <form (ngSubmit)="save_new_address_user()">
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">{{ "address.title_address" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
+                <ion-input type="text" name="address_title" [(ngModel)]="new_address.address_title"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">{{ "address.user_address" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
+                <ion-input type="text" name="user_address" [(ngModel)]="new_address.user_address"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">{{ "address.description_user_address" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
+                <ion-input type="text" name="description_user_address" [(ngModel)]="new_address.description_user_address"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="stacked">{{ "address.state" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
+                  <ionic-selectable
+                  name="id_muni"
+                  [(ngModel)]="new_address.id_muni"
+                  [items]="states"
+                  itemValueField="id_muni"
+                  itemTextField="nombre_muni"
+                  [hasVirtualScroll]="true"
+                  closeButtonText="Cancelar"
+                  [canSearch]="true">
+                </ionic-selectable>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button type="submit" expand="block" color="primary">{{ "address.save_address" | translate }}</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
+  </form>
 </ion-content>

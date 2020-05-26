@@ -3,7 +3,10 @@
         "establishment_name": "Mi trago ya !!!",
         "welcome": "Bienvenido",
         "delete": "Eliminar",
-        "edit": "Editar"
+        "edit": "Editar",
+        "select": "Seleccione...",
+        "accept": "Aceptar",
+        "cancel": "Cancelar"
     },
     "menu": {
         "home": "Inicio",
@@ -26,7 +29,12 @@
     "address": {
         "title": "Mis Direcciones",
         "new_address": "Nueva Dirección",
-        "add_address": "Agregar Dirección"
+        "add_address": "Agregar Dirección",
+        "title_address": "Titulo",
+        "user_address": "Dirección",
+        "description_user_address": "Descripción",
+        "save_address": "Guardar Dirección",
+        "state": "Municipio"
     },
     "login": {
         "init_session": "Iniciar Sesión",

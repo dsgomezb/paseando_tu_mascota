@@ -231,7 +231,6 @@ router.post('/api/update_user_api', async (req, res) => {
 
 //Capturar id de usuario, consultar direcciones que tiene asociadas y enviarlas al front para gestion de direcciones
 router.post('/api/get_address_user', async (req, res) => {
-    console.log(req.body);
     const { user_id } = req.body;
     const user_address = await pool.query('SELECT us_add.address_title as address_title, us_add.user_address as user_address, us_add.description_user_address as description_user_address, \
         us_add.id_user_address, mun.nombre_muni FROM users AS us INNER JOIN user_address AS us_add ON us.id_user = us_add.id_user\
@@ -247,8 +246,24 @@ router.post('/api/get_address_user', async (req, res) => {
             "error": "El usuario no tiene direcciones asociadas"
         };
     }
-    console.log(data);
     res.status(200).json(data);
 });
 
+//Api para obtener los municipios de la base de datos
+router.post('/api/get_states', async (req, res) => {
+    const states = await pool.query("SELECT muni.id_muni, CONCAT(muni.nombre_muni,' - ',UPPER(depto.name_depto)) as nombre_muni \
+    FROM municipios AS muni JOIN departamentos AS depto ON depto.id_depto = muni.id_depto ORDER BY depto.name_depto asc");
+    if(states.length > 0){
+        data = {
+            "code": "0",
+            "data": states
+        };
+    }else{
+        data = {
+            "code": "1",
+            "error": "No existen municipios"
+        };
+    }
+    res.status(200).json(data);
+});
 module.exports = router;

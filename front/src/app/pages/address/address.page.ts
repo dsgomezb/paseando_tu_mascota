@@ -31,8 +31,6 @@ export class AddressPage implements OnInit {
         this.toast.presentToast(data.error, "info-toast", 3000);
       }else if(data.code == 0){
         this.user_address = data.data;
-        console.log(this.user_address);
-        //this.router.navigate(['/profile']);
       }
      });
   }
