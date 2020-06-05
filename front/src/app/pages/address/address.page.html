@@ -28,8 +28,8 @@
       {{user_add.description_user_address}}
     </ion-card-content>
     <div class="center">
-      <ion-button size="small" fill="outline" color="success" title='{{ "general.edit" | translate }}'><ion-icon name="pencil-outline"></ion-icon></ion-button>
-      <ion-button size="small" fill="outline" color="danger" title='{{ "general.delete" | translate }}'><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+      <ion-button (click)="editAddress(user_add.id_user_address)" size="small" fill="outline" color="success" title='{{ "general.edit" | translate }}'><ion-icon name="pencil-outline"></ion-icon></ion-button>
+      <ion-button (click)="deleteAddress(user_add.id_user_address)" size="small" fill="outline" color="danger" title='{{ "general.delete" | translate }}'><ion-icon name="close-circle-outline"></ion-icon></ion-button>
     </div>
   </ion-card>
 

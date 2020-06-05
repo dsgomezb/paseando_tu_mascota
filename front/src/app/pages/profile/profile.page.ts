@@ -79,9 +79,7 @@ userInfo = {
   }
 
   async update_user(){
-    console.log(this.user_info);
     if(this.user_info.names == '' || this.user_info.document == '' || this.user_info.phone == '' || this.user_info.email == ''){
-      console.log("entra a fallo");
       this.toast.presentToast(i18nMessages.General["errors"]["data_update_profile_user"], "error-toast", 3000); //Ejemplo de como usar el translate desde typescript (se centraliza todo en el es.json)
     }else{
       this.request.postData('users/api/update_user_api', this.user_info, {}).then(data => {
@@ -91,7 +89,6 @@ userInfo = {
           this.toast.presentToast(data.message, "success-toast", 3000);
           this.navCtrl.navigateForward('/home');
         }
-        //this.data = data;
        });
     }
   }

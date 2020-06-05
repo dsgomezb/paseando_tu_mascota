@@ -34,6 +34,8 @@
         "user_address": "Dirección",
         "description_user_address": "Descripción",
         "save_address": "Guardar Dirección",
+        "edit_address": "Editar Dirección",
+        "update_address": "Actualizar Dirección",
         "state": "Municipio"
     },
     "login": {
@@ -66,7 +68,8 @@
     "General":{
         "errors":{
             "username_and_password": "Usuario y contraseña requeridos",
-            "data_update_profile_user": "Todos los campos de este formulario son obligatorios"
+            "data_update_profile_user": "Todos los campos de este formulario son obligatorios",
+            "data_marked_required": "Los campos con (*) son obligatorios"
         }
     }
 

@@ -235,17 +235,10 @@ router.post('/api/get_address_user', async (req, res) => {
     const user_address = await pool.query('SELECT us_add.address_title as address_title, us_add.user_address as user_address, us_add.description_user_address as description_user_address, \
         us_add.id_user_address, mun.nombre_muni FROM users AS us INNER JOIN user_address AS us_add ON us.id_user = us_add.id_user\
         INNER JOIN municipios AS mun ON mun.id_muni = us_add.id_muni WHERE us.id_user = ?', [user_id]);
-    if(user_address.length > 0){
-        data = {
-            "code": "0",
-            "data": user_address
-        };
-    }else{
-        data = {
-            "code": "1",
-            "error": "El usuario no tiene direcciones asociadas"
-        };
-    }
+    data = {
+        "code": "0",
+        "data": user_address
+    };
     res.status(200).json(data);
 });
 
@@ -266,4 +259,101 @@ router.post('/api/get_states', async (req, res) => {
     }
     res.status(200).json(data);
 });
+
+//Agregar nueva direccion de un usuario desde movil
+router.post('/api/add_user_address', async (req, res) => {
+    const { address_title, user_address, description_user_address, id_user } = req.body;
+    var id_muni = req.body.id_muni.id_muni;
+    const newUserAddress = {
+        id_user,
+        address_title,
+        description_user_address,
+        user_address,
+        id_muni
+    };
+    const add_address = await pool.query('INSERT INTO user_address SET ?', [newUserAddress]);
+    if(add_address){
+        data = {
+            "code": "0",
+            "message": "Dirección guardada correctamente",
+            "save": true
+        };
+    }else{
+        data = {
+            "code": "1",
+            "update": false,
+            "error": "Error al guardar la dirección"
+        };
+    }
+    res.status(200).json(data);
+});
+
+//Eliminar direccion de un usuario
+router.post('/api/delete_address_user', async (req, res) => {
+    const { id_user_address } = req.body;
+    const delete_address = await pool.query('DELETE FROM user_address WHERE id_user_address = ?', [id_user_address]);
+    if(delete_address){
+        data = {
+            "code": "0",
+            "message": "Dirección eliminada correctamente",
+            "delete": true
+        };
+    }else{
+        data = {
+            "code": "1",
+            "update": false,
+            "error": "Error al eliminar la dirección"
+        };
+    }
+    res.status(200).json(data);
+});
+
+//Capturar id de la direccion de un usuario para poderla editar desde la móvil
+router.post('/api/get_address_data_edit', async (req, res) => {
+    console.log("hola");
+    const { id_user_address } = req.body;
+    console.log("llega"+id_user_address);
+    const rows = await pool.query('SELECT us_add.address_title as address_title, us_add.user_address as user_address, \
+                us_add.description_user_address as description_user_address, us_add.id_user_address, \
+                mun.id_muni, mun.nombre_muni FROM user_address AS us_add INNER JOIN municipios AS mun ON mun.id_muni = us_add.id_muni WHERE us_add.id_user_address = ?', [id_user_address]);
+    if(rows.length > 0){
+        const address = rows[0];
+        console.log(address);
+        data = {
+            "code": "0",
+            "data": address
+        };
+    }else{
+        data = {
+            "code": "1",
+            "error": "La dirección no existe"
+        };
+    }
+    res.status(200).json(data);
+});
+
+//Actualizar una direccion de un usuario desde movil
+router.post('/api/update_user_address', async (req, res) => {
+    const { address_title, user_address, description_user_address, id_user } = req.body;
+    var id_muni = req.body.id_muni.id_muni;
+    var id_user_address = req.body.id_user_address;
+
+    const update_address = await pool.query('UPDATE user_address SET address_title = ?, description_user_address = ?, \
+        user_address = ?, id_muni = ? WHERE id_user_address = ?', [address_title, description_user_address, user_address, id_muni, id_user_address]);
+    if(update_address){
+        data = {
+            "code": "0",
+            "message": "Dirección actualizada correctamente",
+            "save": true
+        };
+    }else{
+        data = {
+            "code": "1",
+            "update": false,
+            "error": "Error al editar la dirección"
+        };
+    }
+    res.status(200).json(data);
+});
+
 module.exports = router;
