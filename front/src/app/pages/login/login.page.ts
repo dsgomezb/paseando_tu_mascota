@@ -11,6 +11,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { ToastService  } from '../../services/toaster/toast.service';
 import { SERVICES } from "../../constants/services";
 import { StorageService } from "../../storage.service";
+import { Geolocation, Geoposition  } from '@ionic-native/geolocation/ngx';
 //import { SERVICES } from "../../constants/services";
 //import { HttpClientModule, HttpClient } from '@angular/common/http';
 @Component({
@@ -19,6 +20,9 @@ import { StorageService } from "../../storage.service";
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
+  lat:number
+  lon:number
+  total:string
   data;
   formGroup: any;
   userData = {
@@ -35,9 +39,11 @@ export class LoginPage implements OnInit {
     private menu: MenuController,
     private router: Router,
     private navCtrl: NavController,
-    public storageService: StorageService
+    public storageService: StorageService,
+    public geolocation: Geolocation
   ) { 
     this.initializeApp();
+    this.getGeolocation()
   }
 
   initializeApp() {
@@ -51,6 +57,15 @@ export class LoginPage implements OnInit {
   ngOnInit() {
     this.menu.enable(false, 'menu');
     this.menu.close(SERVICES.menuId);
+  }
+
+  getGeolocation(){
+    this.geolocation.getCurrentPosition().then((geoposition: Geoposition)=>{
+      this.lat = geoposition.coords.latitude;
+      this.lon = geoposition.coords.longitude;
+      console.log("lat: "+this.lat);
+      console.log("long: "+this.lon);
+    });
   }
 
   async login() {

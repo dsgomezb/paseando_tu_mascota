@@ -12,7 +12,11 @@ export class AddressPage implements OnInit {
   id_user;
   userData = {
     user_id: ''
-    };
+  };
+  user_address_id = {
+    user_address_id:'',
+    id_user: ''
+  };
   user_address = [];  
   constructor(
     public request: RequestService,
@@ -32,13 +36,13 @@ export class AddressPage implements OnInit {
 
   getAddressUser(){
     this.userData.user_id = this.id_user;
-      this.request.postData('users/api/get_address_user',this.userData, {}).then(data => {
-        if(data.code == 0){
-          this.user_address = data.data;
-        }else{
-          this.toast.presentToast(data.error, "info-toast", 3000);
-        }
-      });
+    this.request.postData('users/api/get_address_user',this.userData, {}).then(data => {
+      if(data.code == 0){
+        this.user_address = data.data;
+      }else{
+        this.toast.presentToast(data.error, "info-toast", 3000);
+      }
+    });
   }
 
   deleteAddress(id_user_address){
@@ -59,4 +63,16 @@ export class AddressPage implements OnInit {
     this.router.navigate(["add-address", id_user_add]);
   }
 
+  select_address(id_user_add, id_user){
+    this.user_address_id.user_address_id = id_user_add;
+    this.user_address_id.id_user = id_user;
+    this.request.postData('users/api/change_status_address_user',this.user_address_id, {}).then(data => {
+      if(data.code == 0){
+        this.toast.presentToast(data.message, "success-toast", 3000);
+        this.ionViewWillEnter();
+      }else{
+        this.toast.presentToast(data.error, "info-toast", 3000);
+      }
+    });
+  }
 }

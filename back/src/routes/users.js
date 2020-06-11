@@ -233,7 +233,7 @@ router.post('/api/update_user_api', async (req, res) => {
 router.post('/api/get_address_user', async (req, res) => {
     const { user_id } = req.body;
     const user_address = await pool.query('SELECT us_add.address_title as address_title, us_add.user_address as user_address, us_add.description_user_address as description_user_address, \
-        us_add.id_user_address, mun.nombre_muni FROM users AS us INNER JOIN user_address AS us_add ON us.id_user = us_add.id_user\
+        us_add.id_user_address, us_add.status, us_add.id_user, mun.nombre_muni FROM users AS us INNER JOIN user_address AS us_add ON us.id_user = us_add.id_user\
         INNER JOIN municipios AS mun ON mun.id_muni = us_add.id_muni WHERE us.id_user = ?', [user_id]);
     data = {
         "code": "0",
@@ -310,9 +310,7 @@ router.post('/api/delete_address_user', async (req, res) => {
 
 //Capturar id de la direccion de un usuario para poderla editar desde la móvil
 router.post('/api/get_address_data_edit', async (req, res) => {
-    console.log("hola");
     const { id_user_address } = req.body;
-    console.log("llega"+id_user_address);
     const rows = await pool.query('SELECT us_add.address_title as address_title, us_add.user_address as user_address, \
                 us_add.description_user_address as description_user_address, us_add.id_user_address, \
                 mun.id_muni, mun.nombre_muni FROM user_address AS us_add INNER JOIN municipios AS mun ON mun.id_muni = us_add.id_muni WHERE us_add.id_user_address = ?', [id_user_address]);
@@ -351,6 +349,29 @@ router.post('/api/update_user_address', async (req, res) => {
             "code": "1",
             "update": false,
             "error": "Error al editar la dirección"
+        };
+    }
+    res.status(200).json(data);
+});
+
+//Api para la movil para cambiar la direccion activa de un usuario
+router.post('/api/change_status_address_user', async (req, res) => {
+    const { user_address_id, id_user } = req.body;
+    const inactive = 0;
+    const active = 1;
+    const update_status_address_cero = await pool.query('UPDATE user_address set status = ? WHERE id_user = ?', [inactive, id_user]);
+    const update_status_address = await pool.query('UPDATE user_address set status = ? WHERE id_user_address = ?', [active, user_address_id]);
+    if(update_status_address_cero && update_status_address){
+        data = {
+            "code": "0",
+            "message": "Dirección marcado como principal",
+            "delete": true
+        };
+    }else{
+        data = {
+            "code": "1",
+            "update": false,
+            "error": "Error al actualizar la dirección"
         };
     }
     res.status(200).json(data);

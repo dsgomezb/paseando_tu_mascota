@@ -16,20 +16,26 @@
     </ion-row>
   </ion-grid>
 
-  <ion-card *ngFor="let user_add of user_address">
-    <ion-item>
-      <ion-icon name="home-outline" slot="start"></ion-icon>
-      <ion-label>{{user_add.address_title}}</ion-label>
-    </ion-item>
+  <ion-card *ngFor="let user_add of user_address"  >
+    <div [ngClass]="(user_add.status=='1')?'active-address':''">
+      <div (click)="select_address(user_add.id_user_address, user_add.id_user)">
+        <ion-item>
+          <ion-icon [ngClass]="(user_add.status=='1')?'blue':''" name="home" slot="start"></ion-icon>
+          <ion-label>
+            {{user_add.address_title}}
+          </ion-label>
+        </ion-item>
 
-    <ion-card-content>
-      {{user_add.nombre_muni}} <br>
-      <b>{{user_add.user_address}}</b> <br>
-      {{user_add.description_user_address}}
-    </ion-card-content>
-    <div class="center">
-      <ion-button (click)="editAddress(user_add.id_user_address)" size="small" fill="outline" color="success" title='{{ "general.edit" | translate }}'><ion-icon name="pencil-outline"></ion-icon></ion-button>
-      <ion-button (click)="deleteAddress(user_add.id_user_address)" size="small" fill="outline" color="danger" title='{{ "general.delete" | translate }}'><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+        <ion-card-content>
+          {{user_add.nombre_muni}} <br>
+          <b>{{user_add.user_address}}</b> <br>
+          {{user_add.description_user_address}}
+        </ion-card-content>
+      </div>
+      <div class="center">
+        <ion-button (click)="editAddress(user_add.id_user_address)" size="small" fill="outline" color="success" title='{{ "general.edit" | translate }}'><ion-icon name="pencil-outline"></ion-icon></ion-button>
+        <ion-button (click)="deleteAddress(user_add.id_user_address)" size="small" fill="outline" color="danger" title='{{ "general.delete" | translate }}'><ion-icon name="close-circle-outline"></ion-icon></ion-button>
+      </div>
     </div>
   </ion-card>
 

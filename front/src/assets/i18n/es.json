@@ -38,6 +38,11 @@
         "update_address": "Actualizar Dirección",
         "state": "Municipio"
     },
+    "establishment":{
+        "title": "Establecimientos",
+        "initial_message": "Aqui podras encontrar los establecimientos disponibles actualmente para realizar tus pedidos",
+        "welcome": "Bienvenido !!!"
+    },
     "login": {
         "init_session": "Iniciar Sesión",
         "user": "Usuario",

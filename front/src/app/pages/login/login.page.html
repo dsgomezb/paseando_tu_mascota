@@ -1,51 +1,51 @@
 <ion-content padding>
   <form (ngSubmit)="login()">
-  <ion-card>
-    <ion-card-content>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-img class="logo round" src="../../assets/icon/imagen.jpg"></ion-img>
-          </ion-col>
-        </ion-row>
-        <ion-row class="ion-text-center">
-          <ion-col>
-            <ion-card-title color="primary">{{ "login.init_session" | translate }}</ion-card-title>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label position="floating">{{ "login.user" | translate }}</ion-label>
-              <ion-input type="text" name="user" placeholder="{{ 'login.user' | translate }}" [(ngModel)]="userData.username" required autocomplete="off"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-        <ion-row>
-          <ion-col>
-            <ion-item>
-              <ion-label position="floating">{{ "login.password" | translate }}</ion-label>
-              <ion-input type="password" name="password" placeholder="{{ 'login.password' | translate }}" [(ngModel)]="userData.password" required autocomplete="off"></ion-input>
-            </ion-item>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-grid>
-        <ion-row>
-          <ion-col>
-            <ion-button expand="block" color="primary" type="submit">{{ "login.deposit" | translate }}</ion-button>
-            <ion-button expand="block" color="success">{{ "login.register" | translate }}</ion-button>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col size="12">
-            <ion-text><small>{{ "login.forgot_password" | translate }}</small></ion-text>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card-content>
-  </ion-card>
+    <ion-card>
+      <ion-card-content>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-img class="logo round" src="../../assets/icon/imagen.jpg"></ion-img>
+            </ion-col>
+          </ion-row>
+          <ion-row class="ion-text-center">
+            <ion-col>
+              <ion-card-title color="primary">{{ "login.init_session" | translate }}</ion-card-title>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">{{ "login.user" | translate }}</ion-label>
+                <ion-input type="text" name="user" placeholder="{{ 'login.user' | translate }}" [(ngModel)]="userData.username" required autocomplete="off"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+          <ion-row>
+            <ion-col>
+              <ion-item>
+                <ion-label position="floating">{{ "login.password" | translate }}</ion-label>
+                <ion-input type="password" name="password" placeholder="{{ 'login.password' | translate }}" [(ngModel)]="userData.password" required autocomplete="off"></ion-input>
+              </ion-item>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+              <ion-button expand="block" color="primary" type="submit">{{ "login.deposit" | translate }}</ion-button>
+              <ion-button expand="block" color="success">{{ "login.register" | translate }}</ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="12">
+              <ion-text><small>{{ "login.forgot_password" | translate }}</small></ion-text>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-card-content>
+    </ion-card>
   </form>
 </ion-content>
