@@ -377,4 +377,16 @@ router.post('/api/change_status_address_user', async (req, res) => {
     res.status(200).json(data);
 });
 
+//Api para la movil para cambiar la direccion activa de un usuario
+router.post('/api/save_position_user', async (req, res) => {
+    const { latitude, longitude, user } = req.body;
+    let updated_position = new Date();
+    const update_lat_lon = await pool.query('UPDATE users set latitude = ?, longitude = ?, updated_position = ? WHERE id_user = ?', [latitude, longitude, updated_position, user]);
+    data = {
+        "code": "0",
+        "message": "Se actualiza posicion",
+    };
+    res.status(200).json(data);
+});
+
 module.exports = router;

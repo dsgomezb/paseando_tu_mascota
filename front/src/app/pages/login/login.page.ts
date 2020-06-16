@@ -11,7 +11,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { ToastService  } from '../../services/toaster/toast.service';
 import { SERVICES } from "../../constants/services";
 import { StorageService } from "../../storage.service";
-import { Geolocation, Geoposition  } from '@ionic-native/geolocation/ngx';
+import { Geolocation, Geoposition, GeolocationOptions  } from '@ionic-native/geolocation/ngx';
 //import { SERVICES } from "../../constants/services";
 //import { HttpClientModule, HttpClient } from '@angular/common/http';
 @Component({
@@ -28,7 +28,9 @@ export class LoginPage implements OnInit {
   userData = {
     username: '',
     password: ''
-    };
+  };
+  //options : GeolocationOptions;
+
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -43,7 +45,6 @@ export class LoginPage implements OnInit {
     public geolocation: Geolocation
   ) { 
     this.initializeApp();
-    this.getGeolocation()
   }
 
   initializeApp() {
@@ -59,15 +60,6 @@ export class LoginPage implements OnInit {
     this.menu.close(SERVICES.menuId);
   }
 
-  getGeolocation(){
-    this.geolocation.getCurrentPosition().then((geoposition: Geoposition)=>{
-      this.lat = geoposition.coords.latitude;
-      this.lon = geoposition.coords.longitude;
-      console.log("lat: "+this.lat);
-      console.log("long: "+this.lon);
-    });
-  }
-
   async login() {
     if(this.userData.username == '' || this.userData.password == ''){
       this.toast.presentToast(i18nMessages.General["errors"]["username_and_password"], "error-toast", 3000); //Ejemplo de como usar el translate desde typescript (se centraliza todo en el es.json)
@@ -79,11 +71,26 @@ export class LoginPage implements OnInit {
           this.storageService.token_user = data.token;
           localStorage.setItem('token', data.token);
           localStorage.setItem('user_id', data.user_id);
+          this.saveGeolocation();
           this.navCtrl.navigateForward('/home');
         }
         this.data = data;
        });
     }
+  }
+
+  saveGeolocation(){
+    var position = {
+      latitude: null,
+      longitude: null,
+      user: localStorage.getItem('user_id')
+    };
+    this.geolocation.getCurrentPosition().then((geoposition: Geoposition)=>{
+      position.latitude = geoposition.coords.latitude;
+      position.longitude = geoposition.coords.longitude;
+      this.request.postData('users/api/save_position_user',position, {}).then(data => {
+      });
+    });
   }
 
 }
