@@ -41,7 +41,9 @@
     "establishment":{
         "title": "Establecimientos",
         "initial_message": "Aqui podras encontrar los establecimientos disponibles actualmente para realizar tus pedidos",
-        "welcome": "Bienvenido !!!"
+        "welcome": "Bienvenido !!!",
+        "open": "Abierto",
+        "close": "Cerrado"
     },
     "login": {
         "init_session": "Iniciar Sesión",

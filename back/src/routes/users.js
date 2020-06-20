@@ -316,7 +316,6 @@ router.post('/api/get_address_data_edit', async (req, res) => {
                 mun.id_muni, mun.nombre_muni FROM user_address AS us_add INNER JOIN municipios AS mun ON mun.id_muni = us_add.id_muni WHERE us_add.id_user_address = ?', [id_user_address]);
     if(rows.length > 0){
         const address = rows[0];
-        console.log(address);
         data = {
             "code": "0",
             "data": address

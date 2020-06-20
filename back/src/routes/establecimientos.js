@@ -220,4 +220,38 @@ router.post('/update', isLoggedIn, async (req, res) => {
     }
 });
 
+//API establecimientos
+
+//Obtiene los establecimientos cerca de un usuario
+router.post('/api/get_establishment', async (req, res) => {
+    const { user_id } = req.body;
+    status = 1;
+    const user_address = await pool.query('SELECT * FROM user_address WHERE id_user = ? AND status = ? LIMIT 1', [user_id, status]);
+    if(user_address.length > 0){
+        muni_address_user = user_address[0].id_muni;
+        status_establecimiento = 1;
+        const establishment_user = await pool.query('SELECT * FROM establecimiento WHERE id_muni = ? AND status_establecimiento = ?', [muni_address_user, status_establecimiento]);
+        if(establishment_user){
+            data = {
+                "code": "0",
+                "message": "Se listan los establecimientos",
+                "data": establishment_user,
+                "save": true
+            };
+        }else{
+            data = {
+                "code": "1",
+                "update": false,
+                "error": "Error al listar los establecimientos"
+            };
+        }
+    }else{
+        data = {
+            "code": "1",
+            "update": false,
+            "error": "El usuario no tiene direcciones asociadas"
+        };
+    }
+    res.status(200).json(data);
+});
 module.exports = router;

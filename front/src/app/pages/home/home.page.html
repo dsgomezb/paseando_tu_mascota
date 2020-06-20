@@ -11,5 +11,21 @@
   <ion-toolbar>
     <ion-title class="title" color="light">{{ "establishment.welcome" | translate }}</ion-title>
   </ion-toolbar>
-  <div class="padding">{{ "establishment.initial_message" | translate }}</div>
+  <div class="padding"><small>{{ "establishment.initial_message" | translate }}</small></div>
+
+  <ion-card *ngFor="let establishment of establishments">
+    <ion-card-content class="sin-padding" (click)="select_establishment(establishment.id_establecimiento)">
+      <ion-item lines="none">
+        <ion-icon name="fast-food-outline" slot="start"></ion-icon>
+        <ion-label class="sin-margin">
+          <small *ngIf="establishment.open == 1" class="green">{{ "establishment.open" | translate }}</small>
+          <small *ngIf="establishment.open == 0" class="red">{{ "establishment.close" | translate }}</small>
+          <br>
+          <b><small>{{establishment.name_establecimiento}}</small></b><br>
+          <small>Envío variable ° Acepta pagos online</small><br>
+        </ion-label>
+      </ion-item>
+    </ion-card-content>
+  </ion-card>
+
 </ion-content>
