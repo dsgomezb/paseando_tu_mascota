@@ -45,6 +45,9 @@
         "open": "Abierto",
         "close": "Cerrado"
     },
+    "establishment_products":{
+        "title": "Lista de productos"
+    },
     "login": {
         "init_session": "Iniciar Sesión",
         "user": "Usuario",

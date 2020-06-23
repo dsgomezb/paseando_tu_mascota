@@ -1,0 +1,26 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title color="primary"><b>{{ "establishment_products.title" | translate }}</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-toolbar>
+    <ion-title size="small"><b>{{ data_establishment.name_establecimiento }}</b></ion-title>
+  </ion-toolbar>
+
+  <ion-list *ngIf="products">
+    <ion-item *ngFor="let product of products">
+      <ion-label>
+        <h2><b>{{ product.name_product }}</b></h2>
+        <p>{{ product.description_product }}</p>
+        <p>{{ product.name_presentation_product }}</p>
+        <ion-text color="danger"><small>${{ product.value_iva_product }}</small></ion-text>
+      </ion-label>
+    </ion-item>
+  </ion-list>
+
+</ion-content>

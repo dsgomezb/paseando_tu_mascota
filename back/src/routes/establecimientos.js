@@ -254,4 +254,46 @@ router.post('/api/get_establishment', async (req, res) => {
     }
     res.status(200).json(data);
 });
+
+//Obtiene la informacion de un establecimiento
+router.post('/api/get_establishment_info', async (req, res) => {
+    const { id_establishment } = req.body;
+    const establishment = await pool.query('SELECT * FROM establecimiento WHERE id_establecimiento = ?', [id_establishment]);
+    if(establishment.length > 0){
+        data = {
+            "code": "0",
+            "message": "Información del estabelcimiento",
+            "data": establishment,
+        };
+    }else{
+        data = {
+            "code": "1",
+            "update": false,
+            "error": "El establecimiento no tiene informacion asociada"
+        };
+    }
+    res.status(200).json(data);
+});
+
+//Obtiene los productos de un establecimiento
+router.post('/api/get_products_establishment', async (req, res) => {
+    const { id_establishment } = req.body;
+    const products = await pool.query('SELECT * FROM product JOIN presentation_product as pres \
+    ON pres.id_presentation_product = product.id_presentation_product WHERE product.id_establecimiento = ?', [id_establishment]);
+    if(products.length > 0){
+        data = {
+            "code": "0",
+            "message": "Productos listados correctamente",
+            "data": products,
+        };
+    }else{
+        data = {
+            "code": "1",
+            "update": false,
+            "error": "El establecimiento no tiene productos"
+        };
+    }
+    res.status(200).json(data);
+});
+
 module.exports = router;

@@ -45,6 +45,7 @@ export class HomePage implements OnInit {
 
   select_establishment(id_establishment){
     console.log(id_establishment);
+    this.router.navigate(["establishment", id_establishment]);
   }
 
 }
