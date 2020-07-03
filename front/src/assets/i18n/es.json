@@ -1,6 +1,6 @@
 {
     "general": {
-        "establishment_name": "Mi trago ya !!!",
+        "establishment_name": "Paseando tu mascota!",
         "welcome": "Bienvenido",
         "delete": "Eliminar",
         "edit": "Editar",
@@ -21,10 +21,13 @@
         "profile": "profile",
         "address": "address",
         "home": "home",
-        "add-address": "add-address"
+        "add-address": "add-address",
+        "register-client": "register-client"
     },
     "home":{
-        "title": "Inicio"
+        "title": "Inicio",
+        "welcome": "Bienvenido!",
+        "initial_message": "Bienvenido a paseando tu mascota. Aqui podrás encontrar muchos beneficios para el cuidado adecuado de tu mascota"
     },
     "login": {
         "init_session": "Iniciar Sesión",

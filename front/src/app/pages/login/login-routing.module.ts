@@ -7,6 +7,10 @@ const routes: Routes = [
   {
     path: '',
     component: LoginPage
+  },
+  {
+    path: 'register-client',
+    loadChildren: () => import('../register-client/register-client.module').then( m => m.RegisterClientPageModule)
   }
 ];
 
