@@ -3,7 +3,7 @@ module.exports = {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'establecimiento_online'
+        database: 'paseando_tu_mascota'
     }
 };
 /*

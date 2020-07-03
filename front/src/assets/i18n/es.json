@@ -26,28 +26,6 @@
     "home":{
         "title": "Inicio"
     },
-    "address": {
-        "title": "Mis Direcciones",
-        "new_address": "Nueva Dirección",
-        "add_address": "Agregar Dirección",
-        "title_address": "Titulo",
-        "user_address": "Dirección",
-        "description_user_address": "Descripción",
-        "save_address": "Guardar Dirección",
-        "edit_address": "Editar Dirección",
-        "update_address": "Actualizar Dirección",
-        "state": "Municipio"
-    },
-    "establishment":{
-        "title": "Establecimientos",
-        "initial_message": "Aqui podras encontrar los establecimientos disponibles actualmente para realizar tus pedidos",
-        "welcome": "Bienvenido !!!",
-        "open": "Abierto",
-        "close": "Cerrado"
-    },
-    "establishment_products":{
-        "title": "Lista de productos"
-    },
     "login": {
         "init_session": "Iniciar Sesión",
         "user": "Usuario",

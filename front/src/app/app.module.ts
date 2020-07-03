@@ -14,7 +14,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { IonicSelectableModule } from 'ionic-selectable';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { CartModalPageModule } from './pages/cart-modal/cart-modal.module';
 export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
@@ -34,8 +33,7 @@ export function createTranslateLoader(http: HttpClient) {
       }
     }),
     HttpClientModule,
-    IonicSelectableModule,
-    CartModalPageModule
+    IonicSelectableModule
   ],
   providers: [
     StatusBar,
