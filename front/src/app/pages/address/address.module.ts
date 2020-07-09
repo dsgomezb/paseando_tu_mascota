@@ -4,19 +4,18 @@ import { FormsModule } from '@angular/forms';
 
 import { IonicModule } from '@ionic/angular';
 
-import { RegisterClientPageRoutingModule } from './register-client-routing.module';
+import { AddressPageRoutingModule } from './address-routing.module';
 
-import { RegisterClientPage } from './register-client.page';
+import { AddressPage } from './address.page';
 import { TranslateModule } from '@ngx-translate/core';
-
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
-    RegisterClientPageRoutingModule,
+    AddressPageRoutingModule,
     TranslateModule
   ],
-  declarations: [RegisterClientPage]
+  declarations: [AddressPage]
 })
-export class RegisterClientPageModule {}
+export class AddressPageModule {}

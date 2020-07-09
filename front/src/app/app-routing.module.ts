@@ -15,15 +15,22 @@ const routes: Routes = [
     path: 'profile',
     loadChildren: () => import('./pages/profile/profile.module').then( m => m.ProfilePageModule)
   },
+    {
+    path: 'add-address/:id',
+    loadChildren: () => import('./pages/address/add-address/add-address.module').then( m => m.AddAddressPageModule)
+  },
+  {
+    path: 'address',
+    loadChildren: () => import('./pages/address/address.module').then( m => m.AddressPageModule)
+  },
   {
     path: 'home',
     loadChildren: () => import('./pages/home/home.module').then( m => m.HomePageModule)
-  },  {
+  },
+  {
     path: 'register-client',
     loadChildren: () => import('./pages/register-client/register-client.module').then( m => m.RegisterClientPageModule)
   }
-
-
 
 ];
 

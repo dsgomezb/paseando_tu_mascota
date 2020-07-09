@@ -6,7 +6,8 @@
         "edit": "Editar",
         "select": "Seleccione...",
         "accept": "Aceptar",
-        "cancel": "Cancelar"
+        "cancel": "Cancelar",
+        "return": "Volver"
     },
     "menu": {
         "home": "Inicio",
@@ -22,12 +23,25 @@
         "address": "address",
         "home": "home",
         "add-address": "add-address",
-        "register-client": "register-client"
+        "register-client": "/register-client",
+        "login": "login"
     },
     "home":{
         "title": "Inicio",
         "welcome": "Bienvenido!",
         "initial_message": "Bienvenido a paseando tu mascota. Aqui podrás encontrar muchos beneficios para el cuidado adecuado de tu mascota"
+    },
+    "address": {
+        "title": "Mis Direcciones",
+        "new_address": "Nueva Dirección",
+        "add_address": "Agregar Dirección",
+        "title_address": "Titulo",
+        "user_address": "Dirección",
+        "description_user_address": "Descripción",
+        "save_address": "Guardar Dirección",
+        "edit_address": "Editar Dirección",
+        "update_address": "Actualizar Dirección",
+        "state": "Municipio"
     },
     "login": {
         "init_session": "Iniciar Sesión",
@@ -44,6 +58,18 @@
         "email": "Email",
         "update_info": "Actualizar Información",
         "phone": "Teléfono"
+    },
+    "register": {
+        "title": "Registro de clientes",
+        "document": "Documento",
+        "name": "Nombres",
+        "lastname": "Apellidos",
+        "email": "Correo electrónico",
+        "create_account": "Crear cuenta",
+        "phone": "Teléfono celular",
+        "username": "Nombre de usuario",
+        "password": "Contraseña",
+        "confirm_password": "Confirmar contraseña"
     },
     "Components":{
         "App":{

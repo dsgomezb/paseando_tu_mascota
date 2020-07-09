@@ -27,25 +27,4 @@ export class HomePage implements OnInit {
   ngOnInit() {
   }
 
-  ionViewWillEnter(){
-    this.getEstablishment();
-  }
-
-  getEstablishment(){
-    this.userData.user_id = this.id_user;
-    this.request.postData('establecimientos/api/get_establishment',this.userData, {}).then(data => {
-      if(data.code == 0){
-        this.establishments = data.data;
-        this.toast.presentToast(data.message, "success-toast", 3000);
-      }else{
-        this.toast.presentToast(data.error, "info-toast", 3000);
-      }
-    });
-  }
-
-  select_establishment(id_establishment){
-    console.log(id_establishment);
-    this.router.navigate(["establishment", id_establishment]);
-  }
-
 }

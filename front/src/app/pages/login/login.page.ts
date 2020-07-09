@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router, RouterModule } from "@angular/router";
 
 import { Platform, MenuController, NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -56,6 +56,10 @@ export class LoginPage implements OnInit {
   }
 
   ngOnInit() {
+
+  }
+
+  ionViewWillEnter(){
     this.menu.enable(false, 'menu');
     this.menu.close(SERVICES.menuId);
   }
