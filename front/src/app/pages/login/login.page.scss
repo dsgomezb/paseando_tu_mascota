@@ -5,16 +5,17 @@
     display: block;
   }
 
-  .fondo{
-    background: #FAFAFA;;
-  }
+.fondo{
+  background: #FAFAFA;;
+}
 
-  .border{
-    --border-radius: 25px;
-  }
+.title{
+  background-color: #36abe0;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
 
-  .title{
-    background-color: #36abe0;
-    padding-top: 10px;
-    padding-bottom: 10px;
+.borde {
+  border-radius: 25px !important;
+  overflow: hidden;
 }

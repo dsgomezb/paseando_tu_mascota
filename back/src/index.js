@@ -76,6 +76,7 @@ app.use((req, res, next) => {
 app.use(require('./routes'));
 app.use(require('./routes/authentication'));
 app.use('/users', require('./routes/users'));
+app.use('/client', require('./routes/client_api'));
 
 //Starting the server
 app.listen((process.env.PORT || 3000), function(){

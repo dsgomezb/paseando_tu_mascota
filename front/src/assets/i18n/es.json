@@ -24,7 +24,7 @@
         "home": "home",
         "add-address": "add-address",
         "register-client": "/register-client",
-        "login": "login"
+        "login": "/login"
     },
     "home":{
         "title": "Inicio",
@@ -69,7 +69,8 @@
         "phone": "Teléfono celular",
         "username": "Nombre de usuario",
         "password": "Contraseña",
-        "confirm_password": "Confirmar contraseña"
+        "confirm_password": "Confirmar contraseña",
+        "term_condition": "Acepto Términos y condiciones"
     },
     "Components":{
         "App":{
@@ -86,7 +87,8 @@
         "errors":{
             "username_and_password": "Usuario y contraseña requeridos",
             "data_update_profile_user": "Todos los campos de este formulario son obligatorios",
-            "data_marked_required": "Los campos con (*) son obligatorios"
+            "data_marked_required": "Los campos con (*) son obligatorios",
+            "terms_conditions_required": "Debe aceptar los términos y condiciones"
         }
     }
 

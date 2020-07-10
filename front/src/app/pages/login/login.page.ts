@@ -53,6 +53,7 @@ export class LoginPage implements OnInit {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+    localStorage.clear();
   }
 
   ngOnInit() {

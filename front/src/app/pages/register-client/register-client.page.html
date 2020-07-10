@@ -1,13 +1,13 @@
 <ion-header>
   <ion-toolbar class="center">
-    <ion-title color="success">{{ "register.title" | translate }}</ion-title>
+      <ion-title color="success">{{ "register.title" | translate }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
   <!--Este es de guardar-->
   <div *ngIf="!id_user_add">
-    <form  (ngSubmit)="save_new_address_user()">
+    <form  (ngSubmit)="save_new_client()">
       <ion-card>
         <ion-card-content>
           <ion-grid>
@@ -15,7 +15,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.name" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="names"></ion-input>
+                  <ion-input type="text" name="names" [(ngModel)]="new_client.names"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -23,7 +23,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.lastname" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="lastnames"></ion-input>
+                  <ion-input type="text" name="lastnames" [(ngModel)]="new_client.lastnames"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -31,7 +31,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.document" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="document"></ion-input>
+                  <ion-input type="text" name="document" [(ngModel)]="new_client.document"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -39,7 +39,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.email" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="email"></ion-input>
+                  <ion-input type="email" name="email" [(ngModel)]="new_client.email"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -47,7 +47,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.phone" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="phone"></ion-input>
+                  <ion-input type="text" name="phone" [(ngModel)]="new_client.phone"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -55,7 +55,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.username" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="username"></ion-input>
+                  <ion-input type="text" name="username" [(ngModel)]="new_client.username"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -63,7 +63,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.password" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="password"></ion-input>
+                  <ion-input type="password" name="password" [(ngModel)]="new_client.password"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -71,8 +71,20 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.confirm_password" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="confirm_password"></ion-input>
+                  <ion-input type="password" name="confirm_password" [(ngModel)]="new_client.confirm_password"></ion-input>
                 </ion-item>
+              </ion-col>
+            </ion-row>
+            <ion-row>
+              <ion-col size="1">
+                <div>
+                  <ion-checkbox class="borde" color="primary" slot="start" name="term_condition" [(ngModel)]="new_client.term_condition"></ion-checkbox>
+                </div>
+              </ion-col>
+              <ion-col size="11">
+                <div>
+                  &nbsp;<a href="#">{{ "register.term_condition" | translate }}</a>
+                </div>
               </ion-col>
             </ion-row>
           </ion-grid>

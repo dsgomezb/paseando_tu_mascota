@@ -117,7 +117,7 @@ export class AppComponent implements OnInit {
   }*/
 
   async logout() {
-    //localStorage.clear();
+    localStorage.clear();
     //this.closeMenu();
     this.storageService.token_user = '';
     this.router.navigate(['/']);
