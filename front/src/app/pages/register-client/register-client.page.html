@@ -7,7 +7,7 @@
 <ion-content>
   <!--Este es de guardar-->
   <div *ngIf="!id_user_add">
-    <form  (ngSubmit)="save_new_client()">
+    <form [formGroup]="registerClient" (ngSubmit)="validate_form()">
       <ion-card>
         <ion-card-content>
           <ion-grid>
@@ -15,7 +15,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.name" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="names" [(ngModel)]="new_client.names"></ion-input>
+                  <ion-input type="text" name="names" formControlName="names"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -23,7 +23,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.lastname" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="lastnames" [(ngModel)]="new_client.lastnames"></ion-input>
+                  <ion-input type="text" name="lastnames" formControlName="lastnames"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -31,15 +31,16 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.document" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="document" [(ngModel)]="new_client.document"></ion-input>
+                  <ion-input type="text" name="document" formControlName="document"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
             <ion-row>
               <ion-col>
-                <ion-item>
+                <ion-item style="display: flex; width: 100%;">
                   <ion-label position="floating">{{ "register.email" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="email" name="email" [(ngModel)]="new_client.email"></ion-input>
+                  <ion-input type="email" name="email" formControlName="email"></ion-input>
+                  <ion-icon style="z-index: 99" name="alert" *ngIf="registerClient.get('email').hasError('pattern') && registerClient.get('email').touched" item-end color="secondary" (click)="presentToast('La correo debe tener un formato válido ejemplo@ejemplo.com')"></ion-icon>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -47,7 +48,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.phone" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="phone" [(ngModel)]="new_client.phone"></ion-input>
+                  <ion-input type="text" name="phone" formControlName="phone"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -55,7 +56,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.username" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="username" [(ngModel)]="new_client.username"></ion-input>
+                  <ion-input type="text" name="username" formControlName="username"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -63,7 +64,7 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.password" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="password" name="password" [(ngModel)]="new_client.password"></ion-input>
+                  <ion-input type="password" name="password" formControlName="password"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -71,14 +72,14 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="floating">{{ "register.confirm_password" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="password" name="confirm_password" [(ngModel)]="new_client.confirm_password"></ion-input>
+                  <ion-input type="password" name="confirm_password" formControlName="confirm_password"></ion-input>
                 </ion-item>
               </ion-col>
             </ion-row>
             <ion-row>
               <ion-col size="1">
                 <div>
-                  <ion-checkbox class="borde" color="primary" slot="start" name="term_condition" [(ngModel)]="new_client.term_condition"></ion-checkbox>
+                  <ion-checkbox class="borde" color="primary" slot="start" name="term_condition" formControlName="term_condition"></ion-checkbox>
                 </div>
               </ion-col>
               <ion-col size="11">
