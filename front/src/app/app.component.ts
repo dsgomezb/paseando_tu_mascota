@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from "@angular/router";
+import { Router } from '@angular/router';
 
 import { Platform, MenuController, NavController} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { TranslateService } from "@ngx-translate/core";
+import { TranslateService } from '@ngx-translate/core';
 import { i18nMessages } from './TranslateLoader';
-import { SERVICES } from "./constants/services";
-import { StorageService } from "./storage.service";
+import { SERVICES } from './constants/services';
+import { StorageService } from './storage.service';
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -15,7 +15,7 @@ import { StorageService } from "./storage.service";
 })
 export class AppComponent implements OnInit {
   public selectedIndex = 0;
-  //menuId = SERVICES.menuId;
+  // menuId = SERVICES.menuId;
   public token;
   public appPages = [
     {
@@ -29,7 +29,7 @@ export class AppComponent implements OnInit {
       icon: 'paper-plane'
     },
     {
-      title: i18nMessages["home"],
+      title: i18nMessages['home'],
       url: '/home/Outbox',
       icon: 'paper-plane'
     }
@@ -53,32 +53,32 @@ export class AppComponent implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.translate.setDefaultLang("es");
+      this.translate.setDefaultLang('es');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
       this.translate.use('es');
-      //this.isUserInSession();
+      // this.isUserInSession();
 
-      this.translate.get("Components").subscribe(components => {
+      this.translate.get('Components').subscribe(components => {
         i18nMessages.Components = components;
       });
 
-      this.translate.get("General").subscribe(general => {
+      this.translate.get('General').subscribe(general => {
         i18nMessages.General = general;
       });
 
-      this.translate.get("ResponseServer").subscribe(responseServer => {
+      this.translate.get('ResponseServer').subscribe(responseServer => {
         i18nMessages.ResponseServer = responseServer;
       });
 
-      this.translate.get("Menu").subscribe(menu => {
+      this.translate.get('Menu').subscribe(menu => {
         i18nMessages.Menu = menu;
       });
 
     });
   }
 
-  close(){
+  close() {
     this.menu.close();
   }
   /*isUserInSession() {
@@ -118,10 +118,10 @@ export class AppComponent implements OnInit {
 
   async logout() {
     localStorage.clear();
-    //this.closeMenu();
+    // this.closeMenu();
     this.storageService.token_user = '';
     this.router.navigate(['/']);
-    //this.navCtrl.navigateForward('/');
+    // this.navCtrl.navigateForward('/');
 
   }
   

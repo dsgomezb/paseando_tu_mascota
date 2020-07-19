@@ -32,7 +32,7 @@
           <ion-row>
             <ion-col class="center">
               <ion-button color="secondary" shape="round" expand="block" type="submit">{{ "login.deposit" | translate }}</ion-button>
-              <ion-button color="medium" shape="round" expand="block" routerLink="{{ 'routes.register-client' | translate }}" >{{ "login.register" | translate }}</ion-button>
+              <ion-button color="medium" shape="round" expand="block" (click)="goRegister()" >{{ "login.register" | translate }}</ion-button>
             </ion-col>
           </ion-row>
         </ion-grid>

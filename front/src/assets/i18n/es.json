@@ -16,7 +16,8 @@
         "login": "login",
         "route_login": "login",
         "close_sesion": "Cerrar Sesión",
-        "address": "Mis Direcciones"
+        "address": "Mis Direcciones",
+        "purchases": "Compras"
     },
     "routes":{
         "profile": "profile",

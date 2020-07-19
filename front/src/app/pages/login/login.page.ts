@@ -9,27 +9,27 @@ import { i18nMessages } from '../../TranslateLoader';
 import { RequestService } from '../../services/http/request.service';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { ToastService  } from '../../services/toaster/toast.service';
-import { SERVICES } from "../../constants/services";
-import { StorageService } from "../../storage.service";
+import { SERVICES } from '../../constants/services';
+import { StorageService } from '../../storage.service';
 import { Geolocation, Geoposition, GeolocationOptions  } from '@ionic-native/geolocation/ngx';
-//import { SERVICES } from "../../constants/services";
-//import { HttpClientModule, HttpClient } from '@angular/common/http';
+// import { SERVICES } from "../../constants/services";
+// import { HttpClientModule, HttpClient } from '@angular/common/http';
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage implements OnInit {
-  lat:number
-  lon:number
-  total:string
+  lat: number;
+  lon: number;
+  total: string;
   data;
   formGroup: any;
   userData = {
     username: '',
     password: ''
   };
-  //options : GeolocationOptions;
+  // options : GeolocationOptions;
 
   constructor(
     private platform: Platform,
@@ -49,7 +49,7 @@ export class LoginPage implements OnInit {
 
   initializeApp() {
     this.platform.ready().then(() => {
-      this.translate.setDefaultLang("es");
+      this.translate.setDefaultLang('es');
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
@@ -84,8 +84,13 @@ export class LoginPage implements OnInit {
     }
   }
 
-  saveGeolocation(){
-    var position = {
+  // Función para dirigirse a la pagina de registro
+  goRegister() {
+    this.navCtrl.navigateForward('/register-client');
+  }
+
+  saveGeolocation() {
+    let position = {
       latitude: null,
       longitude: null,
       user: localStorage.getItem('user_id')
