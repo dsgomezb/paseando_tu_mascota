@@ -43,7 +43,7 @@ export class LoginPage implements OnInit {
     private navCtrl: NavController,
     public storageService: StorageService,
     public geolocation: Geolocation
-  ) { 
+  ) {
     this.initializeApp();
   }
 
@@ -66,6 +66,7 @@ export class LoginPage implements OnInit {
   }
 
   async login() {
+    console.log('click login')
     if(this.userData.username == '' || this.userData.password == ''){
       this.toast.presentToast(i18nMessages.General["errors"]["username_and_password"], "error-toast", 3000); //Ejemplo de como usar el translate desde typescript (se centraliza todo en el es.json)
     }else{

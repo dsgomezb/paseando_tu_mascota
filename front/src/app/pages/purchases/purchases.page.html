@@ -1,0 +1,62 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="brand-primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title><b>{{ "purchases.title" | translate }}</b></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <h4>{{ "purchases.description" | translate }}</h4>
+  <ion-card class="card-purchases">
+    <ion-card-header>
+      <ion-card-title>Paquete 1</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ul>
+        <li>{{ "purchases.specs" | translate }}: Lorem ipsum dolor</li>
+        <li>{{ "purchases.duration" | translate }}: 1 semana</li>
+        <li>{{ "purchases.price" | translate }}: $ 80.000</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="card-purchases">
+    <ion-card-header>
+      <ion-card-title>Paquete 1</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ul>
+        <li>{{ "purchases.specs" | translate }}: Lorem ipsum dolor</li>
+        <li>{{ "purchases.duration" | translate }}: 1 mes</li>
+        <li>{{ "purchases.price" | translate }}: $ 100.000</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card class="card-purchases">
+    <ion-card-header>
+      <ion-card-title>Paquete 1</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ul>
+        <li>{{ "purchases.specs" | translate }}: Lorem ipsum dolor</li>
+        <li>{{ "purchases.duration" | translate }}: 1 año</li>
+        <li>{{ "purchases.price" | translate }}: $ 150.000</li>
+      </ul>
+    </ion-card-content>
+  </ion-card>
+  <ion-item>
+    <ion-label class="w-30">{{ "purchases.quantity" | translate }}</ion-label>
+    <ion-select [(ngModel)]="quantity" (ionChange)="cantidad()"placeholder="" okText="{{ 'purchases.select' | translate }}" cancelText="{{ 'purchases.cancel' | translate }}">
+      <ion-select-option *ngFor="let number of numbers" value="{{number}}">{{number}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>{{ "purchases.total" | translate }}: $ 300.000</ion-label>
+  </ion-item>
+</ion-content>

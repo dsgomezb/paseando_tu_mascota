@@ -78,6 +78,11 @@ export class AppComponent implements OnInit {
     });
   }
 
+  goPage(page) {
+    this.navCtrl.navigateForward(page);
+    this.close();
+  }
+
   close() {
     this.menu.close();
   }
@@ -120,8 +125,8 @@ export class AppComponent implements OnInit {
     localStorage.clear();
     // this.closeMenu();
     this.storageService.token_user = '';
-    this.router.navigate(['/']);
-    // this.navCtrl.navigateForward('/');
+    //this.router.navigate(['/']);
+    this.navCtrl.navigateBack('/');
 
   }
   

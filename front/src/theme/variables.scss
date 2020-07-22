@@ -3,6 +3,30 @@
 
 /** Ionic CSS Variables **/
 :root {
+  /** brand-primary **/
+  --ion-color-brand-primary: #DA7F2E;
+  --ion-color-brand-primary-rgb: 218,127,46;
+  --ion-color-brand-primary-contrast: #ffffff;
+  --ion-color-brand-primary-contrast-rgb: 0,0,0;
+  --ion-color-brand-primary-shade: #c07028;
+  --ion-color-brand-primary-tint: #de8c43;
+
+  /** brand-secondary **/
+  --ion-color-brand-secondary: #ff1d25;
+  --ion-color-brand-secondary-rgb: 255,29,37;
+  --ion-color-brand-secondary-contrast: #ffffff;
+  --ion-color-brand-secondary-contrast-rgb: 255,255,255;
+  --ion-color-brand-secondary-shade: #e01a21;
+  --ion-color-brand-secondary-tint: #ff343b;
+
+  /** brand-succes **/
+  --ion-color-brand-succes: #07A0C3;
+  --ion-color-brand-succes-rgb: 7,160,195;
+  --ion-color-brand-succes-contrast: #ffffff;
+  --ion-color-brand-succes-contrast-rgb: 255,255,255;
+  --ion-color-brand-succes-shade: #068dac;
+  --ion-color-brand-succes-tint: #20aac9;
+
   /** primary **/
   --ion-color-primary: #3880ff;
   --ion-color-primary-rgb: 56, 128, 255;
@@ -74,6 +98,33 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+}
+
+.ion-color-brand-primary {
+  --ion-color-base: var(--ion-color-brand-primary);
+  --ion-color-base-rgb: var(--ion-color-brand-primary-rgb);
+  --ion-color-contrast: var(--ion-color-brand-primary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-brand-primary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-brand-primary-shade);
+  --ion-color-tint: var(--ion-color-brand-primary-tint);
+}
+
+.ion-color-brand-secondary {
+  --ion-color-base: var(--ion-color-brand-secondary);
+  --ion-color-base-rgb: var(--ion-color-brand-secondary-rgb);
+  --ion-color-contrast: var(--ion-color-brand-secondary-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-brand-secondary-contrast-rgb);
+  --ion-color-shade: var(--ion-color-brand-secondary-shade);
+  --ion-color-tint: var(--ion-color-brand-secondary-tint);
+}
+
+.ion-color-brand-succes {
+  --ion-color-base: var(--ion-color-brand-succes);
+  --ion-color-base-rgb: var(--ion-color-brand-succes-rgb);
+  --ion-color-contrast: var(--ion-color-brand-succes-contrast);
+  --ion-color-contrast-rgb: var(--ion-color-brand-succes-contrast-rgb);
+  --ion-color-shade: var(--ion-color-brand-succes-shade);
+  --ion-color-tint: var(--ion-color-brand-succes-tint);
 }
 
 @media (prefers-color-scheme: dark) {

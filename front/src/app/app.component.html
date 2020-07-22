@@ -8,24 +8,29 @@
           <ion-note>{{ "general.welcome" | translate }}</ion-note>
 
           <!--Inicio-->
-          <ion-item  routerLink="{{ 'routes.home' | translate }}" (click)="close()">
+          <ion-item (click)="goPage('home')" >
             <ion-icon slot="start" name="grid"></ion-icon>
             <ion-label>{{ "menu.home" | translate }}</ion-label>
           </ion-item>
           <!--Gestion de mi perfil-->
-            <ion-item  routerLink="{{ 'routes.profile' | translate }}" (click)="close()">
+            <ion-item (click)="goPage('profile')">
               <ion-icon slot="start" name="person"></ion-icon>
               <ion-label>{{ "menu.profile" | translate }}</ion-label>
             </ion-item>
             <!--Compras-->
-            <ion-item  routerLink="{{ 'routes.profile' | translate }}" (click)="close()">
+            <ion-item (click)="goPage('purchases')">
               <ion-icon slot="start" name="wallet"></ion-icon>
               <ion-label>{{ "menu.purchases" | translate }}</ion-label>
             </ion-item>
           <!--Gestion de direcciones-->
-            <ion-item  routerLink="{{ 'routes.address' | translate }}" (click)="close()">
+            <ion-item (click)="goPage('address')">
               <ion-icon slot="start" name="home"></ion-icon>
               <ion-label>{{ "menu.address" | translate }}</ion-label>
+            </ion-item>
+            <!--Mis mascotas-->
+            <ion-item (click)="goPage('mypets')">
+              <ion-icon slot="start" name="paw"></ion-icon>
+              <ion-label>{{ "menu.myPets" | translate }}</ion-label>
             </ion-item>
           <!--Cerrar sesión-->
             <ion-item (click)="logout()" lines="none" detail="false">

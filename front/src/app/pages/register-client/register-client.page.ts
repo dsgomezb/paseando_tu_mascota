@@ -23,7 +23,7 @@ export class RegisterClientPage implements OnInit {
     password: '',
     confirm_password: '',
     term_condition: false
-  }
+  };
   constructor(
     public request: RequestService,
     private toast: ToastService,
@@ -35,11 +35,9 @@ export class RegisterClientPage implements OnInit {
     this.setting_form();
   }
 
-  ngOnInit() {
-    
-  }
+  ngOnInit() { }
 
-  ionViewWillEnter(){
+  ionViewWillEnter() {
     this.menu.enable(false, 'menu');
     this.menu.close(SERVICES.menuId);
   }
@@ -84,6 +82,15 @@ export class RegisterClientPage implements OnInit {
     validate_form() {
       if (!this.registerClient.invalid) {
         if (this.registerClient.get('password').value === this.registerClient.get('confirm_password').value) {
+          this.new_client.names = this.registerClient.get('names').value;
+          this.new_client.lastnames = this.registerClient.get('lastnames').value;
+          this.new_client.document = this.registerClient.get('document').value;
+          this.new_client.email = this.registerClient.get('email').value;
+          this.new_client.phone = this.registerClient.get('phone').value;
+          this.new_client.username = this.registerClient.get('username').value;
+          this.new_client.password = this.registerClient.get('password').value;
+          this.new_client.confirm_password = this.registerClient.get('confirm_password').value;
+          this.new_client.term_condition = this.registerClient.get('term_condition').value;
           this.save_new_client();
         } else {
           this.toast.presentToast('Las contraseñas no coinciden, inténtalo de nuevo', 'error-toast', 3000);

@@ -17,7 +17,8 @@
         "route_login": "login",
         "close_sesion": "Cerrar Sesión",
         "address": "Mis Direcciones",
-        "purchases": "Compras"
+        "purchases": "Compras",
+        "myPets": "Mis mascotas"
     },
     "routes":{
         "profile": "profile",
@@ -72,6 +73,21 @@
         "password": "Contraseña",
         "confirm_password": "Confirmar contraseña",
         "term_condition": "Acepto Términos y condiciones"
+    },
+    "purchases":{
+        "title": "Compras",
+        "description": "Seleccione el paquete e ingrese la cantidad",
+        "specs": "Especificaciones",
+        "duration": "Duración",
+        "price": "Precio",
+        "quantity": "Cantidad",
+        "select": "seleccionar",
+        "cancel": "cancelar",
+        "total": "total"
+    },
+    "myPets": {
+        "title": "Mis mascotas",
+        "registerPet": "Registrar mascota"
     },
     "Components":{
         "App":{

@@ -27,7 +27,15 @@
               <ion-col>
                 <ion-item>
                   <ion-label position="stacked">{{ "address.user_address" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                  <ion-input type="text" name="user_address" [(ngModel)]="new_address.user_address"></ion-input>
+                  <ion-input type="text" name="user_address" [(ngModel)]="new_address.user_address" (ionInput)="UpdateSearchResults()"></ion-input>
+                 <!--  <ion-searchbar name="user_address" [(ngModel)]="autocomplete.input" (ionInput)="UpdateSearchResults()"  placeholder="Search for a place"  (ionClear)="ClearAutocomplete()"></ion-searchbar> -->
+                </ion-item>
+                <ion-item [hidden]="autocompleteItems.length == 0">
+                  <ion-list >
+                    <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResult(item)">
+                      {{ item.description }}
+                    </ion-item>
+                  </ion-list>
                 </ion-item>
               </ion-col>
             </ion-row>
@@ -87,7 +95,14 @@
             <ion-col>
               <ion-item>
                 <ion-label position="stacked">{{ "address.user_address" | translate }}<ion-text color="danger" >*</ion-text></ion-label>
-                <ion-input type="text" name="user_address" [(ngModel)]="data_edit_address.user_address"></ion-input>
+                <ion-input type="text" name="user_address" [(ngModel)]="data_edit_address.user_address" (ionInput)="UpdateSearchResultsEdit()"></ion-input>
+              </ion-item>
+              <ion-item [hidden]="autocompleteItems.length == 0">
+                <ion-list >
+                  <ion-item *ngFor="let item of autocompleteItems" tappable (click)="SelectSearchResultEdit(item)">
+                    {{ item.description }}
+                  </ion-item>
+                </ion-list>
               </ion-item>
             </ion-col>
           </ion-row>
