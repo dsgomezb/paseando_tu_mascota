@@ -77,6 +77,7 @@ app.use(require('./routes'));
 app.use(require('./routes/authentication'));
 app.use('/users', require('./routes/users'));
 app.use('/client', require('./routes/client_api'));
+app.use('/pet', require('./routes/pet_api'));
 
 //Starting the server
 app.listen((process.env.PORT || 3000), function(){
